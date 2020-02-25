@@ -1,14 +1,16 @@
-@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+@import "../../variables.scss";
 
 a {
-  font-family: "Lato", sans-serif;
-  color: #444444;
-  text-decoration: none;
+  color: $text-color;
+
+  &:hover {
+    color: $orange;
+  }
 }
 
 .header-nav {
   display: flex;
-  padding: 10px 40px;
+  padding: 20px 40px 10px 40px;
 
   &__logo {
     width: 80px;
@@ -16,21 +18,15 @@ a {
 
   &__link {
     margin-left: 20px;
-
-    &:hover {
-      color: #ffa200;
-    }
   }
 
   .user-menu {
     margin-left: auto;
 
     &__link {
-      border-bottom: 1px dotted #444444;
+      border-bottom: 1px dotted $text-color;
 
       &:hover {
-        color: #ffa200;
-
         border-bottom: none;
       }
     }
