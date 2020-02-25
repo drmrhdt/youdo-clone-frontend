@@ -3,13 +3,15 @@
     <h1 class="jumbotron__title">Освободим вас от забот</h1>
     <h2 class="jumbotron__subtitle">Поможем найти надежного исполнителя для любых задач</h2>
     <form class="jumbotron__form"> 
-        <!-- (ngSubmit)="onSubmit()" #form="ngForm" -->
-        <input class="jumbotron__input" type="text" placeholder="Напишите, чем вам помочь...">
-        <button class="jumbotron__button">Заказать услугу</button>
+       <input class="jumbotron__input" type="text" [value]="inputValue" placeholder="Напишите, чем вам помочь...">
+       <button class="jumbotron__button">Заказать услугу</button>
     </form>
     <p class="jumbotron__example-query">
        Например: 
-       <a class="jumbotron__example-link" href="#">подключить водонагреватель</a>
+       <span (click)="moveTextToInput()" 
+             [textContent]="exampleQuery" 
+             class="jumbotron__example-link">
+        </span>
     </p>
     <a class="jumbotron__action-link" href="#">стать исполнителем и начать зарабатывать</a>
   </div>
