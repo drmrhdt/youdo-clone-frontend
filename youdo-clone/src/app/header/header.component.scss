@@ -16,8 +16,12 @@ a {
     width: 80px;
   }
 
-  &__link {
+  & > :nth-child(n) {
     margin-left: 20px;
+  }
+
+  &__link-container {
+    position: relative;
   }
 
   .user-menu {

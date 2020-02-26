@@ -1,13 +1,18 @@
 <nav class="header-nav">
-    <a href="#" class="header-nav__link header-nav__logo">
-        <img src="../../assets/download.svg" alt="youdo-logo" />
+  <a href="#" class="header-nav__link header-nav__logo">
+    <img src="../../assets/download.svg" alt="youdo-logo" />
+  </a>
+  <div class="header-nav__link-container">
+    <a href="#" class="header-nav__link" (click)="isHover = !isHover">
+      Создать задание
     </a>
-    <a href="#" class="header-nav__link">Создать задание</a>
-    <a href="#" class="header-nav__link">Найти задание</a>
-    <a href="#" class="header-nav__link">Исполнители</a>
-    <div class="user-menu">
-        <a href="#" class="user-menu__link">Вход</a>
-        <span class="user-menu__delemeter">или</span>
-        <a href="#" class="user-menu__link">регистрация</a>
-    </div>
+    <app-dropdown-list *ngIf="isHover"></app-dropdown-list>
+  </div>
+  <a href="#" class="header-nav__link">Найти задание</a>
+  <a href="#" class="header-nav__link">Исполнители</a>
+  <div class="user-menu">
+    <a href="#" class="user-menu__link">Вход</a>
+    <span class="user-menu__delemeter">или</span>
+    <a href="#" class="user-menu__link">регистрация</a>
+  </div>
 </nav>
