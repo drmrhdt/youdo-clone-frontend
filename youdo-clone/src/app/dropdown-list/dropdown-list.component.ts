@@ -7,7 +7,6 @@ import { Category } from "./category.model";
   styleUrls: ["./dropdown-list.component.scss"]
 })
 export class DropdownListComponent implements OnInit {
-
   categories: Category[] = [
     {
       title_en: "courier",
