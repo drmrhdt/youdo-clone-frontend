@@ -3,7 +3,12 @@
     <img src="../../assets/download.svg" alt="youdo-logo" />
   </a>
   <div class="header-nav__link-container">
-    <a [routerLink]="'/'" class="header-nav__link" (click)="isHover = !isHover">
+    <a
+      [routerLink]="'/'"
+      class="header-nav__link"
+      (click)="isHover = !isHover"
+      #createTaskLink
+    >
       Создать задание
     </a>
     <app-dropdown-list *ngIf="isHover"></app-dropdown-list>

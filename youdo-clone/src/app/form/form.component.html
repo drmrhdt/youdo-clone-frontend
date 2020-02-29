@@ -1,0 +1,81 @@
+<form class="form">
+  <h2 class="form__title">Заполните заявку</h2>
+  <div>
+    <label for="title" class="form__label">Мне нужно</label>
+    <input
+      type="text"
+      id="title"
+      class="form__field"
+      placeholder="Напишите, чем вам помочь..."
+    />
+  </div>
+  <div>
+    <label for="comment" class="form__label"
+      >Опишите пожелания и детали, чтобы исполнители лучше оценили вашу
+      задачу</label
+    >
+    <textarea
+      name="comment"
+      id="comment"
+      cols="30"
+      rows="10"
+      class="form__field"
+      placeholder="Пример заявки"
+    ></textarea>
+  </div>
+  <div>
+    <label class="form__label">Дата и время</label>
+    <select name="time" class="form__field">
+      <option value="start">Начать работу</option>
+      <option value="end">Закончить работу</option>
+      <option value="period">Указать период</option>
+    </select>
+    <input type="date" class="form__field" />
+    <input type="time" class="form__field" />
+  </div>
+  <div>
+    <label class="form__label">
+      <input type="checkbox" class="form__field" />
+      Я использую YouDo для бизнеса, нужны закрывающие документы
+    </label>
+  </div>
+  <div>
+    <label for="budget" class="form__label"
+      >На какой бюджет вы рассчитываете?</label
+    >
+    <input type="range" id="budget" class="form__field" min="0" max="20000" />
+    <label class="form__label"
+      >или укажите примерную стоимость <input type="number" class="form__field"
+    /></label>
+  </div>
+
+  <div>
+    <label class="form__label">Ваши контакты</label>
+    <input type="text" class="form__field" placeholder="Имя Фамилия" />
+    <input type="email" class="form__field" placeholder="E-mail" />
+    <input type="tel" class="form__field" placeholder="Ваш телефон" />
+  </div>
+
+  <button class="form__btn_type_submit">Опубликовать</button>
+  <div>
+    <input
+      type="checkbox"
+      id="terms"
+      class="form__field form__field_type_checkbox"
+    />
+    <label for="terms" class="form__label form__label_type_checkbox" checked>
+      Я согласен с
+      <a href="#">
+        правилами сайта
+      </a>
+    </label>
+    <p class="form__label">
+      Нажимая «Опубликовать», вы соглашаетесь с правилами платёжного сервиса
+      <a href="#">«Единая касса — Безопасная Сделка» </a>
+      и сервиса
+      <a href="#">«Сделка без риска»</a>. Ваш банк может взимать дополнительную
+      комиссию.
+      <a href="#">Отключить Сделку без риска</a>
+    </p>
+  </div>
+</form>

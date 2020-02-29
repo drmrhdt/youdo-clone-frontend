@@ -1,14 +1,16 @@
 <ul class="dropdown-list">
   <li class="dropdown-list__li" *ngFor="let category of categories">
-    <a
-      [routerLink]="['task', 'new', category.title_en]"
-      class="dropdown-list__link list-link"
-    >
+    <a routerLink="#" class="dropdown-list__link list-link">
       {{ category.title_ru }}
     </a>
     <ul class="nested-list">
       <li class="nested-list__li">
-        <a href="#" class="nested-list__link list-link category-link">
+        <a
+          href="/youdo/task/new/{{ category.title_en }}/{{
+            category.subcategories[category.subcategories.length - 1].title_en
+          }}"
+          class="nested-list__link list-link category-link"
+        >
           {{ category.title_ru }}
         </a>
       </li>
@@ -17,12 +19,9 @@
         *ngFor="let subcategory of category.subcategories"
       >
         <a
-          [routerLink]="[
-            'task',
-            'new',
-            category.title_en,
+          routerLink="/youdo/task/new/{{ category.title_en }}/{{
             subcategory.title_en
-          ]"
+          }}"
           class="nested-list__link list-link"
         >
           {{ subcategory.title_ru }}

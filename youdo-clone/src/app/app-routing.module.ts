@@ -1,11 +1,21 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
+import { JumbotronComponent } from "./jumbotron/jumbotron.component";
+import { FormComponent } from "./form/form.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: "",
+    redirectTo: "/youdo",
+    pathMatch: "full"
+  },
+  { path: "youdo", component: JumbotronComponent },
+  { path: "youdo/task/new/:category/:subcategory", component: FormComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

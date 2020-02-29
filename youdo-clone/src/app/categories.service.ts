@@ -7,7 +7,6 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class CategoriesService {
-  // private categories: Category[] = [];
 
   getCategories(): Observable<{ message: string; categories: Category[] }> {
     return this.http.get<{ message: string; categories: Category[] }>(
