@@ -1,98 +1,209 @@
 <form class="form">
   <h2 class="form__title">Заполните заявку</h2>
-  <div>
+  <div class="form__group">
     <label for="title" class="form__label">Мне нужно</label>
     <input
       type="text"
       id="title"
-      class="form__field"
+      class="form__field form__field_w_100"
       placeholder="Напишите, чем вам помочь..."
     />
   </div>
-  <div>
+
+  <div class="form__group group-inputs">
+    <select name="category" class="form__field">
+      <option value="">Мероприятия и промоакции</option>
+    </select>
+    <select name="subcategory" class="form__field">
+      <option value="">Что-то другое</option>
+    </select>
+  </div>
+
+  <div class="form__group">
     <label for="comment" class="form__label"
-      >Опишите пожелания и детали, чтобы исполнители лучше оценили вашу
-      задачу</label
-    >
+      >Опишите пожелания и детали, чтобы исполнители лучше оценили вашу задачу
+    </label>
     <textarea
       name="comment"
       id="comment"
       cols="30"
       rows="10"
-      class="form__field"
+      class="form__field form__field_w_100"
       placeholder="Пример заявки"
     ></textarea>
   </div>
-  <div>
+
+  <div class="form__group group-date">
     <label class="form__label">Дата и время</label>
-    <select name="time" class="form__field" #selectTime>
+    <select name="time" class="form__field field_margin_left" #selectTime>
       <option value="start">Начать работу</option>
       <option value="end">Закончить работу</option>
       <option value="period">Указать период</option>
     </select>
-    <div *ngIf="selectTime.value === 'start' || selectTime.value === 'period'">
-      <label *ngIf="selectTime.value === 'period'" class="form__label"
-        >Начать</label
-      >
-      <input name="startDate" type="date" class="form__field" />
-      <input name="startTime" type="time" class="form__field" />
-      <a href="#">Сегодня</a>
-      <a href="#">Завтра</a>
+  </div>
+
+  <div class="form__group">
+    <div
+      class="group-actions"
+      *ngIf="selectTime.value === 'start' || selectTime.value === 'period'"
+    >
+      <label *ngIf="selectTime.value === 'period'" class="form__label">
+        Начать
+      </label>
+      <div class="group-actions__inputs-action">
+        <input name="startDate" type="date" class="form__field" />
+        <input
+          name="startTime"
+          type="time"
+          class="form__field field_margin_left"
+        />
+      </div>
+      <div class="group-actions__links-action">
+        <a
+          href="#"
+          class="form__link form__link_action form__link_font-size_xs"
+        >
+          Сегодня
+        </a>
+        <a href="#" class="form__link form__link_action form__link_font-size_xs"
+          >Завтра</a
+        >
+      </div>
     </div>
 
-    <div *ngIf="selectTime.value === 'end' || selectTime.value === 'period'">
+    <div
+      class="group-actions"
+      *ngIf="selectTime.value === 'end' || selectTime.value === 'period'"
+    >
       <label *ngIf="selectTime.value === 'period'" class="form__label"
-        >Завершить</label
-      >
-      <input name="endDate" type="date" class="form__field" />
-      <input name="endDate" type="time" class="form__field" />
-      <a href="#">Сегодня</a>
-      <a href="#">Завтра</a>
+        >Завершить
+      </label>
+      <div class="group-actions__inputs-action">
+        <input name="endDate" type="date" class="form__field" />
+        <input
+          name="endDate"
+          type="time"
+          class="form__field field_margin_left"
+        />
+      </div>
+      <div class="group-actions__links-action">
+        <a href="#" class="form__link form__link_action form__link_font-size_xs"
+          >Сегодня
+        </a>
+        <a href="#" class="form__link form__link_action form__link_font-size_xs"
+          >Завтра</a
+        >
+      </div>
     </div>
   </div>
-  <div>
-    <label class="form__label">
-      <input type="checkbox" class="form__field" />
+
+  <div class="form__group">
+    <label class="form__label">Адрес</label>
+    <input
+      type="text"
+      class="form__field form__field_w_100"
+      placeholder="Улица, дом, строение, корпус"
+    />
+    <a href="#" class="form__link_action">Добавить ещё один адрес</a>
+  </div>
+
+  <div class="form__group">
+    <input
+      type="checkbox"
+      id="business"
+      class="form__field form__field_type_checkbox"
+    />
+    <label for="business" class="form__label form__label_type_checkbox">
       Я использую YouDo для бизнеса, нужны закрывающие документы
     </label>
   </div>
-  <div>
+
+  <div class="form__group">
     <label for="budget" class="form__label"
       >На какой бюджет вы рассчитываете?</label
     >
     <input type="range" id="budget" class="form__field" min="0" max="20000" />
     <label class="form__label"
-      >или укажите примерную стоимость <input type="number" class="form__field"
-    /></label>
+      >или укажите примерную стоимость
+      <input type="number" class="form__field field_margin_left" />
+    </label>
   </div>
 
-  <div>
+  <div class="form__group">
     <label class="form__label">Ваши контакты</label>
-    <input type="text" class="form__field" placeholder="Имя Фамилия" />
-    <input type="email" class="form__field" placeholder="E-mail" />
-    <input type="tel" class="form__field" placeholder="Ваш телефон" />
+    <div class="group-contacts">
+      <input type="text" class="form__field" placeholder="Имя Фамилия" />
+      <input type="email" class="form__field" placeholder="E-mail" />
+      <input type="tel" class="form__field" placeholder="Ваш телефон" />
+    </div>
+    <p>
+      Уже зарегистрированы?
+      <a href="#" class="form__link form__link_action">Войдите!</a>
+    </p>
   </div>
 
-  <button class="form__btn_type_submit">Опубликовать</button>
-  <div>
+  <div class="form__group">
+    <label class="form__label">Дополнительные условия</label>
+    <input
+      type="checkbox"
+      id="subscribe-suggestions"
+      class="form__field form__field_type_checkbox"
+      checked
+    />
+    <label
+      for="subscribe-suggestions"
+      class="form__label form__label_type_checkbox"
+    >
+      Получать email-уведомления о новых предложениях
+    </label>
+    <input
+      type="checkbox"
+      id="show-only-executors"
+      class="form__field form__field_type_checkbox"
+    />
+    <label
+      for="show-only-executors"
+      class="form__label form__label_type_checkbox"
+    >
+      Показывать мое задание только исполнителям
+    </label>
+  </div>
+
+  <div class="form__group">
+    <button class="form__btn_type_submit">Опубликовать</button>
+  </div>
+
+  <div class="form__group">
     <input
       type="checkbox"
       id="terms"
       class="form__field form__field_type_checkbox"
+      checked
     />
-    <label for="terms" class="form__label form__label_type_checkbox" checked>
+    <label for="terms" class="form__label form__label_type_checkbox">
       Я согласен с
-      <a href="#">
+      <a href="#" class="form__link-terms form__link">
         правилами сайта
       </a>
     </label>
     <p class="form__label">
       Нажимая «Опубликовать», вы соглашаетесь с правилами платёжного сервиса
-      <a href="#">«Единая касса — Безопасная Сделка» </a>
+      <a
+        href="#"
+        class="form__link form__link_color_gray form__link_border_solid"
+        >«Единая касса — Безопасная Сделка»
+      </a>
       и сервиса
-      <a href="#">«Сделка без риска»</a>. Ваш банк может взимать дополнительную
-      комиссию.
-      <a href="#">Отключить Сделку без риска</a>
+      <a
+        href="#"
+        class="form__link form__link_color_gray form__link_border_solid"
+        >«Сделка без риска»</a
+      >. Ваш банк может взимать дополнительную комиссию.
+      <a
+        href="#"
+        class="form__link form__link_color_gray form__link_border_dotted"
+        >Отключить Сделку без риска</a
+      >
     </p>
   </div>
 </form>

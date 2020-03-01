@@ -11,6 +11,7 @@ body {
 
 button {
   border: none;
+  outline: none;
   cursor: pointer;
 }
 
@@ -24,4 +25,12 @@ ul {
   padding: 0;
 
   list-style: none;
+}
+
+input,
+textarea,
+select {
+  box-sizing: border-box;
+
+  outline: none;
 }
