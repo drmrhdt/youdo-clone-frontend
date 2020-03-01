@@ -25,13 +25,30 @@
   </div>
   <div>
     <label class="form__label">Дата и время</label>
-    <select name="time" class="form__field">
+    <select name="time" class="form__field" #selectTime>
       <option value="start">Начать работу</option>
       <option value="end">Закончить работу</option>
       <option value="period">Указать период</option>
     </select>
-    <input type="date" class="form__field" />
-    <input type="time" class="form__field" />
+    <div *ngIf="selectTime.value === 'start' || selectTime.value === 'period'">
+      <label *ngIf="selectTime.value === 'period'" class="form__label"
+        >Начать</label
+      >
+      <input name="startDate" type="date" class="form__field" />
+      <input name="startTime" type="time" class="form__field" />
+      <a href="#">Сегодня</a>
+      <a href="#">Завтра</a>
+    </div>
+
+    <div *ngIf="selectTime.value === 'end' || selectTime.value === 'period'">
+      <label *ngIf="selectTime.value === 'period'" class="form__label"
+        >Завершить</label
+      >
+      <input name="endDate" type="date" class="form__field" />
+      <input name="endDate" type="time" class="form__field" />
+      <a href="#">Сегодня</a>
+      <a href="#">Завтра</a>
+    </div>
   </div>
   <div>
     <label class="form__label">
