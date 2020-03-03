@@ -53,7 +53,7 @@
 
     &:checked + label::after {
       background: $form-button-hover-color url("../../assets/checked.svg") 50%
-      50% no-repeat;
+        50% no-repeat;
       border-color: $form-button-color;
     }
   }
