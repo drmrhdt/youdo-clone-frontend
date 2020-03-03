@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "youdo-clone": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "youdo-clone"
+    }
+  },
+  "defaultProject": "youdo-clone",
+  "cli": {
+    "analytics": "3b52c9f6-7655-4544-89fa-47b1678ba21f"
+  }
 }

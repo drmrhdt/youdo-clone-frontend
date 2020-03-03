@@ -1,8 +1,9 @@
-<form class="form">
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
   <h2 class="form__title">Заполните заявку</h2>
   <div class="form__group">
     <label for="title" class="form__label">Мне нужно</label>
     <input
+      formControlName="description"
       type="text"
       id="title"
       class="form__field form__field_w_100"
@@ -11,10 +12,10 @@
   </div>
 
   <div class="form__group group-inputs">
-    <select name="category" class="form__field">
+    <select formControlName="category" class="form__field">
       <option value="">Мероприятия и промоакции</option>
     </select>
-    <select name="subcategory" class="form__field">
+    <select formControlName="subcategory" class="form__field">
       <option value="">Что-то другое</option>
     </select>
   </div>
@@ -24,7 +25,7 @@
       >Опишите пожелания и детали, чтобы исполнители лучше оценили вашу задачу
     </label>
     <textarea
-      name="comment"
+      formControlName="comment"
       id="comment"
       cols="30"
       rows="10"
@@ -35,8 +36,12 @@
 
   <div class="form__group group-date">
     <label class="form__label">Дата и время</label>
-    <select name="time" class="form__field field_margin_left" #selectTime>
-      <option value="start">Начать работу</option>
+    <select
+      formControlName="time"
+      class="form__field field_margin_left"
+      #selectTime
+    >
+      <option value="start" selected>Начать работу</option>
       <option value="end">Закончить работу</option>
       <option value="period">Указать период</option>
     </select>
@@ -51,9 +56,9 @@
         Начать
       </label>
       <div class="group-actions__inputs-action">
-        <input name="startDate" type="date" class="form__field" />
+        <input formControlName="startDate" type="date" class="form__field" />
         <input
-          name="startTime"
+          formControlName="startTime"
           type="time"
           class="form__field field_margin_left"
         />
@@ -79,9 +84,9 @@
         >Завершить
       </label>
       <div class="group-actions__inputs-action">
-        <input name="endDate" type="date" class="form__field" />
+        <input formControlName="endDate" type="date" class="form__field" />
         <input
-          name="endDate"
+          formControlName="endTime"
           type="time"
           class="form__field field_margin_left"
         />
@@ -100,6 +105,7 @@
   <div class="form__group">
     <label class="form__label">Адрес</label>
     <input
+      formControlName="address"
       type="text"
       class="form__field form__field_w_100"
       placeholder="Улица, дом, строение, корпус"
@@ -109,6 +115,7 @@
 
   <div class="form__group">
     <input
+      formControlName="isBusiness"
       type="checkbox"
       id="business"
       class="form__field form__field_type_checkbox"
@@ -122,19 +129,45 @@
     <label for="budget" class="form__label"
       >На какой бюджет вы рассчитываете?</label
     >
-    <input type="range" id="budget" class="form__field" min="0" max="20000" />
+    <input
+      formControlName="budget"
+      type="range"
+      id="budget"
+      class="form__field"
+      min="0"
+      max="20000"
+    />
     <label class="form__label"
       >или укажите примерную стоимость
-      <input type="number" class="form__field field_margin_left" />
+      <input
+        type="number"
+        formControlName="budget"
+        class="form__field field_margin_left"
+      />
     </label>
   </div>
 
   <div class="form__group">
     <label class="form__label">Ваши контакты</label>
     <div class="group-contacts">
-      <input type="text" class="form__field" placeholder="Имя Фамилия" />
-      <input type="email" class="form__field" placeholder="E-mail" />
-      <input type="tel" class="form__field" placeholder="Ваш телефон" />
+      <input
+        formControlName="fullName"
+        type="text"
+        class="form__field"
+        placeholder="Имя Фамилия"
+      />
+      <input
+        formControlName="email"
+        type="email"
+        class="form__field"
+        placeholder="E-mail"
+      />
+      <input
+        formControlName="tel"
+        type="tel"
+        class="form__field"
+        placeholder="Ваш телефон"
+      />
     </div>
     <p>
       Уже зарегистрированы?
@@ -145,6 +178,7 @@
   <div class="form__group">
     <label class="form__label">Дополнительные условия</label>
     <input
+      formControlName="isSubscribeSuggestions"
       type="checkbox"
       id="subscribe-suggestions"
       class="form__field form__field_type_checkbox"
@@ -157,6 +191,7 @@
       Получать email-уведомления о новых предложениях
     </label>
     <input
+      formControlName="isShowOnlyToExecutors"
       type="checkbox"
       id="show-only-executors"
       class="form__field form__field_type_checkbox"
@@ -174,6 +209,7 @@
   </div>
 
   <div class="form__group">
+    <!-- just for validation, not for sending to server -->
     <input
       type="checkbox"
       id="terms"
