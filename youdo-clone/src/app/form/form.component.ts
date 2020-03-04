@@ -1,6 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { PublicationService } from "../publication.service";
-import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators
+} from "@angular/forms";
 
 @Component({
   selector: "app-form",
@@ -14,22 +19,21 @@ export class FormComponent implements OnInit {
   ) {}
 
   form = this.formBuilder.group({
-    description: "",
-    category: "",
-    subcategory: "",
-    comment: "",
-    time: "",
+    description: ["", Validators.required],
+    category: ["any", Validators.required],
+    subcategory: ["any", Validators.required],
+    comment: ["", Validators.required],
+    time: ["start", Validators.required],
     startDate: null,
     startTime: null,
     endDate: null,
     endTime: null,
-    address: "", // it will be FormArray
+    address: ["", Validators.required], // it will be FormArray
     isBusiness: false,
     budget: "",
-    fullName: "",
-    email: "",
-    tel: "",
-    number: "",
+    fullName: ["", Validators.required],
+    email: ["", Validators.required],
+    tel: ["", Validators.required],
     isSubscribeSuggestions: false,
     isShowOnlyToExecutors: false
   });
