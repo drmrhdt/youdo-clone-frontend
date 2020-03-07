@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PublicationService } from "../publication.service";
-import { CategoriesService } from "../categories.service";
+import { PublicationService } from "../../services/publication.service";
+import { CategoriesService } from "../../services/categories.service";
 import { Observable, concat } from "rxjs";
 import { map, concatMap } from "rxjs/operators";
 import {
@@ -10,7 +10,7 @@ import {
   FormBuilder,
   Validators
 } from "@angular/forms";
-import { Category, Subcategory } from "../dropdown-list/category.model";
+import { Category, Subcategory } from "../../models/Category.model";
 
 @Component({
   selector: "app-form",

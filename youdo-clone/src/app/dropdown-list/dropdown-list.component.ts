@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Category } from "./category.model";
-import { CategoriesService } from "../categories.service";
+import { Category } from "../../models/Category.model";
+import { CategoriesService } from "../../services/categories.service";
 
 @Component({
   selector: "app-dropdown-list",
