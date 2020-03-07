@@ -1,13 +1,26 @@
 <div class="task-preview">
   <div class="layout_flex">
-    <a href="#" class="task-preview__title link">Category</a>
+    <a
+      href="#"
+      class="task-preview__title link"
+      [title]="task.category.title_ru"
+    >
+      {{ task.category.title_ru }}
+    </a>
     <div class="row">
       <img
+        *ngIf="task.sdr"
         title="Оплата онлайн через сделку без риска"
         src="../../assets/sdelka_online.svg"
         alt="sbr"
       />
-      <span class="task-preview__price">до Price руб.</span>
+      <img
+        *ngIf="task.business"
+        title="Оплата онлайн через сделку без риска"
+        src="../../assets/business.svg"
+        alt="sbr"
+      />
+      <span class="task-preview__price">до {{ task.price }} руб.</span>
     </div>
   </div>
   <div class="row">
@@ -17,8 +30,26 @@
       alt="avatar"
     />
     <div class="column layout_margin_left">
-      <a href="#" class="link">Nickname</a>
-      <span>Reviews</span>
+      <a href="#" class="link">{{ task.author }}</a>
+      <span *ngIf="task.reviews.positive || task.reviews.negative">
+        Отзывы:
+        <span
+          class="task-preview__review_type_positive"
+          *ngIf="task.reviews.positive"
+        >
+          {{ task.reviews.positive }}
+        </span>
+        <span
+          class="task-preview__review_type_negative"
+          *ngIf="task.reviews.negative"
+        >
+          {{ task.reviews.negative }}
+        </span>
+      </span>
+
+      <span *ngIf="!task.reviews.positive && !task.reviews.negative">
+        Нет отзывов
+      </span>
     </div>
   </div>
 </div>

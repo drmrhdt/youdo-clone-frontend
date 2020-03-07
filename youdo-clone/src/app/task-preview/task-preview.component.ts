@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { TaskPreview } from "../../models/TaskPreview.model";
 
 @Component({
   selector: "app-task-preview",
@@ -7,6 +8,8 @@ import { Component, OnInit } from "@angular/core";
 })
 export class TaskPreviewComponent implements OnInit {
   constructor() {}
+
+  @Input() task: TaskPreview;
 
   ngOnInit(): void {}
 }

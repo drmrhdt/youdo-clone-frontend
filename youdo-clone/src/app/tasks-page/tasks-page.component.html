@@ -1,0 +1,21 @@
+<div class="tasks-page">
+  <div class="left-block">
+    <header>
+      header
+    </header>
+    <ul class="tasks-page__tasks-list">
+      <app-task-preview
+        *ngFor="let taskPreview of tasksPreviews; let i; as: index"
+        [task]="i"
+      ></app-task-preview>
+    </ul>
+  </div>
+  <div class="right-block">
+    <div>
+      banner
+    </div>
+    <div>
+      categories
+    </div>
+  </div>
+</div>

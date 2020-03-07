@@ -1,5 +1,6 @@
 const express = require("express");
 const categories = require("./categories");
+const tasksPreview = require("./task-preview.test");
 
 const app = express();
 
@@ -20,6 +21,14 @@ app.use("/api/categories", (req, res, next) => {
   res.status(200).json({
     message: "Categories fetched successfully",
     categories: categories
+  });
+  next();
+});
+
+app.use("/api/tasks-preview", (req, res, next) => {
+  res.status(200).json({
+    message: "Tasks previews fetched successfully",
+    tasksPreview: tasksPreview
   });
 });
 

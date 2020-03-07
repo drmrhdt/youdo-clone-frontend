@@ -54,7 +54,7 @@ module.exports = [
     price: 30000,
     reviews: {
       positive: 0,
-      negative: 0
+      negative: 1
     },
     sdr: false,
     business: true

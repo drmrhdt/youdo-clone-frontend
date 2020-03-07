@@ -2,10 +2,9 @@
 
 :host {
   .task-preview {
-    width: 40%;
     padding: 15px 30px;
 
-    border-top: 1px solid #e3ebf1;
+    border-top: 1px solid $task-preview-border;
 
     &__title {
       font-size: 24px;
@@ -23,8 +22,37 @@
       margin-left: 10px;
       padding: 10px 20px;
 
-      background-color: #fff1a6;
+      background-color: $price-bg;
       border-radius: 4px;
+    }
+
+    &__review_type_positive {
+      position: relative;
+
+      padding-left: 20px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+
+        display: block;
+        width: 15px;
+        height: 15px;
+
+        background: $transparent url("../../assets/like.svg") no-repeat center;
+        background-size: contain;
+      }
+    }
+
+    &__review_type_negative {
+      @extend .task-preview__review_type_positive;
+
+      &::before {
+        background: $transparent url("../../assets/dislike.svg") no-repeat
+        center;
+      }
     }
   }
 

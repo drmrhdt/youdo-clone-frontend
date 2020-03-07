@@ -1,0 +1,12 @@
+.tasks-page {
+  display: flex;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+
+  .left-block,
+  .right-block {
+    width: 48%;
+  }
+}
