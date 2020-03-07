@@ -14,10 +14,15 @@
 
   <div class="form__group group-inputs">
     <select formControlName="category" class="form__field" required>
-      <option value="category">Мероприятия и промоакции</option>
+      <option
+        *ngFor="let category of categories"
+        value="{{ category.title_en }}"
+      >
+        {{ category.title_ru }}
+      </option>
     </select>
     <select formControlName="subcategory" class="form__field" required>
-      <option value="subcategory">Что-то другое</option>
+      <option> </option>
     </select>
   </div>
 

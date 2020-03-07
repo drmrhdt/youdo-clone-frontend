@@ -1,0 +1,60 @@
+@import "../../variables.scss";
+
+:host {
+  .task-preview {
+    width: 40%;
+    padding: 15px 30px;
+
+    border-top: 1px solid #e3ebf1;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__avatar {
+      width: 40px;
+      height: auto;
+    }
+
+    &__price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px;
+      padding: 10px 20px;
+
+      background-color: #fff1a6;
+      border-radius: 4px;
+    }
+  }
+
+  .layout_flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .layout_margin_left {
+    margin-left: 10px;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .link {
+    color: $form-link-terms;
+
+    &:hover {
+      color: $form-link-terms-hover;
+
+      border-color: $form-link-terms-hover;
+    }
+  }
+
+  .row {
+    display: flex;
+  }
+}

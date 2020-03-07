@@ -9,6 +9,7 @@ import { HeaderComponent } from "./header/header.component";
 import { JumbotronComponent } from "./jumbotron/jumbotron.component";
 import { DropdownListComponent } from "./dropdown-list/dropdown-list.component";
 import { FormComponent } from "./form/form.component";
+import { TaskPreviewComponent } from "./task-preview/task-preview.component";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormComponent } from "./form/form.component";
     HeaderComponent,
     JumbotronComponent,
     DropdownListComponent,
-    FormComponent
+    FormComponent,
+    TaskPreviewComponent
   ],
   imports: [
     BrowserModule,
