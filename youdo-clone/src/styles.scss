@@ -34,3 +34,15 @@ select {
 
   outline: none;
 }
+
+.link {
+  color: $form-link-terms;
+
+  cursor: pointer;
+
+  &:hover {
+    color: $form-link-terms-hover;
+
+    border-color: $form-link-terms-hover;
+  }
+}

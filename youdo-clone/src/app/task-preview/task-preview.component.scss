@@ -72,16 +72,6 @@
     align-items: flex-start;
   }
 
-  .link {
-    color: $form-link-terms;
-
-    &:hover {
-      color: $form-link-terms-hover;
-
-      border-color: $form-link-terms-hover;
-    }
-  }
-
   .row {
     display: flex;
   }

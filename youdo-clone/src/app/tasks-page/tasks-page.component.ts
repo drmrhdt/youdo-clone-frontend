@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { TaskService } from "../../services/task.service";
+import { CategoriesService } from "../../services/categories.service";
 import { TaskPreview } from "../../models/TaskPreview.model";
+import { Category } from "../../models/Category.model";
 
 @Component({
   selector: "app-tasks-page",
@@ -8,13 +10,21 @@ import { TaskPreview } from "../../models/TaskPreview.model";
   styleUrls: ["./tasks-page.component.scss"]
 })
 export class TasksPageComponent implements OnInit {
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private categoriesService: CategoriesService
+  ) {}
 
   tasksPreviews: TaskPreview[] = [];
+  categories: Category[] = [];
 
   ngOnInit(): void {
     this.taskService.getTasksPreviewList().subscribe(response => {
       this.tasksPreviews = response.tasksPreview;
+    });
+
+    this.categoriesService.getCategories().subscribe(response => {
+      this.categories = response.categories;
     });
   }
 }

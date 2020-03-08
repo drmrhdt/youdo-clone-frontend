@@ -11,6 +11,9 @@ import { DropdownListComponent } from "./dropdown-list/dropdown-list.component";
 import { FormComponent } from "./form/form.component";
 import { TaskPreviewComponent } from "./task-preview/task-preview.component";
 import { TasksPageComponent } from "./tasks-page/tasks-page.component";
+import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { VerificationBannerComponent } from './verification-banner/verification-banner.component';
+import { FilterHeaderComponent } from './filter-header/filter-header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { TasksPageComponent } from "./tasks-page/tasks-page.component";
     DropdownListComponent,
     FormComponent,
     TaskPreviewComponent,
-    TasksPageComponent
+    TasksPageComponent,
+    CategoriesListComponent,
+    VerificationBannerComponent,
+    FilterHeaderComponent
   ],
   imports: [
     BrowserModule,

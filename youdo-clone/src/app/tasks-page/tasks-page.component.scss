@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .tasks-page {
   display: flex;
   display: flex;
@@ -5,8 +7,17 @@
   width: 80%;
   margin: 0 auto;
 
-  .left-block,
+  .left-block {
+    width: 68%;
+  }
+
   .right-block {
-    width: 48%;
+    width: 30%;
+  }
+}
+
+.category-list {
+  &__li {
+    padding: 10px 0;
   }
 }

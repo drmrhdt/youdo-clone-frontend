@@ -1,0 +1,36 @@
+@import "../../variables.scss";
+
+.verification-banner {
+  position: relative;
+
+  display: flex;
+  padding: 20px 12px 20px 120px;
+
+  font-size: 12px;
+
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+
+  &:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+
+    display: block;
+    width: 91px;
+    height: 88px;
+
+    background: $transparent url("../../assets/verification-banner.svg")
+    no-repeat center;
+    background-size: contain;
+  }
+
+  &__text {
+    color: #444444;
+  }
+}

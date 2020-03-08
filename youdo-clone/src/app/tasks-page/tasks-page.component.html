@@ -1,21 +1,22 @@
 <div class="tasks-page">
   <div class="left-block">
-    <header>
-      header
-    </header>
+    <app-filter-header></app-filter-header>
     <ul class="tasks-page__tasks-list">
-      <app-task-preview
-        *ngFor="let taskPreview of tasksPreviews; let i; as: index"
-        [task]="i"
-      ></app-task-preview>
+      <li>
+        <app-task-preview
+          *ngFor="let taskPreview of tasksPreviews; let i; as: index"
+          [task]="i"
+        ></app-task-preview>
+      </li>
     </ul>
   </div>
   <div class="right-block">
-    <div>
-      banner
-    </div>
-    <div>
-      categories
-    </div>
+    <app-verification-banner></app-verification-banner>
+    <ul class="category-list">
+      <li class="link category-list__li">Все категории</li>
+      <li class="link category-list__li" *ngFor="let category of categories">
+        {{ category.title_ru }}
+      </li>
+    </ul>
   </div>
 </div>
