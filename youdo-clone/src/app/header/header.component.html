@@ -1,22 +1,17 @@
 <nav class="header-nav">
-  <a [routerLink]="'/'" class="header-nav__link header-nav__logo">
+  <a routerLink="/youdo" class="header-nav__link header-nav__logo">
     <img src="../../assets/download.svg" alt="youdo-logo" />
   </a>
   <div class="header-nav__link-container">
-    <a
-      [routerLink]="'/'"
-      class="header-nav__link"
-      (click)="isHover = !isHover"
-      #createTaskLink
-    >
+    <a class="header-nav__link" (click)="isHover = !isHover" #createTaskLink>
       Создать задание
     </a>
     <app-dropdown-list *ngIf="isHover"></app-dropdown-list>
   </div>
-  <a [routerLink]="['/tasks-all-any-all-1']" class="header-nav__link"
+  <a routerLink="/youdo/tasks-all-any-all-1" class="header-nav__link"
     >Найти задание</a
   >
-  <a [routerLink]="['/executors-courier']" class="header-nav__link"
+  <a routerLink="/youdo/executors-courier" class="header-nav__link"
     >Исполнители</a
   >
   <div class="user-menu">

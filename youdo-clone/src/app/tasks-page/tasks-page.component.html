@@ -13,8 +13,17 @@
   <div class="right-block">
     <app-verification-banner></app-verification-banner>
     <ul class="category-list">
-      <li class="link category-list__li">Все категории</li>
-      <li class="link category-list__li" *ngFor="let category of categories">
+      <li
+        routerLink="/youdo/tasks-all-any-all-1"
+        class="link category-list__li"
+      >
+        Все категории
+      </li>
+      <li
+        routerLink="/youdo/tasks-all-any-{{ category.title_en }}-1"
+        class="link category-list__li"
+        *ngFor="let category of categories"
+      >
         {{ category.title_ru }}
       </li>
     </ul>
