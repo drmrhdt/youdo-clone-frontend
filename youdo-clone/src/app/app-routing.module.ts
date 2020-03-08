@@ -7,7 +7,7 @@ import { TasksPageComponent } from "./tasks-page/tasks-page.component";
 
 const routes: Routes = [
   {
-    path: "/",
+    path: "",
     redirectTo: "/youdo",
     pathMatch: "full"
   },
