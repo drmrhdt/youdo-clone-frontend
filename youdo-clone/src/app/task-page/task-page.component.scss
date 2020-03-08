@@ -1,10 +1,9 @@
-@import "../../variables.scss";
-
-.tasks-page {
+.task-page {
   display: flex;
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
+  padding: 25px 0;
 
   .left-block {
     width: 68%;
@@ -12,11 +11,5 @@
 
   .right-block {
     width: 30%;
-  }
-}
-
-.category-list {
-  &__li {
-    padding: 10px 0;
   }
 }
