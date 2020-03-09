@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Category } from "../models/Category.model";
 import { CategoriesResponse } from "../models/CategoriesResponse.model";
-import { Observable, AsyncSubject } from "rxjs";
-import { shareReplay, tap } from "rxjs/operators";
+import { AsyncSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
