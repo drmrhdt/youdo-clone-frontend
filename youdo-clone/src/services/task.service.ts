@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { TaskPreview } from "../models/TaskPreview.model";
 import { TaskResponse } from "../models/TaskResponse.model";
+import { TasksPreviewResponse } from "../models/TasksPreviewResponse";
 
 @Injectable({
   providedIn: "root"
@@ -10,14 +10,10 @@ import { TaskResponse } from "../models/TaskResponse.model";
 export class TaskService {
   constructor(private httpClient: HttpClient) {}
 
-  getTasksPreviewList(): Observable<{
-    message: string;
-    tasksPreview: TaskPreview[];
-  }> {
-    return this.httpClient.get<{
-      message: string;
-      tasksPreview: TaskPreview[];
-    }>("http://localhost:3000/api/tasks-preview");
+  getTasksPreviewList(): Observable<TasksPreviewResponse> {
+    return this.httpClient.get<TasksPreviewResponse>(
+      "http://localhost:3000/api/tasks-preview"
+    );
   }
 
   getTaskById(id: string): Observable<TaskResponse> {

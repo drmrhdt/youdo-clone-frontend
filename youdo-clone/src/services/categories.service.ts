@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Category } from "../models/Category.model";
+import { CategoriesResponse } from "../models/CategoriesResponse.model";
 import { Observable, AsyncSubject } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
 
@@ -19,11 +20,9 @@ export class CategoriesService {
   getCategories() {
     this.categoriesSubject.next(
       this.http
-        .get<{ message: string; categories: Category[] }>(
-          "http://localhost:3000/api/categories"
-        )
+        .get<CategoriesResponse>("http://localhost:3000/api/categories")
         .subscribe(res => {
-          this.categories = res.categories;
+          this.categories = res.data.categories;
         })
     );
 

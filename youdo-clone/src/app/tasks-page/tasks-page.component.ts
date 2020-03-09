@@ -20,7 +20,7 @@ export class TasksPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskService.getTasksPreviewList().subscribe(response => {
-      this.tasksPreviews = response.tasksPreview;
+      this.tasksPreviews = response.data.tasksPreview;
     });
 
     this.categories = this.categoriesService.categories;

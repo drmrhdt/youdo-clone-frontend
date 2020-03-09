@@ -22,20 +22,23 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/categories", (req, res, next) => {
+app.get("/api/categories", (req, res) => {
   res.status(200).json({
-    message: "Categories fetched successfully",
-    categories: categories
+    status: "success",
+    results: categories.length,
+    data: {
+      categories
+    }
   });
-  next();
 });
 
-app.use("/api/tasks-preview", (req, res, next) => {
+app.get("/api/tasks-preview", (req, res) => {
   res.status(200).json({
-    message: "Tasks previews fetched successfully",
-    tasksPreview: tasksPreview
+    message: "success",
+    data: {
+      tasksPreview
+    }
   });
-  next();
 });
 
 app.get("/api/task/:id", (req, res) => {
@@ -45,7 +48,7 @@ app.get("/api/task/:id", (req, res) => {
   res.status(200).json({
     status: "success",
     data: {
-      task: task
+      task
     }
   });
 });
@@ -58,7 +61,6 @@ app.post("/api/task", (req, res) => {
 
   const newTask = { id, ...req.body };
   formTasks.push(newTask);
-  console.log(formTasks);
 
   fs.writeFile(
     `${__dirname}/form-tasks.json`,
