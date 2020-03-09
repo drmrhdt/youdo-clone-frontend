@@ -30,6 +30,19 @@ app.use("/api/tasks-preview", (req, res, next) => {
     message: "Tasks previews fetched successfully",
     tasksPreview: tasksPreview
   });
+  next();
+});
+
+app.get("/api/task/:id", (req, res) => {
+  const id = +req.params.id;
+  const task = tasksPreview.find(task => task.id === id);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      task: task
+    }
+  });
 });
 
 module.exports = app;
