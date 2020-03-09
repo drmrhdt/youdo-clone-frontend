@@ -17,6 +17,7 @@ export interface TaskPreview {
     endDate?: number;
     endTime?: number;
   };
+  description: string;
   sdr: boolean;
   business: boolean;
   createDate: number;

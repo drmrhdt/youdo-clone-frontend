@@ -5,7 +5,7 @@ module.exports = [
     category: {
       title_en: "Category",
       title_ru: "Маникюр и педикюр",
-      subcategory: {
+      subcategories: {
         title_en: "Subcategory",
         title_ru: "Подкатегория"
       }
@@ -23,6 +23,8 @@ module.exports = [
       endDate: 1583676636128,
       endTime: 1583676636128
     },
+    description:
+      "Забрать холодильник со славянки и привезти на проспеет просвящения 68. желательно сегодня.",
     sdr: true,
     business: false,
     createDate: 1583676036128
@@ -32,11 +34,11 @@ module.exports = [
     author: "Konformidze",
     category: {
       title_en: "Category",
-      title_ru: "Парикмахер на дом"
-    },
-    subcategory: {
-      title_en: "Subcategory",
-      title_ru: "Подкатегория"
+      title_ru: "Парикмахер на дом",
+      subcategories: {
+        title_en: "Subcategory",
+        title_ru: "Подкатегория"
+      }
     },
     price: 7000,
     paymentType: "withoutGuarantee",
@@ -51,6 +53,9 @@ module.exports = [
       endDate: 1583676636128,
       endTime: 1583676636128
     },
+    description:
+      "Забрать холодильник со славянки и привезти на проспеет просвящения 68. желательно сегодня.",
+
     sdr: true,
     business: false,
     createDate: 1583676006128
@@ -60,12 +65,13 @@ module.exports = [
     author: "Анастасия",
     category: {
       title_en: "Category",
-      title_ru: "Вынести строительный мусор"
+      title_ru: "Вынести строительный мусор",
+      subcategories: {
+        title_en: "Subcategory",
+        title_ru: "Подкатегория"
+      }
     },
-    subcategory: {
-      title_en: "Subcategory",
-      title_ru: "Подкатегория"
-    },
+
     price: 7000,
     paymentType: "withoutGuarantee",
     additionalCondition: [],
@@ -79,6 +85,9 @@ module.exports = [
       endDate: 1583676636128,
       endTime: 1583676636128
     },
+    description:
+      "Забрать холодильник со славянки и привезти на проспеет просвящения 68. желательно сегодня.",
+
     sdr: true,
     business: false,
     createDate: 1580676036128
@@ -88,12 +97,13 @@ module.exports = [
     author: "Александра",
     category: {
       title_en: "Category",
-      title_ru: "Требуется администратор в банный комплекс"
+      title_ru: "Требуется администратор в банный комплекс",
+      subcategories: {
+        title_en: "Subcategory",
+        title_ru: "Подкатегория"
+      }
     },
-    subcategory: {
-      title_en: "Subcategory",
-      title_ru: "Подкатегория"
-    },
+
     price: 30000,
     paymentType: "withoutGuarantee",
     additionalCondition: [],
@@ -107,6 +117,9 @@ module.exports = [
       endDate: 1583676636128,
       endTime: 1583676636128
     },
+    description:
+      "Забрать холодильник со славянки и привезти на проспеет просвящения 68. желательно сегодня.",
+
     sdr: false,
     business: true,
     createDate: 1503676036128
@@ -116,12 +129,13 @@ module.exports = [
     author: "Артем К.",
     category: {
       title_en: "Category",
-      title_ru: "Ремонт AverMedia"
+      title_ru: "Ремонт AverMedia",
+      subcategories: {
+        title_en: "Subcategory",
+        title_ru: "Подкатегория"
+      }
     },
-    subcategory: {
-      title_en: "Subcategory",
-      title_ru: "Подкатегория"
-    },
+
     price: 30000,
     paymentType: "withoutGuarantee",
     additionalCondition: [],
@@ -135,6 +149,9 @@ module.exports = [
       endDate: 1583676636128,
       endTime: 1583676636128
     },
+    description:
+      "Забрать холодильник со славянки и привезти на проспеет просвящения 68. желательно сегодня.",
+
     sdr: true,
     business: false,
     createDate: 1583600036128

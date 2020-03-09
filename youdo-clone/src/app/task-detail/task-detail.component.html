@@ -1,23 +1,32 @@
-<section class="task-detail">
-  <h4 class="task-detail__title">Заголовок</h4>
+<section *ngIf="isLoading === false" class="task-detail">
+  <h4 class="task-detail__title">{{ task.category.title_ru }}</h4>
   <div class="task-detail__status-bar">
     <div class="task-detail__status">Открыто</div>
     <div>10 просмотров</div>
-    <div>Создано 2 ч. 39 мин. назад</div>
-    <div>Подкатегория</div>
+    <div>
+      Создано {{ task.createDate | date: "dd.MM.yyyy" }},
+      {{ task.createDate | date: "hh:mm" }}
+    </div>
+    <div>{{ task.category.subcategories.title_ru }}</div>
   </div>
   <article class="task-detail__card">
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Начать</strong>
-      <span class="task-detail__task-value">Дата, время</span>
+      <span class="task-detail__task-value"
+        >{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
+        {{ task.executionTime.startTime | date: "hh:mm" }}</span
+      >
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Завершить</strong>
-      <span class="task-detail__task-value">Дата, время</span>
+      <span class="task-detail__task-value"
+        >{{ task.executionTime.endDate | date: "dd.MM.yy" }},
+        {{ task.executionTime.endTime | date: "hh:mm" }}</span
+      >
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Стоимость</strong>
-      <span class="task-detail__task-value">Число</span>
+      <span class="task-detail__task-value">{{ task.price }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Оплата задания</strong>
@@ -27,7 +36,7 @@
     </div>
     <div class="task-detail__task-item task-detail__task-item_type_important">
       <strong class="task-detail__task-property">Описание</strong>
-      <span class="task-detail__task-value">Текст</span>
+      <span class="task-detail__task-value">{{ task.description }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Дополнительные условия</strong>
