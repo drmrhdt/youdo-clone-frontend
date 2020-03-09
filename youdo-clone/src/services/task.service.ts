@@ -8,6 +8,8 @@ import { TaskResponse } from "../models/TaskResponse.model";
   providedIn: "root"
 })
 export class TaskService {
+  constructor(private httpClient: HttpClient) {}
+
   getTasksPreviewList(): Observable<{
     message: string;
     tasksPreview: TaskPreview[];
@@ -24,5 +26,7 @@ export class TaskService {
     );
   }
 
-  constructor(private httpClient: HttpClient) {}
+  createTask(formValues) {
+    return this.httpClient.post("http://localhost:3000/api/task", formValues);
+  }
 }

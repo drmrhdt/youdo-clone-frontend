@@ -11,6 +11,7 @@ import {
   Validators
 } from "@angular/forms";
 import { Category, Subcategory } from "../../models/Category.model";
+import { TaskService } from "../../services/task.service";
 
 @Component({
   selector: "app-form",
@@ -22,7 +23,8 @@ export class FormComponent implements OnInit {
     private publicationService: PublicationService,
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private taskService: TaskService
   ) {}
 
   isLoading: boolean = false;
@@ -78,6 +80,10 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.form.invalid) {
+      return;
+    }
+    this.taskService.createTask(this.form.value).subscribe(console.log);
     console.warn(this.form.value);
   }
 }
