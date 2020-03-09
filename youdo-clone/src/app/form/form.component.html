@@ -1,4 +1,4 @@
-<form class="form" (ngSubmit)="onSubmit()" [formGroup]="form">
+<form *ngIf="!isLoading" class="form" (ngSubmit)="onSubmit()" [formGroup]="form">
   <h2 class="form__title">Заполните заявку</h2>
   <div class="form__group">
     <label for="title" class="form__label">Мне нужно</label>
@@ -13,7 +13,12 @@
   </div>
 
   <div class="form__group group-inputs">
-    <select formControlName="category" class="form__field" required>
+    <select
+      formControlName="category"
+      class="form__field"
+      required
+      (input)="updateSelectSubcategory()"
+    >
       <option
         *ngFor="let category of categories"
         value="{{ category.title_en }}"
@@ -22,7 +27,15 @@
       </option>
     </select>
     <select formControlName="subcategory" class="form__field" required>
-      <option> </option>
+      <!-- <option value="{{ currentSubcategoryObject.title_en }}">
+        {{ currentSubcategoryObject.title_ru }}
+      </option> -->
+      <option
+        *ngFor="let subcategory of currentCategoryObject.subcategories"
+        value="{{ subcategory.title_en }}"
+      >
+        {{ subcategory.title_ru }}
+      </option>
     </select>
   </div>
 

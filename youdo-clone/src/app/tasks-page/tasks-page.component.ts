@@ -23,8 +23,6 @@ export class TasksPageComponent implements OnInit {
       this.tasksPreviews = response.tasksPreview;
     });
 
-    this.categoriesService.getCategories().subscribe(response => {
-      this.categories = response.categories;
-    });
+    this.categories = this.categoriesService.categories;
   }
 }

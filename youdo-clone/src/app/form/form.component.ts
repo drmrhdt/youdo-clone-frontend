@@ -25,28 +25,18 @@ export class FormComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  currentCategory: string;
-  currentSubcategory: string;
+  isLoading: boolean = false;
+
+  categoryFromUrl: string = this.route.snapshot.paramMap.get("category");
+  subcategoryFromUrl: string = this.route.snapshot.paramMap.get("subcategory");
   currentCategoryObject: Category;
   currentSubcategoryObject: Subcategory;
   categories: Category[] = [];
 
-  currentCategory$: Observable<string> = this.route.params.pipe(
-    map(p => (this.currentCategory = p.category))
-  );
-  currentSubcategory$: Observable<string> = this.route.params.pipe(
-    map(p => (this.currentSubcategory = p.subcategory))
-  );
-  categories$: Observable<
-    Category[]
-  > = this.categoriesService
-    .getCategories()
-    .pipe(map(response => (this.categories = response.categories)));
-
   form = this.formBuilder.group({
     description: ["", Validators.required],
-    category: [this.currentCategory, Validators.required],
-    subcategory: [this.currentSubcategory, Validators.required],
+    category: [this.categoryFromUrl, Validators.required],
+    subcategory: [this.subcategoryFromUrl, Validators.required],
     comment: ["", Validators.required],
     time: ["start", Validators.required],
     startDate: null,
@@ -64,37 +54,27 @@ export class FormComponent implements OnInit {
   });
 
   ngOnInit() {
-    // this.categoriesService.getCategories().subscribe(response => {
-    //   this.categories$ = response.categories;
-    // });
-    // this.currentSubcategory$.subscribe(currentCategory => {
-    //   this.currentCategory = currentCategory;
-    //   console.log(
-    //     this.categories.find(category => category.title_en === "courier")
-    //   );
-    // });
-    concat(
-      this.categories$,
-      this.currentCategory$,
-      this.currentSubcategory$
-    ).subscribe(() => {
-      console.log(
-        this.categories,
-        this.currentCategory,
-        this.currentSubcategory
-      );
-      this.getCurrentSubcategory();
-    });
-  }
-
-  getCurrentSubcategory() {
+    this.isLoading = true;
+    this.categories = this.categoriesService.categories;
     this.currentCategoryObject = this.categories.find(
-      category => category.title_en === this.currentCategory
+      category => category.title_en === this.categoryFromUrl
     );
 
     this.currentSubcategoryObject = this.currentCategoryObject.subcategories.find(
-      subcategory => subcategory.title_en === this.currentSubcategory
+      subcategory => subcategory.title_en === this.subcategoryFromUrl
     );
+    this.isLoading = false;
+  }
+
+  updateSelectSubcategory() {
+    this.form.get("category").valueChanges.subscribe(() => {
+      this.currentCategoryObject = this.categories.find(
+        category => category.title_en === this.form.get("category").value
+      );
+      this.form.controls.subcategory.patchValue(
+        this.currentCategoryObject.subcategories[0].title_en
+      );
+    });
   }
 
   onSubmit() {

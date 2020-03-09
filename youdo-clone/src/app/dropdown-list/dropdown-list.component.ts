@@ -13,8 +13,7 @@ export class DropdownListComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit() {
-    this.categoriesService
-      .getCategories()
-      .subscribe(response => (this.categories = response.categories));
+    this.categories = this.categoriesService.categories;
+    // .subscribe(response => (this.categories = response.categories));
   }
 }
