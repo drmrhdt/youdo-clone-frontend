@@ -1,14 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { FormBuilder, Validators } from "@angular/forms";
 import { CategoriesService } from "../../services/categories.service";
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validators
-} from "@angular/forms";
-import { Category, Subcategory } from "../../models/Category.model";
 import { TaskService } from "../../services/task.service";
+import { Category } from "../../models/Category.model";
+import { Subcategory } from "../../models/Subcategory.model";
 
 @Component({
   selector: "app-form",
@@ -33,14 +29,8 @@ export class FormComponent implements OnInit {
   // form: FormGroup;
   form = this.formBuilder.group({
     description: ["", Validators.required],
-    // category: this.formBuilder.group({
-    //   title_ru: "this.currentCategoryObject.title_ru",
-    //   title_en: [this.categoryFromUrl, Validators.required]
-    // subcategory: this.formBuilder.group({
-    //   title_ru: "this.currentSubcategoryObject.title_ru",
-    //   title_en: [this.subcategoryFromUrl, Validators.required]
-    // })
-    // }),
+    category: [this.categoryFromUrl, Validators.required],
+    subcategory: [this.subcategoryFromUrl, Validators.required],
     comment: ["", Validators.required],
     executionTime: this.formBuilder.group({
       time: ["start", Validators.required],
@@ -66,24 +56,22 @@ export class FormComponent implements OnInit {
     this.isLoading = true;
     this.categories = this.categoriesService.categories;
     this.currentCategoryObject = this.categories.find(
-      category => category.title_en === this.categoryFromUrl
+      category => category.key === this.categoryFromUrl
     );
 
     this.currentSubcategoryObject = this.currentCategoryObject.subcategories.find(
-      subcategory => subcategory.title_en === this.subcategoryFromUrl
+      subcategory => subcategory.code.toLowerCase() === this.subcategoryFromUrl
     );
     this.isLoading = false;
   }
 
   updateSelectSubcategory() {
-    this.form.get("category").valueChanges.subscribe(() => {
-      this.currentCategoryObject = this.categories.find(
-        category => category.title_en === this.form.get("category").value
-      );
-      this.form.controls.subcategory.patchValue(
-        this.currentCategoryObject.subcategories[0].title_en
-      );
-    });
+    this.currentCategoryObject = this.categories.find(
+      category => category.key === this.form.get("category").value
+    );
+    this.form.controls.subcategory.patchValue(
+      this.currentCategoryObject.subcategories[0].code
+    );
   }
 
   onSubmit() {

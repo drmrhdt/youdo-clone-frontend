@@ -14,6 +14,5 @@ export class DropdownListComponent implements OnInit {
 
   ngOnInit() {
     this.categories = this.categoriesService.categories;
-    // .subscribe(response => (this.categories = response.categories));
   }
 }

@@ -1,10 +1,12 @@
-export interface Category {
-  title_en: string;
-  title_ru: string;
-  subcategories: Subcategory[];
-}
+import { Subcategory } from "./Subcategory.model";
 
-export interface Subcategory {
-  title_ru: string;
-  title_en: string;
+export interface Category {
+  id: number;
+  key: string;
+  text: string;
+  cities: string;
+  hints: {
+    description?: string;
+  };
+  subcategories: Subcategory[];
 }

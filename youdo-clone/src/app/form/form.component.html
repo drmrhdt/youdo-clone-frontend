@@ -18,30 +18,27 @@
   </div>
 
   <div class="form__group group-inputs">
-    <!-- formControlName="category" -->
     <select
+      formControlName="category"
       class="form__field"
       required
-      (input)="updateSelectSubcategory()"
+      (change)="updateSelectSubcategory()"
     >
-      <option
-        *ngFor="let category of categories"
-        value="{{ category.title_en }}"
-      >
-        {{ category.title_ru }}
+      <option *ngFor="let category of categories" value="{{ category.key }}">
+        {{ category.text }}
       </option>
     </select>
-    <!-- <select formControlName="subcategory" class="form__field" required>
-      <option value="{{ currentSubcategoryObject.title_en }}">
-        {{ currentSubcategoryObject.title_ru }}
+    <select formControlName="subcategory" class="form__field" required>
+      <option value="{{ currentSubcategoryObject.key }}">
+        {{ currentSubcategoryObject.name }}
       </option>
       <option
         *ngFor="let subcategory of currentCategoryObject.subcategories"
-        value="{{ subcategory.title_en }}"
+        value="{{ subcategory.code }}"
       >
-        {{ subcategory.title_ru }}
+        {{ subcategory.name }}
       </option>
-    </select> -->
+    </select>
   </div>
 
   <div class="form__group">
@@ -60,75 +57,81 @@
   </div>
 
   <div formGroupName="executionTime">
-  <div class="form__group group-date">
-    <label class="form__label">Дата и время</label>
-    <select
-      formControlName="time"
-      class="form__field field_margin_left"
-      #selectTime
-      required
-    >
-      <option value="start" selected>Начать работу</option>
-      <option value="end">Закончить работу</option>
-      <option value="period">Указать период</option>
-    </select>
-  </div>
-
-  <div class="form__group">
-    <div
-      class="group-actions"
-      *ngIf="selectTime.value === 'start' || selectTime.value === 'period'"
-    >
-      <label *ngIf="selectTime.value === 'period'" class="form__label">
-        Начать
-      </label>
-      <div class="group-actions__inputs-action">
-        <input formControlName="startDate" type="date" class="form__field" />
-        <input
-          formControlName="startTime"
-          type="time"
-          class="form__field field_margin_left"
-        />
-      </div>
-      <div class="group-actions__links-action">
-        <a
-          href="#"
-          class="form__link form__link_action form__link_font-size_xs"
-        >
-          Сегодня
-        </a>
-        <a href="#" class="form__link form__link_action form__link_font-size_xs"
-          >Завтра</a
-        >
-      </div>
+    <div class="form__group group-date">
+      <label class="form__label">Дата и время</label>
+      <select
+        formControlName="time"
+        class="form__field field_margin_left"
+        #selectTime
+        required
+      >
+        <option value="start" selected>Начать работу</option>
+        <option value="end">Закончить работу</option>
+        <option value="period">Указать период</option>
+      </select>
     </div>
 
-    <div
-      class="group-actions"
-      *ngIf="selectTime.value === 'end' || selectTime.value === 'period'"
-    >
-      <label *ngIf="selectTime.value === 'period'" class="form__label"
-        >Завершить
-      </label>
-      <div class="group-actions__inputs-action">
-        <input formControlName="endDate" type="date" class="form__field" />
-        <input
-          formControlName="endTime"
-          type="time"
-          class="form__field field_margin_left"
-        />
+    <div class="form__group">
+      <div
+        class="group-actions"
+        *ngIf="selectTime.value === 'start' || selectTime.value === 'period'"
+      >
+        <label *ngIf="selectTime.value === 'period'" class="form__label">
+          Начать
+        </label>
+        <div class="group-actions__inputs-action">
+          <input formControlName="startDate" type="date" class="form__field" />
+          <input
+            formControlName="startTime"
+            type="time"
+            class="form__field field_margin_left"
+          />
+        </div>
+        <div class="group-actions__links-action">
+          <a
+            href="#"
+            class="form__link form__link_action form__link_font-size_xs"
+          >
+            Сегодня
+          </a>
+          <a
+            href="#"
+            class="form__link form__link_action form__link_font-size_xs"
+            >Завтра</a
+          >
+        </div>
       </div>
-      <div class="group-actions__links-action">
-        <a href="#" class="form__link form__link_action form__link_font-size_xs"
-          >Сегодня
-        </a>
-        <a href="#" class="form__link form__link_action form__link_font-size_xs"
-          >Завтра</a
-        >
+
+      <div
+        class="group-actions"
+        *ngIf="selectTime.value === 'end' || selectTime.value === 'period'"
+      >
+        <label *ngIf="selectTime.value === 'period'" class="form__label"
+          >Завершить
+        </label>
+        <div class="group-actions__inputs-action">
+          <input formControlName="endDate" type="date" class="form__field" />
+          <input
+            formControlName="endTime"
+            type="time"
+            class="form__field field_margin_left"
+          />
+        </div>
+        <div class="group-actions__links-action">
+          <a
+            href="#"
+            class="form__link form__link_action form__link_font-size_xs"
+            >Сегодня
+          </a>
+          <a
+            href="#"
+            class="form__link form__link_action form__link_font-size_xs"
+            >Завтра</a
+          >
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div class="form__group">
     <label class="form__label">Адрес</label>

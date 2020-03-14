@@ -1,8 +1,11 @@
 const express = require("express");
-const categories = require("./categories");
 const fs = require("fs");
 
+const subcategories = JSON.parse(
+  fs.readFileSync(`${__dirname}/subcategories.json`)
+);
 const tasks = JSON.parse(fs.readFileSync(`${__dirname}/tasks.json`));
+const categories = JSON.parse(fs.readFileSync(`${__dirname}/categories.json`));
 
 const app = express();
 
@@ -27,6 +30,21 @@ app.get("/api/categories", (req, res) => {
     results: categories.length,
     data: {
       categories
+    }
+  });
+});
+
+app.get("/api/subcategories/:id", (req, res) => {
+  const id = +req.params.id;
+  const filteredSubcategories = subcategories.filter(
+    subCat => subCat.category === id
+  );
+
+  res.status(200).json({
+    status: "success",
+    results: filteredSubcategories.length,
+    data: {
+      subcategories: filteredSubcategories
     }
   });
 });
@@ -69,3 +87,26 @@ app.post("/api/task", (req, res) => {
 });
 
 module.exports = app;
+
+// const propToLowerCase = array => {
+//   array.forEach(obj => {
+//     for (const key in obj) {
+//       const titleCase = key.slice(0, 1).toLowerCase() + key.slice(1);
+//       if (Array.isArray(obj[key])) {
+//         obj[titleCase] = obj[key];
+//         propToLowerCase(obj[titleCase]);
+//         delete obj[key];
+//       } else {
+//         obj[titleCase] = obj[key];
+//         delete obj[key];
+//       }
+//     }
+//   });
+//   return array;
+// };
+
+// const newObj = propToLowerCase(subcategoriesJson);
+
+// fs.writeFile(`${__dirname}/test.json`, JSON.stringify(newObj), err => {
+//   console.log(err);
+// });
