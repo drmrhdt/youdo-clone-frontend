@@ -1,4 +1,9 @@
-<form *ngIf="!isLoading" class="form" (ngSubmit)="onSubmit()" [formGroup]="form">
+<form
+  *ngIf="!isLoading"
+  class="form"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="form"
+>
   <h2 class="form__title">Заполните заявку</h2>
   <div class="form__group">
     <label for="title" class="form__label">Мне нужно</label>
@@ -13,8 +18,8 @@
   </div>
 
   <div class="form__group group-inputs">
+    <!-- formControlName="category" -->
     <select
-      formControlName="category"
       class="form__field"
       required
       (input)="updateSelectSubcategory()"
@@ -26,17 +31,17 @@
         {{ category.title_ru }}
       </option>
     </select>
-    <select formControlName="subcategory" class="form__field" required>
-      <!-- <option value="{{ currentSubcategoryObject.title_en }}">
+    <!-- <select formControlName="subcategory" class="form__field" required>
+      <option value="{{ currentSubcategoryObject.title_en }}">
         {{ currentSubcategoryObject.title_ru }}
-      </option> -->
+      </option>
       <option
         *ngFor="let subcategory of currentCategoryObject.subcategories"
         value="{{ subcategory.title_en }}"
       >
         {{ subcategory.title_ru }}
       </option>
-    </select>
+    </select> -->
   </div>
 
   <div class="form__group">
@@ -54,6 +59,7 @@
     ></textarea>
   </div>
 
+  <div formGroupName="executionTime">
   <div class="form__group group-date">
     <label class="form__label">Дата и время</label>
     <select
@@ -122,6 +128,7 @@
       </div>
     </div>
   </div>
+</div>
 
   <div class="form__group">
     <label class="form__label">Адрес</label>
@@ -173,7 +180,7 @@
     <label class="form__label">Ваши контакты</label>
     <div class="group-contacts">
       <input
-        formControlName="fullName"
+        formControlName="author"
         type="text"
         class="form__field"
         placeholder="Имя Фамилия"
@@ -200,7 +207,7 @@
     </p>
   </div>
 
-  <div class="form__group">
+  <div class="form__group" formGroupName="additionalConditions">
     <label class="form__label">Дополнительные условия</label>
     <input
       formControlName="isSubscribeSuggestions"

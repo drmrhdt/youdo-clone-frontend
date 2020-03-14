@@ -3,24 +3,24 @@
     <a
       routerLink="/youdo/task/{{ task.id }}"
       class="task-preview__title link"
-      [title]="task.category.title_ru"
+      [title]="task.description"
     >
-      {{ task.category.title_ru }}
+      {{ task.description }}
     </a>
     <div class="row">
       <img
-        *ngIf="task.sdr"
+        *ngIf="task.isSbr"
         title="Оплата онлайн через сделку без риска"
         src="../../assets/sdelka_online.svg"
         alt="sbr"
       />
       <img
-        *ngIf="task.business"
+        *ngIf="task.isBusiness"
         title="Оплата онлайн через сделку без риска"
         src="../../assets/business.svg"
         alt="sbr"
       />
-      <span class="task-preview__price">до {{ task.price }} руб.</span>
+      <span class="task-preview__price">до {{ task.budget }} руб.</span>
     </div>
   </div>
   <div class="row">

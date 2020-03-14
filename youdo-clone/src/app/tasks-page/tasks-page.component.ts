@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TaskService } from "../../services/task.service";
 import { CategoriesService } from "../../services/categories.service";
-import { TaskPreview } from "../../models/TaskPreview.model";
+import { Task } from "../../models/Task.model";
 import { Category } from "../../models/Category.model";
 
 @Component({
@@ -15,12 +15,12 @@ export class TasksPageComponent implements OnInit {
     private categoriesService: CategoriesService
   ) {}
 
-  tasksPreviews: TaskPreview[] = [];
+  tasks: Task[] = [];
   categories: Category[] = [];
 
   ngOnInit(): void {
-    this.taskService.getTasksPreviewList().subscribe(response => {
-      this.tasksPreviews = response.data.tasksPreview;
+    this.taskService.getTasksList().subscribe(response => {
+      this.tasks = response.data.tasks;
     });
 
     this.categories = this.categoriesService.categories;

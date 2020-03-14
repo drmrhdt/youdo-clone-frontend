@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TaskService } from "../../services/task.service";
 import { ActivatedRoute } from "@angular/router";
-import { TaskPreview } from "../../models/TaskPreview.model";
+import { Task } from "../../models/Task.model";
 
 @Component({
   selector: "app-task-detail",
@@ -15,7 +15,7 @@ export class TaskDetailComponent implements OnInit {
   ) {}
 
   isLoading: boolean;
-  task: TaskPreview;
+  task: Task;
 
   ngOnInit(): void {
     this.isLoading = true;

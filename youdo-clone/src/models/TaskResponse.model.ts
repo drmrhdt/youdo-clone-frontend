@@ -1,8 +1,8 @@
-import { TaskPreview } from "./TaskPreview.model";
+import { Task } from "./Task.model";
 
 export interface TaskResponse {
   status: string;
   data: {
-    task: TaskPreview;
+    task: Task;
   };
 }

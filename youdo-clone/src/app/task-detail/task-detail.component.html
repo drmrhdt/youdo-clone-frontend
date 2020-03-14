@@ -1,5 +1,5 @@
 <section *ngIf="isLoading === false" class="task-detail">
-  <h4 class="task-detail__title">{{ task.category.title_ru }}</h4>
+  <h4 class="task-detail__title">{{ task.description }}</h4>
   <div class="task-detail__status-bar">
     <div class="task-detail__status">Открыто</div>
     <div>10 просмотров</div>
@@ -7,7 +7,7 @@
       Создано {{ task.createDate | date: "dd.MM.yyyy" }},
       {{ task.createDate | date: "hh:mm" }}
     </div>
-    <div>{{ task.category.subcategories.title_ru }}</div>
+    <!-- <div>{{ task.category.subcategories.title_ru }}</div> -->
   </div>
   <article class="task-detail__card">
     <div class="task-detail__task-item">
@@ -26,7 +26,7 @@
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Стоимость</strong>
-      <span class="task-detail__task-value">{{ task.price }}</span>
+      <span class="task-detail__task-value">{{ task.budget }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Оплата задания</strong>
@@ -36,7 +36,7 @@
     </div>
     <div class="task-detail__task-item task-detail__task-item_type_important">
       <strong class="task-detail__task-property">Описание</strong>
-      <span class="task-detail__task-value">{{ task.description }}</span>
+      <span class="task-detail__task-value">{{ task.comment }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Дополнительные условия</strong>

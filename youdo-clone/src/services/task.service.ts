@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { TaskResponse } from "../models/TaskResponse.model";
-import { TasksPreviewResponse } from "../models/TasksPreviewResponse";
+import { TasksResponse } from "../models/TasksResponse";
 
 @Injectable({
   providedIn: "root"
@@ -10,9 +10,9 @@ import { TasksPreviewResponse } from "../models/TasksPreviewResponse";
 export class TaskService {
   constructor(private httpClient: HttpClient) {}
 
-  getTasksPreviewList(): Observable<TasksPreviewResponse> {
-    return this.httpClient.get<TasksPreviewResponse>(
-      "http://localhost:3000/api/tasks-preview"
+  getTasksList(): Observable<TasksResponse> {
+    return this.httpClient.get<TasksResponse>(
+      "http://localhost:3000/api/tasks"
     );
   }
 

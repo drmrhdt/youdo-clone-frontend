@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PublicationService } from "../../services/publication.service";
 import { CategoriesService } from "../../services/categories.service";
-import { Observable, concat } from "rxjs";
-import { map, concatMap } from "rxjs/operators";
 import {
   FormControl,
   FormGroup,
@@ -20,7 +17,6 @@ import { TaskService } from "../../services/task.service";
 })
 export class FormComponent implements OnInit {
   constructor(
-    private publicationService: PublicationService,
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
@@ -34,25 +30,36 @@ export class FormComponent implements OnInit {
   currentCategoryObject: Category;
   currentSubcategoryObject: Subcategory;
   categories: Category[] = [];
-
+  // form: FormGroup;
   form = this.formBuilder.group({
     description: ["", Validators.required],
-    category: [this.categoryFromUrl, Validators.required],
-    subcategory: [this.subcategoryFromUrl, Validators.required],
+    // category: this.formBuilder.group({
+    //   title_ru: "this.currentCategoryObject.title_ru",
+    //   title_en: [this.categoryFromUrl, Validators.required]
+    // subcategory: this.formBuilder.group({
+    //   title_ru: "this.currentSubcategoryObject.title_ru",
+    //   title_en: [this.subcategoryFromUrl, Validators.required]
+    // })
+    // }),
     comment: ["", Validators.required],
-    time: ["start", Validators.required],
-    startDate: null,
-    startTime: null,
-    endDate: null,
-    endTime: null,
+    executionTime: this.formBuilder.group({
+      time: ["start", Validators.required],
+      startDate: [+new Date(), Validators.required],
+      startTime: [+new Date(), Validators.required],
+      endDate: null,
+      endTime: null
+    }),
     address: ["", Validators.required], // it will be FormArray
-    isBusiness: false,
     budget: "",
-    fullName: ["", Validators.required],
+    author: ["", Validators.required],
     email: ["", Validators.required],
     tel: ["", Validators.required],
-    isSubscribeSuggestions: false,
-    isShowOnlyToExecutors: false
+    additionalConditions: this.formBuilder.group({
+      isSubscribeSuggestions: false,
+      isShowOnlyToExecutors: false
+    }),
+    isBusiness: false,
+    isSbr: true
   });
 
   ngOnInit() {
@@ -83,7 +90,17 @@ export class FormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.taskService.createTask(this.form.value).subscribe(console.log);
+    console.log(this.form.value);
+    const newTask = {
+      createDate: new Date(),
+      ...this.form.value,
+      reviews: {
+        positive: 0,
+        negative: 0
+      }
+    };
+    this.taskService.createTask(newTask).subscribe(console.log);
     console.warn(this.form.value);
+    this.form.reset();
   }
 }

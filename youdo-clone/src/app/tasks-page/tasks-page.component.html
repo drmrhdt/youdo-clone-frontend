@@ -4,7 +4,7 @@
     <ul class="tasks-page__tasks-list">
       <li>
         <app-task-preview
-          *ngFor="let taskPreview of tasksPreviews; let i; as: index"
+          *ngFor="let Task of tasks; let i; as: index"
           [task]="i"
         ></app-task-preview>
       </li>
