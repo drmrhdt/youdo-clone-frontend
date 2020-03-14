@@ -2,7 +2,7 @@ import { Subcategory } from "./Subcategory.model";
 
 export interface Category {
   id: number;
-  key: string;
+  key?: string;
   text: string;
   cities: string;
   hints: {

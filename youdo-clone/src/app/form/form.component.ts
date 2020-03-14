@@ -55,13 +55,24 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.categories = this.categoriesService.categories;
-    this.currentCategoryObject = this.categories.find(
-      category => category.key === this.categoryFromUrl
-    );
 
-    this.currentSubcategoryObject = this.currentCategoryObject.subcategories.find(
-      subcategory => subcategory.code.toLowerCase() === this.subcategoryFromUrl
-    );
+    this.categoriesService
+      .getCurrentCategoryAndSubcategory(
+        this.categoryFromUrl,
+        this.subcategoryFromUrl
+      )
+      .subscribe(response => {
+        this.currentCategoryObject = response.data.currentCategory;
+        this.categoriesService
+          .getSubcategories(this.currentCategoryObject)
+          .subscribe(
+            response =>
+              (this.currentCategoryObject.subcategories =
+                response.data.subcategories)
+          );
+        this.currentSubcategoryObject = response.data.currentSubcategory;
+      });
+
     this.isLoading = false;
   }
 
@@ -78,7 +89,6 @@ export class FormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    console.log(this.form.value);
     const newTask = {
       createDate: new Date(),
       ...this.form.value,

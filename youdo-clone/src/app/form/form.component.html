@@ -24,12 +24,15 @@
       required
       (change)="updateSelectSubcategory()"
     >
+    <option value="{{ currentCategoryObject.key }}">
+      {{ currentCategoryObject.text }}
+    </option>
       <option *ngFor="let category of categories" value="{{ category.key }}">
         {{ category.text }}
       </option>
     </select>
     <select formControlName="subcategory" class="form__field" required>
-      <option value="{{ currentSubcategoryObject.key }}">
+      <option value="{{ currentSubcategoryObject.code }}">
         {{ currentSubcategoryObject.name }}
       </option>
       <option

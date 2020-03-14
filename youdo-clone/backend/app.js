@@ -49,9 +49,26 @@ app.get("/api/subcategories/:id", (req, res) => {
   });
 });
 
+app.get("/api/task/new/:categoryFromURL/:subcategoryFromURL", (req, res) => {
+  const { subcategoryFromURL } = req.params;
+  const currentSubcategory = subcategories.find(
+    subcategory => subcategory.code === subcategoryFromURL
+  );
+  const currentCategory = categories.find(
+    category => category.id === currentSubcategory.category
+  );
+  res.status(200).json({
+    status: "success",
+    data: {
+      currentCategory,
+      currentSubcategory
+    }
+  });
+});
+
 app.get("/api/tasks", (req, res) => {
   res.status(200).json({
-    message: "success",
+    status: "success",
     results: tasks.length,
     data: {
       tasks

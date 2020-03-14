@@ -3,7 +3,6 @@
     <a
       routerLink="/youdo/task/new/{{ category.key }}/{{
         category.subcategories[category.subcategories.length - 1].code
-          | lowercase
       }}"
       class="dropdown-list__link list-link"
     >
@@ -14,7 +13,6 @@
         <a
           routerLink="/youdo/task/new/{{ category.key }}/{{
             category.subcategories[category.subcategories.length - 1].code
-              | lowercase
           }}"
           class="nested-list__link list-link category-link"
         >

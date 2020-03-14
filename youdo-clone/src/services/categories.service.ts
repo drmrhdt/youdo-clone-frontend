@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Category } from "../models/Category.model";
 import { CategoriesResponse } from "../models/CategoriesResponse.model";
 import { SubcategoriesResponse } from "../models/SubcategoriesResponse.model";
+import { CurrentCategoryAndSubcategoryResponse } from "src/models/CurrentCategoryAndSubcategoryResponse.model";
 import { AsyncSubject, Observable } from "rxjs";
 
 @Injectable({
@@ -24,17 +25,28 @@ export class CategoriesService {
         .subscribe(res => {
           this.categories = res.data.categories;
           this.categories.forEach(category => {
-            this.http
-              .get<SubcategoriesResponse>(
-                `http://localhost:3000/api/subcategories/${category.id}`
-              )
-              .subscribe(response => {
-                category.subcategories = response.data.subcategories;
-              });
+            this.getSubcategories(category).subscribe(response => {
+              category.subcategories = response.data.subcategories;
+            });
           });
         })
     );
 
     this.categoriesSubject.complete();
+  }
+
+  getSubcategories(category): Observable<SubcategoriesResponse> {
+    return this.http.get<SubcategoriesResponse>(
+      `http://localhost:3000/api/subcategories/${category.id}`
+    );
+  }
+
+  getCurrentCategoryAndSubcategory(
+    category,
+    subcategory
+  ): Observable<CurrentCategoryAndSubcategoryResponse> {
+    return this.http.get<CurrentCategoryAndSubcategoryResponse>(
+      `http://localhost:3000/api/task/new/${category}/${subcategory}`
+    );
   }
 }
