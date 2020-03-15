@@ -5,8 +5,18 @@
   <li
     routerLink="/youdo/tasks-all-any-{{ category.key }}-1"
     class="link category-list__li"
+    (click)="selectCategory(category)"
     *ngFor="let category of categories"
+    [ngClass]="{ isActive: category.id === selectedCategoryId }"
   >
     {{ category.text }}
+    <ul class="category-list__subcategories-list">
+      <li
+        class="link category-list__li"
+        *ngFor="let subcategory of category.subcategories"
+      >
+        {{ subcategory.name }}
+      </li>
+    </ul>
   </li>
 </ul>

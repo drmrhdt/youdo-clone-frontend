@@ -2,4 +2,13 @@
   &__li {
     padding: 10px 0;
   }
+
+  .isActive &__subcategories-list {
+    display: block;
+  }
+
+  &__subcategories-list {
+    display: none;
+    padding-left: 15px;
+  }
 }
