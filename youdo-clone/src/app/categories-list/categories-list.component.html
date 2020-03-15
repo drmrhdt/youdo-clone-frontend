@@ -1,1 +1,12 @@
-<p>categories-list works!</p>
+<ul class="category-list">
+  <li routerLink="/youdo/tasks-all-any-all-1" class="link category-list__li">
+    Все категории
+  </li>
+  <li
+    routerLink="/youdo/tasks-all-any-{{ category.key }}-1"
+    class="link category-list__li"
+    *ngFor="let category of categories"
+  >
+    {{ category.text }}
+  </li>
+</ul>
