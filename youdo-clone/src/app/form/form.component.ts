@@ -90,12 +90,26 @@ export class FormComponent implements OnInit {
       return;
     }
     const newTask = {
-      createDate: new Date(),
+      createDate: +new Date(),
       ...this.form.value,
       reviews: {
         positive: 0,
         negative: 0
       }
+    };
+    newTask.executionTime = {
+      startDate: +new Date(
+        newTask.executionTime.startDate + " " + newTask.executionTime.startTime
+      ),
+      startTime: +new Date(
+        newTask.executionTime.startDate + " " + newTask.executionTime.startTime
+      ),
+      endDate: +new Date(
+        newTask.executionTime.endTime + " " + newTask.executionTime.endDate
+      ),
+      endTime: +new Date(
+        newTask.executionTime.endTime + " " + newTask.executionTime.endDate
+      )
     };
     this.taskService.createTask(newTask).subscribe(console.log);
     console.warn(this.form.value);

@@ -20,11 +20,11 @@
         Все категории
       </li>
       <li
-        routerLink="/youdo/tasks-all-any-{{ category.title_en }}-1"
+        routerLink="/youdo/tasks-all-any-{{ category.key }}-1"
         class="link category-list__li"
         *ngFor="let category of categories"
       >
-        {{ category.title_ru }}
+        {{ category.text }}
       </li>
     </ul>
   </div>

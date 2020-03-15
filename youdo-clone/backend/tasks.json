@@ -23,5 +23,31 @@
     "isBusiness": true,
     "isSbr": true,
     "reviews": { "positive": 0, "negative": 0 }
+  },
+  {
+    "id": 2,
+    "createDate": 1584260848353,
+    "description": "Починить водопровод",
+    "category": "Clerical",
+    "subcategory": "RepairPlumbing",
+    "comment": "Срочно",
+    "executionTime": {
+      "startDate": 1606983000000,
+      "startTime": 1606983000000,
+      "endDate": 1607073180000,
+      "endTime": 1607073180000
+    },
+    "address": "Москва, Красная площадь",
+    "budget": 30000,
+    "author": "Павел Павлов",
+    "email": "pavel@mail.ru",
+    "tel": "+79999999999",
+    "additionalConditions": {
+      "isSubscribeSuggestions": true,
+      "isShowOnlyToExecutors": true
+    },
+    "isBusiness": true,
+    "isSbr": true,
+    "reviews": { "positive": 0, "negative": 0 }
   }
 ]
