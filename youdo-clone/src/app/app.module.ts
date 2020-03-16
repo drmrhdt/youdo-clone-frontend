@@ -16,6 +16,7 @@ import { VerificationBannerComponent } from "./verification-banner/verification-
 import { FilterHeaderComponent } from "./filter-header/filter-header.component";
 import { TaskPageComponent } from './task-page/task-page.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { ExecutorsPageComponent } from './executors-page/executors-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TaskDetailComponent } from './task-detail/task-detail.component';
     VerificationBannerComponent,
     FilterHeaderComponent,
     TaskPageComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    ExecutorsPageComponent
   ],
   imports: [
     BrowserModule,

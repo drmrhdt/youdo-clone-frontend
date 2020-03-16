@@ -3,7 +3,7 @@
     Все категории
   </li>
   <li
-    routerLink="/youdo/tasks-all-any-{{ category.key }}-1"
+    routerLink="/youdo/{{ section }}/{{ category.key }}/{{ defaultPage }}"
     class="link category-list__li"
     (click)="isDisabled && selectCategory(category)"
     *ngFor="let category of categories"

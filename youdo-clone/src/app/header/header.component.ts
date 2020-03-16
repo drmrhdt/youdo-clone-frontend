@@ -13,6 +13,8 @@ import {
 })
 export class HeaderComponent implements OnInit {
   isHover: boolean = false;
+  all: string = "all";
+  defaultPage: number = 1;
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
 
