@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Category } from "../../models/Category.model";
 import { CategoriesService } from "../../services/categories.service";
 import { Subcategory } from "../../models/Subcategory.model";
@@ -12,6 +12,7 @@ export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
   subcategories: Subcategory[] = [];
   selectedCategoryId: number;
+  @Input() isDisabled = false;
 
   constructor(private categoriesService: CategoriesService) {}
 
