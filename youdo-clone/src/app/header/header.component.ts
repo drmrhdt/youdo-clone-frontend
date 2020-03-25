@@ -6,6 +6,8 @@ import {
   ElementRef
 } from "@angular/core";
 
+import { defaultPage } from "../../config/routes";
+
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -13,8 +15,7 @@ import {
 })
 export class HeaderComponent implements OnInit {
   isHover: boolean = false;
-  all: string = "all";
-  defaultPage: number = 1;
+  defaultPage: number = defaultPage;
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
 

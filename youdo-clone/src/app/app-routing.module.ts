@@ -18,7 +18,14 @@ const routes: Routes = [
   { path: "youdo/tasks/:category/:page", component: TasksPageComponent },
   { path: "youdo/task/:taskId", component: TaskPageComponent },
   { path: "youdo/executors", component: ExecutorsPageComponent },
-  { path: "youdo/executors/:category/:subcategory", component: ExecutorsPageComponent }
+  {
+    path: "youdo/executors/:category/:page",
+    component: ExecutorsPageComponent
+  },
+  {
+    path: "youdo/executors/:category/:subcategory/:page",
+    component: ExecutorsPageComponent
+  }
 ];
 
 @NgModule({

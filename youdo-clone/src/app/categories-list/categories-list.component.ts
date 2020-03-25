@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Category } from "../../models/Category.model";
 import { CategoriesService } from "../../services/categories.service";
 import { Subcategory } from "../../models/Subcategory.model";
+import { defaultPage } from "../../config/routes";
 
 @Component({
   selector: "app-categories-list",
@@ -12,10 +13,14 @@ import { Subcategory } from "../../models/Subcategory.model";
 export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
   subcategories: Subcategory[] = [];
-  selectedCategoryId: number;
-  all: string = "all";
-  defaultPage: number = 1;
-  section: string = "tasks";
+  selectedCategoryId: number | null = 16384;
+  /* TO-DO FIX
+     as soon as we click on category or subcategory routerLink
+     new component is created and so, subcategories list closes 
+     and selectedCategoryId=16384 again
+  */
+
+  defaultPage: number = defaultPage;
   @Input() isDisabled = false;
 
   constructor(
@@ -23,16 +28,26 @@ export class CategoriesListComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  get section() {
+    return this.route.snapshot.url[1].path;
+  }
+
   selectCategory(category) {
     if (category.id === this.selectedCategoryId) {
+      console.log("click the same");
+      console.log(this.selectedCategoryId, category.id);
       this.selectedCategoryId = null;
       return;
     }
+    console.log("click different");
+    console.log(this.selectedCategoryId, category.id);
     this.selectedCategoryId = category.id;
+    console.log("click different");
+    console.log(this.selectedCategoryId, category.id);
   }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot);
     this.categories = this.categoriesService.categories;
+    console.log(this.selectedCategoryId);
   }
 }

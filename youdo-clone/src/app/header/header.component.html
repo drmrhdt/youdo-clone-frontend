@@ -8,9 +8,7 @@
     </a>
     <app-dropdown-list *ngIf="isHover"></app-dropdown-list>
   </div>
-  <a
-    routerLink="/youdo/tasks/{{ all }}/{{ defaultPage }}"
-    class="header-nav__link"
+  <a routerLink="/youdo/tasks/all/{{ defaultPage }}" class="header-nav__link"
     >Найти задание</a
   >
   <a routerLink="/youdo/executors" class="header-nav__link">Исполнители</a>

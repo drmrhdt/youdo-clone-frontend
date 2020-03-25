@@ -1,19 +1,24 @@
 <ul class="category-list">
-  <li routerLink="/youdo/tasks-all-any-all-1" class="link category-list__li">
+  <li routerLink="/youdo/{{ section }}/all/1" class="link category-list__li">
     Все категории
   </li>
   <li
+    *ngFor="let category of categories"
     routerLink="/youdo/{{ section }}/{{ category.key }}/{{ defaultPage }}"
     class="link category-list__li"
     (click)="isDisabled && selectCategory(category)"
-    *ngFor="let category of categories"
-    [ngClass]="{ isActive: category.id === selectedCategoryId }"
   >
-    {{ category.text }}
+    {{ category.id }},{{ selectedCategoryId }}
+    <span [ngClass]="{ isActive: category.id === selectedCategoryId }">
+      {{ category.text }}
+    </span>
     <ul class="category-list__subcategories-list">
       <li
-        class="link category-list__li"
         *ngFor="let subcategory of category.subcategories"
+        routerLink="/youdo/{{ section }}/{{ category.key }}/{{
+          subcategory.code
+        }}/{{ defaultPage }}"
+        class="link category-list__li"
       >
         {{ subcategory.name }}
       </li>

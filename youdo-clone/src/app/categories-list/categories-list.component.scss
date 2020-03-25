@@ -3,7 +3,7 @@
     padding: 10px 0;
   }
 
-  .isActive &__subcategories-list {
+  .isActive + &__subcategories-list {
     display: block;
   }
 
