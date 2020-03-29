@@ -6,7 +6,7 @@ body {
   padding: 0;
 
   font-family: "Lato", sans-serif;
-  color: $text-color;
+  color: $color-black-opacity-darken;
 }
 
 button {
@@ -36,13 +36,13 @@ select {
 }
 
 .link {
-  color: $form-link-terms;
+  color: $color-blue-dark;
 
   cursor: pointer;
 
   &:hover {
-    color: $form-link-terms-hover;
+    color: $color-orange-normal;
 
-    border-color: $form-link-terms-hover;
+    border-color: $color-orange-normal;
   }
 }

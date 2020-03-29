@@ -1,31 +1,36 @@
-$text-color: #444444;
-$white: #ffffff;
-$black: #000000;
-$transparent: transparent;
-$dropdown-item-color: #6a6a6a;
-$dropdown-shadow-light-color: rgba(0, 0, 0, 0.1);
-$dropdown-shadow-color: rgba(0, 0, 0, 0.3);
-$jumbotron-overlay-color: rgba(0, 0, 0, 0.5);
-$form-shadow-color: rgba(0, 0, 0, 0.25);
-$orange: #ff8a00;
-$orange-dark: rgba(255, 138, 0, 0.4);
-$gray-link: hsla(0, 0%, 100%, 0.7);
-$gray-link-hover: hsla(0, 0%, 100%, 0.9);
-$blue-light-link: #80e6ff;
-$blue-light-link-border: rgba(128, 228, 255, 0.4);
-$blue-light-link-hover: #4de7ff;
-$dropdown-link-color: #2abf19;
-$nested-dropdown-color: #f4f4f4;
-$form-color: #fbf8ef;
-$form-label-color: #9b9b9b;
-$form-border-color: #c3c3c3;
-$form-button-color: #e78900;
-$form-button-hover-color: #feaf22;
-$form-border-radius: 5px;
-$form-link-terms: #4099fb;
-$form-link-terms-hover: #ff280c;
-$form-link-enter: #809cb0;
-$price-bg: #fff1a6;
-$task-preview-border: #e3ebf1;
-$filter-header-bg: #f8f7ee;
-$task-detail-btn-hover: #5ab82e;
+$color-white: #ffffff;
+$color-transparent: transparent;
+$color-balihai-normal: #809cb0;
+
+/* black */
+$color-black-opacity-normal: #000000;
+$color-black-opacity-light: rgba(0, 0, 0, 0.25);
+$color-black-opacity-dark: rgba(0, 0, 0, 0.5);
+$color-black-opacity-darken: rgba(0, 0, 0, 0.7);
+/* black */
+
+/* lightgray */
+$color-lightgray-normal: #c3c3c3;
+$color-lightgray-light: lighten($color-lightgray-normal, 5%);
+$color-lightgray-lighten: lighten($color-lightgray-normal, 10%);
+$color-lightgray-lightest: lighten($color-lightgray-normal, 20%);
+$color-lightgray-dark: darken($color-lightgray-normal, 25%);
+/* lightgray */
+
+/* blue */
+$color-blue-normal: #4de7ff;
+$color-blue-light: lighten($color-blue-normal, 5%);
+$color-blue-dark: darken($color-blue-normal, 25%);
+$color-blue-darken: rgba(darken($color-blue-normal, 30%), 0.4);
+/* blue */
+
+/* orange */
+$color-orange-normal: #ff8a00;
+$color-orange-light: lighten($color-orange-normal, 5%);
+$color-orange-lighten: lighten($color-orange-normal, 40%);
+$color-orange-dark: darken($color-orange-normal, 50%);
+/* orange */
+
+/* border-radius */
+$border-radius-normal: 5px;
+/* border-radius */

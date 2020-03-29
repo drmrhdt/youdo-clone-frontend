@@ -6,7 +6,7 @@
   margin: 0 auto;
   padding: 40px 45px;
 
-  background: $form-color;
+  background: $color-lightgray-lightest;
   border-radius: 8px;
 
   &__group {
@@ -15,7 +15,7 @@
 
   &__title {
     font-size: 36px;
-    color: $black;
+    color: $color-black-opacity-normal;
     letter-spacing: 0.5px;
   }
 
@@ -24,7 +24,7 @@
     margin-bottom: 5px;
 
     font-size: 0.9rem;
-    color: $form-label-color;
+    color: $color-lightgray-dark;
   }
 
   &__field_type_checkbox {
@@ -47,14 +47,14 @@
       width: 17px;
       height: 17px;
 
-      border: 1px solid $form-border-color;
-      border-radius: $form-border-radius;
+      border: 1px solid $color-lightgray-light;
+      border-radius: $border-radius-normal;
     }
 
     &:checked + label::after {
-      background: $form-button-hover-color url("../../assets/checked.svg") 50%
-        50% no-repeat;
-      border-color: $form-button-color;
+      background: $color-orange-light url("../../assets/checked.svg") 50% 50%
+      no-repeat;
+      border-color: $color-orange-normal;
     }
   }
 
@@ -63,11 +63,11 @@
 
     font-weight: 400;
     font-size: 1rem;
-    color: $form-label-color;
+    color: $color-lightgray-dark;
 
-    background-color: $white;
-    border: 1px solid $form-border-color;
-    border-radius: $form-border-radius;
+    background-color: $color-white;
+    border: 1px solid $color-lightgray-light;
+    border-radius: $border-radius-normal;
 
     transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   }
@@ -81,44 +81,44 @@
 
     font-size: 1.5rem;
     text-align: center;
-    color: $black;
+    color: $color-black-opacity-normal;
 
-    background-color: $form-button-color;
-    border-radius: $form-border-radius;
+    background-color: $color-orange-normal;
+    border-radius: $border-radius-normal;
 
     &:hover {
-      background-color: $form-button-hover-color;
+      background-color: $color-orange-light;
     }
   }
 
   &__link {
     &:hover {
-      color: $form-link-terms-hover;
+      color: $color-orange-normal;
 
-      border-color: $form-link-terms-hover;
+      border-color: $color-orange-normal;
     }
   }
 
   &__link_color_gray {
-    color: $form-label-color;
+    color: $color-lightgray-dark;
   }
 
   &__link_border_solid {
-    border-bottom: 1px solid $form-label-color;
+    border-bottom: 1px solid $color-lightgray-dark;
   }
 
   &__link_border_dotted {
-    border-bottom: 1px dotted $form-label-color;
+    border-bottom: 1px dotted $color-lightgray-dark;
   }
 
   &__link-terms {
-    color: $form-link-terms;
+    color: $color-blue-dark;
   }
 
   &__link_action {
-    color: $form-link-enter;
+    color: $color-balihai-normal;
 
-    border-bottom: 1px dotted $form-link-enter;
+    border-bottom: 1px dotted $color-balihai-normal;
   }
 
   &__link_font-size_xs {

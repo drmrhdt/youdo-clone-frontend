@@ -3,12 +3,12 @@
 .filter-header {
   padding: 15px 35px;
 
-  background-color: $filter-header-bg;
+  background-color: $color-lightgray-lightest;
 
   &__title {
     margin: 0;
 
     font-size: 2rem;
-    color: $black;
+    color: $color-black-opacity-normal;
   }
 }
