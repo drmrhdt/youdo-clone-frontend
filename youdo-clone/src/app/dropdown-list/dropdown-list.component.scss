@@ -8,14 +8,14 @@
 
   min-width: 260px;
 
-  background-color: $white;
-  box-shadow: 0 1px 5px $dropdown-shadow-color;
+  background-color: $color-white;
+  box-shadow: 0 1px 5px $color-black-opacity-light;
 }
 
 .dropdown-list {
   &__li &__link {
     font-weight: 700;
-    color: $dropdown-item-color;
+    color: $color-black-opacity-darken;
 
     &:hover::after {
       content: "";
@@ -28,8 +28,8 @@
       width: 20px;
       height: 20px;
 
-      background-color: $nested-dropdown-color;
-      box-shadow: -2px 2px 1px $dropdown-shadow-light-color;
+      background-color: $color-lightgray-lightest;
+      border: 1px solid $color-black-opacity-light;
       transform: rotate(45deg);
     }
   }
@@ -37,7 +37,7 @@
   &__li:hover .nested-list {
     display: block;
 
-    background-color: $nested-dropdown-color;
+    background-color: $color-lightgray-lightest;
   }
 }
 
@@ -56,12 +56,12 @@
   overflow-x: hidden;
   overflow-y: auto;
 
-  background-color: $white;
-  box-shadow: 0 1px 5px $dropdown-shadow-color;
+  background-color: $color-white;
+  box-shadow: 0 1px 5px $color-black-opacity-light;
 
   &__li &__link {
     font-weight: normal;
-    color: $black;
+    color: $color-black-opacity-normal;
   }
 }
 
@@ -78,6 +78,6 @@
   font-size: 1rem;
 
   &:hover {
-    color: $dropdown-link-color !important;
+    color: $color-orange-normal !important;
   }
 }

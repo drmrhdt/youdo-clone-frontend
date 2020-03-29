@@ -20,7 +20,7 @@
     width: 100%;
     height: 100%;
 
-    background-color: $jumbotron-overlay-color;
+    background-color: $color-black-opacity-dark;
   }
 
   &__offer {
@@ -36,7 +36,7 @@
   &__subtitle {
     margin: 0;
 
-    color: $white;
+    color: $color-white;
   }
 
   &__title {
@@ -58,16 +58,17 @@
     width: 100%;
     padding: 2px;
 
-    background-color: $white;
+    background-color: $color-white;
     border-radius: 8px;
-    box-shadow: 0 12px 32px 0 $form-shadow-color;
+    box-shadow: 0 12px 32px 0 $color-black-opacity-light;
 
     transition: box-shadow 0.3s ease;
 
     &:hover {
       vertical-align: middle;
 
-      box-shadow: 0 0 12px 0 $orange, 0 5px 30px 0 $orange-dark;
+      box-shadow: 0 0 12px 0 $color-orange-normal 0 5px 30px 0
+      $color-orange-dark;
     }
   }
 
@@ -78,7 +79,7 @@
     font-weight: 400;
     font-size: 18px;
 
-    background: $transparent;
+    background: $color-transparent;
     border: 0;
     border-radius: 5px;
     outline: 0;
@@ -93,10 +94,10 @@
     font-size: 1em;
     line-height: 24px;
     text-align: center;
-    color: $white;
+    color: $color-white;
     letter-spacing: 0.3px;
 
-    background: $orange;
+    background: $color-orange-normal;
     border-radius: 8px;
 
     transition: all 0.3s ease;
@@ -132,20 +133,20 @@
     font-size: 0.72222222em;
     line-height: 1.38461538;
     text-align: left;
-    color: $gray-link;
+    color: $color-lightgray-normal;
   }
 
   &__example-link {
-    color: $gray-link;
+    color: $color-lightgray-normal;
 
-    border-bottom: 1px dotted $gray-link;
+    border-bottom: 1px dotted $color-lightgray-normal;
     cursor: pointer;
 
     transition: all 0.3s ease;
     &:hover {
-      color: $gray-link-hover;
+      color: $color-lightgray-light;
 
-      border-bottom: 1px dotted $gray-link-hover;
+      border-bottom: 1px dotted $color-lightgray-light;
     }
   }
 
@@ -153,21 +154,21 @@
     position: relative;
     z-index: 2;
 
-    color: $blue-light-link;
+    color: blue-light-link;
     text-decoration: none;
 
-    border-bottom: 1px solid $blue-light-link-border;
+    border-bottom: 1px solid blue-light-link-border;
 
     transition: all 0.3s ease;
 
     &:hover {
-      color: $blue-light-link-hover;
+      color: $color-blue-normal;
 
-      border-color: $blue-light-link-hover;
+      border-color: $color-blue-normal;
       outline: none;
 
       &::before {
-        background: $transparent url(../../assets/action-link-hover.svg)
+        background: $color-transparent url(../../assets/action-link-hover.svg)
         no-repeat center;
       }
     }
@@ -183,7 +184,7 @@
       height: 30px;
       margin-right: 30px;
 
-      background: $transparent url(../../assets/action-link.svg) no-repeat
+      background: $color-transparent url(../../assets/action-link.svg) no-repeat
       center;
       background-size: contain;
     }

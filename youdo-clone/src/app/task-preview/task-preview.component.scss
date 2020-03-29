@@ -4,7 +4,7 @@
   .task-preview {
     padding: 15px 30px;
 
-    border-top: 1px solid $task-preview-border;
+    border-top: 1px solid $color-lightgray-light;
 
     &__title {
       font-size: 24px;
@@ -22,7 +22,7 @@
       margin-left: 10px;
       padding: 10px 20px;
 
-      background-color: $price-bg;
+      background-color: $color-orange-lighten;
       border-radius: 4px;
     }
 
@@ -41,7 +41,7 @@
         width: 15px;
         height: 15px;
 
-        background: $transparent url("../../assets/like.svg") no-repeat center;
+        background: $color-transparent url("../../assets/like.svg") no-repeat center;
         background-size: contain;
       }
     }
@@ -50,7 +50,7 @@
       @extend .task-preview__review_type_positive;
 
       &::before {
-        background: $transparent url("../../assets/dislike.svg") no-repeat
+        background: $color-transparent url("../../assets/dislike.svg") no-repeat
         center;
       }
     }

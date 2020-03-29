@@ -5,7 +5,7 @@
     margin: 0;
 
     font-size: 24px;
-    color: $black;
+    color: $color-black-opacity-normal;
   }
 
   &__status-bar {
@@ -17,7 +17,7 @@
     & > :nth-child(n) {
       padding: 0 10px;
 
-      border-right: 1px solid $task-preview-border;
+      border-right: 1px solid $color-lightgray-light;
     }
   }
 
@@ -30,7 +30,7 @@
     flex-direction: column;
     padding: 25px 0 20px 0;
 
-    border: 1px solid $task-preview-border;
+    border: 1px solid $color-lightgray-light;
     border-radius: 8px;
   }
 
@@ -39,7 +39,7 @@
     padding: 20px 40px;
 
     &_type_important {
-      background-color: $filter-header-bg;
+      background-color: $color-lightgray-lightest;
     }
   }
 
@@ -56,15 +56,15 @@
 
     font-weight: 700;
     font-size: 20px;
-    color: $white;
+    color: $color-white;
 
-    background-color: $dropdown-link-color;
+    background-color: $color-orange-normal;
     border-radius: 8px;
 
     transition: all 0.3s ease;
 
     &:hover {
-      background-color: $task-detail-btn-hover;
+      background-color: $color-orange-light;
     }
   }
 }

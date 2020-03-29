@@ -1,10 +1,10 @@
 @import "../../variables.scss";
 
 a {
-  color: $text-color;
+  color: $color-black-opacity-darken;
 
   &:hover {
-    color: $orange;
+    color: $color-orange-normal;
   }
 }
 
@@ -28,7 +28,7 @@ a {
     margin-left: auto;
 
     &__link {
-      border-bottom: 1px dotted $text-color;
+      border-bottom: 1px dotted $color-black-opacity-darken;
 
       &:hover {
         border-bottom: none;
