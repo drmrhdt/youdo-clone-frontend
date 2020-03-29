@@ -14,6 +14,7 @@ export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
   subcategories: Subcategory[] = [];
   selectedCategoryId: number | null = 16384;
+  state: Object;
   /* TO-DO FIX
      as soon as we click on category or subcategory routerLink
      new component is created and so, subcategories list closes 

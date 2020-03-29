@@ -5,6 +5,7 @@
   <li
     *ngFor="let category of categories"
     routerLink="/youdo/{{ section }}/{{ category.key }}/{{ defaultPage }}"
+    [state]="{ categoryId: category.id }"
     class="link category-list__li"
     (click)="isDisabled && selectCategory(category)"
   >
