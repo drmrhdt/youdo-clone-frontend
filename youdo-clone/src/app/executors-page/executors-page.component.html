@@ -1,2 +1,18 @@
-<app-verification-banner></app-verification-banner>
-<app-categories-list isDisabled="true"></app-categories-list>
+<div class="executors-page">
+  <div class="executors-page__left-block">
+    <app-verification-banner></app-verification-banner>
+    <app-categories-list isDisabled="true"></app-categories-list>
+  </div>
+  <div class="executors-page__right-block">
+    <app-filter-header></app-filter-header>
+    <ul>
+      <li>
+        <app-executor-preview
+          *ngFor="let executor of executors"
+          [executor]="executor"
+        >
+        </app-executor-preview>
+      </li>
+    </ul>
+  </div>
+</div>

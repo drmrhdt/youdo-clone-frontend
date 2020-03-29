@@ -17,6 +17,7 @@ import { FilterHeaderComponent } from "./filter-header/filter-header.component";
 import { TaskPageComponent } from './task-page/task-page.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { ExecutorsPageComponent } from './executors-page/executors-page.component';
+import { ExecutorPreviewComponent } from './executor-preview/executor-preview.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ExecutorsPageComponent } from './executors-page/executors-page.componen
     FilterHeaderComponent,
     TaskPageComponent,
     TaskDetailComponent,
-    ExecutorsPageComponent
+    ExecutorsPageComponent,
+    ExecutorPreviewComponent
   ],
   imports: [
     BrowserModule,

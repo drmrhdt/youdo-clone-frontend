@@ -6,6 +6,7 @@ const subcategories = JSON.parse(
 );
 const tasks = JSON.parse(fs.readFileSync(`${__dirname}/tasks.json`));
 const categories = JSON.parse(fs.readFileSync(`${__dirname}/categories.json`));
+const executors = JSON.parse(fs.readFileSync(`${__dirname}/executors.json`));
 
 const app = express();
 
@@ -100,6 +101,16 @@ app.post("/api/task", (req, res) => {
         newTask
       }
     });
+  });
+});
+
+app.get("/api/executors", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    results: executors.length,
+    data: {
+      executors
+    }
   });
 });
 
