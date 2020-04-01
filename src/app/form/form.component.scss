@@ -1,0 +1,178 @@
+@import "../../styles/variables.scss";
+
+.form {
+  box-sizing: border-box;
+  width: 64%;
+  margin: 0 auto;
+  padding: 40px 45px;
+
+  background: $color-lightgray-lightest;
+  border-radius: 8px;
+
+  &__group {
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 36px;
+    color: $color-black-opacity-normal;
+    letter-spacing: 0.5px;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-size: 0.9rem;
+    color: $color-lightgray-dark;
+  }
+
+  &__field_type_checkbox {
+    display: none;
+
+    & + label {
+      position: relative;
+
+      padding-left: 25px;
+    }
+
+    & + label::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      display: block;
+      box-sizing: border-box;
+      width: 17px;
+      height: 17px;
+
+      border: 1px solid $color-lightgray-light;
+      border-radius: $border-radius-normal;
+    }
+
+    &:checked + label::after {
+      background: $color-orange-light url("../../assets/checked.svg") 50% 50%
+      no-repeat;
+      border-color: $color-orange-normal;
+    }
+  }
+
+  &__field {
+    padding: 0.5rem 0.8rem;
+
+    font-weight: 400;
+    font-size: 1rem;
+    color: $color-lightgray-dark;
+
+    background-color: $color-white;
+    border: 1px solid $color-lightgray-light;
+    border-radius: $border-radius-normal;
+
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  &__field_w_100 {
+    width: 100%;
+  }
+
+  &__btn_type_submit {
+    padding: 1rem 45px;
+
+    font-size: 1.5rem;
+    text-align: center;
+    color: $color-black-opacity-normal;
+
+    background-color: $color-orange-normal;
+    border-radius: $border-radius-normal;
+
+    &:hover {
+      background-color: $color-orange-light;
+    }
+  }
+
+  &__link {
+    &:hover {
+      color: $color-orange-normal;
+
+      border-color: $color-orange-normal;
+    }
+  }
+
+  &__link_color_gray {
+    color: $color-lightgray-dark;
+  }
+
+  &__link_border_solid {
+    border-bottom: 1px solid $color-lightgray-dark;
+  }
+
+  &__link_border_dotted {
+    border-bottom: 1px dotted $color-lightgray-dark;
+  }
+
+  &__link-terms {
+    color: $color-blue-dark;
+  }
+
+  &__link_action {
+    color: $color-balihai-normal;
+
+    border-bottom: 1px dotted $color-balihai-normal;
+  }
+
+  &__link_font-size_xs {
+    font-size: 13px;
+  }
+}
+
+.group-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__links-action,
+  &__inputs-action {
+    box-sizing: border-box;
+    width: 50%;
+  }
+
+  &__inputs-action > :nth-child(n) {
+    width: 48%;
+  }
+
+  &__links-action > :first-child {
+    margin-right: 10px;
+  }
+
+  &__links-action > :last-child {
+    margin-left: 10px;
+  }
+
+  &__links-action {
+    text-align: center;
+  }
+}
+
+.group-contacts {
+  & > :nth-child(n) {
+    margin: 5px 10px 5px 0;
+  }
+}
+
+.group-inputs {
+  display: flex;
+  justify-content: space-between;
+
+  & > :nth-child(n) {
+    width: 48%;
+  }
+}
+
+.group-date {
+  display: flex;
+}
+
+.field_margin_left {
+  margin-left: 10px;
+}

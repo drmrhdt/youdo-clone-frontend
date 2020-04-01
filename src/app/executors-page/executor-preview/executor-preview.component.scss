@@ -1,0 +1,78 @@
+@import "../../../styles/variables.scss";
+
+.executor-preview {
+  display: flex;
+  padding: 0 0 50px 0;
+
+  &__left-block {
+    width: 20%;
+  }
+
+  &__right-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+    padding: 0 0 0 20px;
+  }
+
+  &__avatar {
+    width: 100%;
+
+    border-radius: 8px;
+  }
+
+  &__reviews {
+    font-size: 0.8rem;
+    color: $color-black-opacity-normal;
+  }
+
+  &__reviews-text {
+    position: relative;
+
+    padding: 0 20px 0 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      display: block;
+      width: 15px;
+      height: 15px;
+
+      background: $color-transparent url("../../../assets/like.svg") no-repeat
+      center;
+    }
+  }
+
+  &__name {
+    display: inline;
+
+    font-size: 1.4rem;
+
+    background-size: contain;
+    border-bottom: 1px solid $color-blue-dark;
+  }
+
+  &__description {
+    color: $color-black-opacity-normal;
+  }
+
+  &__btn-offer {
+    align-self: flex-start;
+    padding: 0.5rem 20px;
+
+    font-size: 1rem;
+    text-align: center;
+    color: $color-white;
+
+    background-color: $color-orange-normal;
+    border-radius: $border-radius-normal;
+
+    &:hover {
+      background-color: $color-orange-light;
+    }
+  }
+}

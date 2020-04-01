@@ -1,0 +1,16 @@
+@import "../../styles/variables.scss";
+
+.executors-page {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+
+  &__left-block {
+    width: 30%;
+  }
+
+  &__right-block {
+    width: 68%;
+  }
+}

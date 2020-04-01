@@ -1,0 +1,16 @@
+@import "../../styles/variables.scss";
+
+.tasks-page {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+
+  .left-block {
+    width: 68%;
+  }
+
+  .right-block {
+    width: 30%;
+  }
+}

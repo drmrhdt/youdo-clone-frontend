@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+@import "./styles/variables.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Lato", sans-serif;
+  color: $color-black-opacity-darken;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+ul {
+  padding: 0;
+
+  list-style: none;
+}
+
+input,
+textarea,
+select {
+  box-sizing: border-box;
+
+  outline: none;
+}
+
+.link {
+  color: $color-blue-dark;
+
+  cursor: pointer;
+
+  &:hover {
+    color: $color-orange-normal;
+
+    border-color: $color-orange-normal;
+  }
+}

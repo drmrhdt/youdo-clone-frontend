@@ -1,0 +1,83 @@
+@import "../../styles/variables.scss";
+
+:host {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 5;
+
+  min-width: 260px;
+
+  background-color: $color-white;
+  box-shadow: 0 1px 5px $color-black-opacity-light;
+}
+
+.dropdown-list {
+  &__li &__link {
+    font-weight: 700;
+    color: $color-black-opacity-darken;
+
+    &:hover::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      right: -4px;
+      z-index: 2;
+
+      display: block;
+      width: 20px;
+      height: 20px;
+
+      background-color: $color-lightgray-lightest;
+      border: 1px solid $color-black-opacity-light;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__li:hover .nested-list {
+    display: block;
+
+    background-color: $color-lightgray-lightest;
+  }
+}
+
+.nested-list {
+  position: absolute;
+  top: 0;
+  left: 100%;
+
+  display: table-cell;
+  display: none;
+  min-width: 260px;
+  min-height: 100%;
+  max-height: calc(100vh - 120px);
+  margin-left: -6px;
+  padding: 20px 17px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-color: $color-white;
+  box-shadow: 0 1px 5px $color-black-opacity-light;
+
+  &__li &__link {
+    font-weight: normal;
+    color: $color-black-opacity-normal;
+  }
+}
+
+.category-link {
+  font-weight: bold !important;
+}
+
+.list-link {
+  position: relative;
+
+  display: block;
+  padding: 6px 25px 6px 17px;
+
+  font-size: 1rem;
+
+  &:hover {
+    color: $color-orange-normal !important;
+  }
+}

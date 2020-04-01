@@ -1,0 +1,79 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  .task-preview {
+    padding: 15px 30px;
+
+    border-top: 1px solid $color-lightgray-light;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__avatar {
+      width: 40px;
+      height: auto;
+    }
+
+    &__price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px;
+      padding: 10px 20px;
+
+      background-color: $color-orange-lighten;
+      border-radius: 4px;
+    }
+
+    &__review_type_positive {
+      position: relative;
+
+      padding-left: 20px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+
+        display: block;
+        width: 15px;
+        height: 15px;
+
+        background: $color-transparent url("../../../assets/like.svg") no-repeat
+        center;
+        background-size: contain;
+      }
+    }
+
+    &__review_type_negative {
+      @extend .task-preview__review_type_positive;
+
+      &::before {
+        background: $color-transparent url("../../../assets/dislike.svg")
+        no-repeat center;
+      }
+    }
+  }
+
+  .layout_flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .layout_margin_left {
+    margin-left: 10px;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .row {
+    display: flex;
+  }
+}

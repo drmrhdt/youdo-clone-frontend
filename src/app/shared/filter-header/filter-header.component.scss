@@ -1,0 +1,14 @@
+@import "../../../styles/variables.scss";
+
+.filter-header {
+  padding: 15px 35px;
+
+  background-color: $color-lightgray-lightest;
+
+  &__title {
+    margin: 0;
+
+    font-size: 2rem;
+    color: $color-black-opacity-normal;
+  }
+}
