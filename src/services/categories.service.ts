@@ -7,7 +7,7 @@ import { CurrentCategoryAndSubcategoryResponse } from "src/models/CurrentCategor
 import { AsyncSubject, Observable } from "rxjs";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class CategoriesService {
   categories: Category[];
@@ -15,29 +15,24 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) {
     this.categoriesSubject = new AsyncSubject();
-    this.getCategories();
+    this.getCategoriesWithSubcategories();
   }
 
-  getCategories(): void {
+  getCategoriesWithSubcategories(): void {
     this.categoriesSubject.next(
       this.http
         .get<CategoriesResponse>("http://localhost:3000/api/categories")
-        .subscribe(res => {
+        .subscribe((res) => {
           this.categories = res.data.categories;
-          this.categories.forEach(category => {
-            this.getSubcategories(category).subscribe(response => {
-              category.subcategories = response.data.subcategories;
-            });
-          });
         })
     );
 
     this.categoriesSubject.complete();
   }
 
-  getSubcategories(category): Observable<SubcategoriesResponse> {
+  getSubcategoriesByCategoryId(category): Observable<SubcategoriesResponse> {
     return this.http.get<SubcategoriesResponse>(
-      `http://localhost:3000/api/subcategories/${category.id}`
+      `http://localhost:3000/api/subcategories/${category._id}`
     );
   }
 
@@ -46,7 +41,7 @@ export class CategoriesService {
     subcategory
   ): Observable<CurrentCategoryAndSubcategoryResponse> {
     return this.http.get<CurrentCategoryAndSubcategoryResponse>(
-      `http://localhost:3000/api/task/new/${category}/${subcategory}`
+      `http://localhost:3000/api/tasks/${category}/${subcategory}`
     );
   }
 }

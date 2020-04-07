@@ -19,8 +19,8 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    const id = this.route.snapshot.paramMap.get("taskId");
-    this.taskService.getTaskById(id).subscribe(response => {
+    const _id = this.route.snapshot.paramMap.get("taskId");
+    this.taskService.getTaskById(_id).subscribe(response => {
       this.isLoading = false;
       return (this.task = response.data.task);
     });

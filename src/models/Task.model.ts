@@ -1,7 +1,5 @@
-import { Category } from "./Category.model";
-
 export interface Task {
-  id: number;
+  _id: number;
   description: string;
   category: string; // do I need it?
   subcategory: string;

@@ -1,7 +1,7 @@
 <ul class="dropdown-list">
   <li class="dropdown-list__li" *ngFor="let category of categories">
     <a
-      routerLink="/youdo/task/new/{{ category.key }}/{{
+      routerLink="/youdo/tasks/add/{{ category.key }}/{{
         category.subcategories[category.subcategories.length - 1].code
       }}"
       class="dropdown-list__link list-link"
@@ -11,7 +11,7 @@
     <ul class="nested-list">
       <li class="nested-list__li">
         <a
-          routerLink="/youdo/task/new/{{ category.key }}/{{
+          routerLink="/youdo/tasks/add/{{ category.key }}/{{
             category.subcategories[category.subcategories.length - 1].code
           }}"
           class="nested-list__link list-link category-link"
@@ -24,7 +24,9 @@
         *ngFor="let subcategory of category.subcategories"
       >
         <a
-          routerLink="/youdo/task/new/{{ category.key }}/{{ subcategory.code }}"
+          routerLink="/youdo/tasks/add/{{ category.key }}/{{
+            subcategory.code
+          }}"
           class="nested-list__link list-link"
         >
           {{ subcategory.name }}

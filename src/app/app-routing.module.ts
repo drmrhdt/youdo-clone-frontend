@@ -11,25 +11,24 @@ const routes: Routes = [
   {
     path: "",
     redirectTo: "/youdo",
-    pathMatch: "full"
+    pathMatch: "full",
   },
   { path: "youdo", component: JumbotronComponent },
-  { path: "youdo/task/new/:category/:subcategory", component: FormComponent },
+  { path: "youdo/tasks/add/:category/:subcategory", component: FormComponent },
   { path: "youdo/tasks/:category/:page", component: TasksPageComponent },
-  { path: "youdo/task/:taskId", component: TaskPageComponent },
-  { path: "youdo/executors", component: ExecutorsPageComponent },
+  { path: "youdo/tasks/:taskId", component: TaskPageComponent },
   {
     path: "youdo/executors/:category/:page",
-    component: ExecutorsPageComponent
+    component: ExecutorsPageComponent,
   },
   {
     path: "youdo/executors/:category/:subcategory/:page",
-    component: ExecutorsPageComponent
-  }
+    component: ExecutorsPageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

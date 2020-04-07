@@ -9,7 +9,7 @@ import { Subcategory } from "../../models/Subcategory.model";
 @Component({
   selector: "app-form",
   templateUrl: "./form.component.html",
-  styleUrls: ["./form.component.scss"]
+  styleUrls: ["./form.component.scss"],
 })
 export class FormComponent implements OnInit {
   constructor(
@@ -37,7 +37,7 @@ export class FormComponent implements OnInit {
       startDate: [+new Date(), Validators.required],
       startTime: [+new Date(), Validators.required],
       endDate: null,
-      endTime: null
+      endTime: null,
     }),
     address: ["", Validators.required], // it will be FormArray
     budget: "",
@@ -46,10 +46,10 @@ export class FormComponent implements OnInit {
     tel: ["", Validators.required],
     additionalConditions: this.formBuilder.group({
       isSubscribeSuggestions: false,
-      isShowOnlyToExecutors: false
+      isShowOnlyToExecutors: false,
     }),
     isBusiness: false,
-    isSbr: true
+    isSbr: true,
   });
 
   ngOnInit() {
@@ -61,12 +61,12 @@ export class FormComponent implements OnInit {
         this.categoryFromUrl,
         this.subcategoryFromUrl
       )
-      .subscribe(response => {
+      .subscribe((response) => {
         this.currentCategoryObject = response.data.currentCategory;
         this.categoriesService
-          .getSubcategories(this.currentCategoryObject)
+          .getSubcategoriesByCategoryId(this.currentCategoryObject)
           .subscribe(
-            response =>
+            (response) =>
               (this.currentCategoryObject.subcategories =
                 response.data.subcategories)
           );
@@ -78,7 +78,7 @@ export class FormComponent implements OnInit {
 
   updateSelectSubcategory() {
     this.currentCategoryObject = this.categories.find(
-      category => category.key === this.form.get("category").value
+      (category) => category.key === this.form.get("category").value
     );
     this.form.controls.subcategory.patchValue(
       this.currentCategoryObject.subcategories[0].code
@@ -94,8 +94,8 @@ export class FormComponent implements OnInit {
       ...this.form.value,
       reviews: {
         positive: 0,
-        negative: 0
-      }
+        negative: 0,
+      },
     };
     newTask.executionTime = {
       startDate: +new Date(
@@ -109,7 +109,7 @@ export class FormComponent implements OnInit {
       ),
       endTime: +new Date(
         newTask.executionTime.endTime + " " + newTask.executionTime.endDate
-      )
+      ),
     };
     this.taskService.createTask(newTask).subscribe(console.log);
     console.warn(this.form.value);
