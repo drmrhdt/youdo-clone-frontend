@@ -3,15 +3,15 @@ import {
   OnInit,
   HostListener,
   ViewChild,
-  ElementRef
+  ElementRef,
 } from "@angular/core";
 
-import { defaultPage } from "../../../config/routes";
+import { defaultPage } from "../../config/routes";
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"]
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
   isHover: boolean = false;

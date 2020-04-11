@@ -3,23 +3,22 @@
     Все категории
   </li>
   <li
-    *ngFor="let category of categories"
     routerLink="/youdo/{{ section }}/{{ category.key }}/{{ defaultPage }}"
-    [state]="{ categoryId: category.id }"
     class="link category-list__li"
-    (click)="isDisabled && selectCategory(category)"
+    *ngFor="let category of categories"
+    (click)="selectCategory(category)"
+    [ngClass]="{
+      isActive: category.key === selectedCategory
+    }"
   >
-    {{ category.id }},{{ selectedCategoryId }}
-    <span [ngClass]="{ isActive: category.id === selectedCategoryId }">
-      {{ category.text }}
-    </span>
+    {{ category.text }}
     <ul class="category-list__subcategories-list">
       <li
-        *ngFor="let subcategory of category.subcategories"
         routerLink="/youdo/{{ section }}/{{ category.key }}/{{
           subcategory.code
         }}/{{ defaultPage }}"
         class="link category-list__li"
+        *ngFor="let subcategory of category.subcategories"
       >
         {{ subcategory.name }}
       </li>

@@ -5,7 +5,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./shared/header/header.component";
+import { HeaderComponent } from "./header/header.component";
 import { JumbotronComponent } from "./jumbotron/jumbotron.component";
 import { DropdownListComponent } from "./dropdown-list/dropdown-list.component";
 import { FormComponent } from "./form/form.component";
@@ -34,16 +34,16 @@ import { ExecutorPreviewComponent } from "./executors-page/executor-preview/exec
     TaskPageComponent,
     TaskDetailComponent,
     ExecutorsPageComponent,
-    ExecutorPreviewComponent
+    ExecutorPreviewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
