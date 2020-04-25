@@ -16,17 +16,17 @@ import { Category } from "../../models/Category.model";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  isHover: boolean = false;
+  isShowDropdown: boolean = false;
   defaultPage: number = defaultPage;
   categories: Category[] = [];
-  isSignUp: boolean = false;
+  isShowDialog: boolean = false;
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
 
   @HostListener("document:click")
   onClick() {
     if (!this.createTaskLink.nativeElement.contains(event.target))
-      this.isHover = false;
+      this.isShowDropdown = false;
   }
 
   constructor(private categoriesService: CategoriesService) {}

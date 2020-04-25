@@ -3,12 +3,16 @@
     <img src="../../assets/download.svg" alt="youdo-logo" />
   </a>
   <div class="header-nav__link-container">
-    <a class="header-nav__link" (click)="isHover = !isHover" #createTaskLink>
+    <a
+      class="header-nav__link"
+      (click)="isShowDropdown = !isShowDropdown"
+      #createTaskLink
+    >
       Создать задание
     </a>
     <app-dropdown-list
       [categories]="categories"
-      *ngIf="isHover"
+      *ngIf="isShowDropdown"
     ></app-dropdown-list>
   </div>
   <a routerLink="/youdo/tasks/all/{{ defaultPage }}" class="header-nav__link"
@@ -20,15 +24,15 @@
   <div class="user-menu">
     <span href="#" class="user-menu__link">Вход</span>
     <span class="user-menu__delemeter">или</span>
-    <span href="#" class="user-menu__link" (click)="isSignUp = !isSignUp"
+    <span href="#" class="user-menu__link" (click)="isShowDialog = true"
       >регистрация</span
     >
   </div>
   <app-popup
-    *ngIf="isSignUp"
+    *ngIf="isShowDialog"
     submitTitle="Зарегистрироваться"
     popupTitle="Регистрация"
-    (close)="isSignUp = !isSignUp"
+    (close)="isShowDialog = false"
     [bodyComponent]="body"
   >
     <ng-template #body>
