@@ -1,0 +1,50 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $color-black-opacity-light;
+}
+
+.popup {
+  &__modal {
+    width: 32em;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 1.5rem;
+
+    background-color: $color-white;
+  }
+
+  &__header,
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  // TODO move to future button component
+  &__btn {
+    padding: 10px;
+
+    font-size: 1em;
+    line-height: 24px;
+    text-align: center;
+    color: $color-white;
+    letter-spacing: 0.3px;
+
+    background: $color-orange-normal;
+    border-radius: 8px;
+
+    transition: all 0.3s ease;
+  }
+}

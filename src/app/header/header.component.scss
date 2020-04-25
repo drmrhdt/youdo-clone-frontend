@@ -16,7 +16,7 @@ a {
     width: 80px;
   }
 
-  & > :nth-child(n) {
+  & > :nth-child(n):not(:last-child) {
     margin-left: 20px;
   }
 
@@ -38,5 +38,37 @@ a {
     &__delemeter {
       margin: 0 10px;
     }
+  }
+}
+
+// TODO move to diff scss file for form's styles or label component
+label {
+  display: block;
+  margin-bottom: 5px;
+
+  font-size: 0.9rem;
+  color: $color-lightgray-dark;
+}
+
+// TODO move to diff scss file for form's styles or input component
+input {
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+
+  font-weight: 400;
+  font-size: 1rem;
+  color: $color-lightgray-dark;
+
+  background-color: $color-white;
+  border: 1px solid $color-lightgray-light;
+  border-radius: $border-radius-normal;
+
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+//TODO move to future auth component
+.auth {
+  &__form {
+    padding: 0.5rem 0 1rem 0;
   }
 }

@@ -18,8 +18,29 @@
     >Исполнители</a
   >
   <div class="user-menu">
-    <a href="#" class="user-menu__link">Вход</a>
+    <span href="#" class="user-menu__link">Вход</span>
     <span class="user-menu__delemeter">или</span>
-    <a href="#" class="user-menu__link">регистрация</a>
+    <span href="#" class="user-menu__link" (click)="isSignUp = !isSignUp"
+      >регистрация</span
+    >
   </div>
+  <app-popup
+    *ngIf="isSignUp"
+    submitTitle="Зарегистрироваться"
+    popupTitle="Регистрация"
+    (close)="isSignUp = !isSignUp"
+    [bodyComponent]="body"
+  >
+  </app-popup>
 </nav>
+
+<ng-template #body>
+  <form class="auth__form">
+    <label for="login">Введите почту</label>
+    <input id="login" type="email" placeholder="email" />
+    <label for="password">Пароль</label>
+    <input id="password" type="password" placeholder="Пароль" />
+    <label for="confirmPassword">Повторите пароль</label>
+    <input id="confirmPassword" type="password" placeholder="Пароль" />
+  </form>
+</ng-template>

@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   isHover: boolean = false;
   defaultPage: number = defaultPage;
   categories: Category[] = [];
+  isSignUp: boolean = false;
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
 
