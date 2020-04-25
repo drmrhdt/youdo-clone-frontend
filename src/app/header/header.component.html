@@ -31,16 +31,8 @@
     (close)="isSignUp = !isSignUp"
     [bodyComponent]="body"
   >
+    <ng-template #body>
+      <app-auth-form></app-auth-form>
+    </ng-template>
   </app-popup>
 </nav>
-
-<ng-template #body>
-  <form class="auth__form">
-    <label for="login">Введите почту</label>
-    <input id="login" type="email" placeholder="email" />
-    <label for="password">Пароль</label>
-    <input id="password" type="password" placeholder="Пароль" />
-    <label for="confirmPassword">Повторите пароль</label>
-    <input id="confirmPassword" type="password" placeholder="Пароль" />
-  </form>
-</ng-template>

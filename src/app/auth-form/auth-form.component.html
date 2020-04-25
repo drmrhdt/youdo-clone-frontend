@@ -1,0 +1,15 @@
+<form *ngIf="authFormType === 'signUp'" class="auth__form">
+  <label for="login">Введите почту</label>
+  <input id="login" type="email" placeholder="email" />
+  <label for="password">Пароль</label>
+  <input id="password" type="password" placeholder="Пароль" />
+  <label for="confirmPassword">Повторите пароль</label>
+  <input id="confirmPassword" type="password" placeholder="Пароль" />
+</form>
+
+<form *ngIf="authFormType === 'signIn'" class="auth__form">
+  <label for="login">Введите почту</label>
+  <input id="login" type="email" placeholder="email" />
+  <label for="password">Пароль</label>
+  <input id="password" type="password" placeholder="Пароль" />
+</form>

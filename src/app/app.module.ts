@@ -19,6 +19,7 @@ import { TaskDetailComponent } from "./tasks-page/task-page/task-detail/task-det
 import { ExecutorsPageComponent } from "./executors-page/executors-page.component";
 import { ExecutorPreviewComponent } from "./executors-page/executor-preview/executor-preview.component";
 import { PopupComponent } from './shared/popup/popup.component';
+import { AuthFormComponent } from './auth-form/auth-form.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { PopupComponent } from './shared/popup/popup.component';
     ExecutorsPageComponent,
     ExecutorPreviewComponent,
     PopupComponent,
+    AuthFormComponent,
   ],
   imports: [
     BrowserModule,
