@@ -54,7 +54,9 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.categories = this.categoriesService.categories;
+    this.categoriesService.categories$.subscribe(
+      (value) => (this.categories = value)
+    );
 
     this.categoriesService
       .getCurrentCategoryAndSubcategory(

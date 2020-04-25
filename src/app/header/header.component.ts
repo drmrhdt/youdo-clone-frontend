@@ -7,6 +7,8 @@ import {
 } from "@angular/core";
 
 import { defaultPage } from "../../config/routes";
+import { CategoriesService } from "src/services/categories.service";
+import { Category } from "../../models/Category.model";
 
 @Component({
   selector: "app-header",
@@ -16,6 +18,7 @@ import { defaultPage } from "../../config/routes";
 export class HeaderComponent implements OnInit {
   isHover: boolean = false;
   defaultPage: number = defaultPage;
+  categories: Category[] = [];
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
 
@@ -25,7 +28,11 @@ export class HeaderComponent implements OnInit {
       this.isHover = false;
   }
 
-  constructor() {}
+  constructor(private categoriesService: CategoriesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categoriesService.categories$.subscribe(
+      (value) => (this.categories = value)
+    );
+  }
 }

@@ -6,7 +6,10 @@
     <a class="header-nav__link" (click)="isHover = !isHover" #createTaskLink>
       Создать задание
     </a>
-    <app-dropdown-list *ngIf="isHover"></app-dropdown-list>
+    <app-dropdown-list
+      [categories]="categories"
+      *ngIf="isHover"
+    ></app-dropdown-list>
   </div>
   <a routerLink="/youdo/tasks/all/{{ defaultPage }}" class="header-nav__link"
     >Найти задание</a
