@@ -21,7 +21,7 @@ export class CategoriesService {
   getCategoriesWithSubcategories(): void {
     this.categoriesSubject.next(
       this.http
-        .get<CategoriesResponse>("http://localhost:3000/api/categories")
+        .get<CategoriesResponse>("http://localhost:3000/api/v1/categories")
         .subscribe((res) => {
           this.categories = res.data.categories;
         })
@@ -32,7 +32,7 @@ export class CategoriesService {
 
   getSubcategoriesByCategoryId(category): Observable<SubcategoriesResponse> {
     return this.http.get<SubcategoriesResponse>(
-      `http://localhost:3000/api/subcategories/${category._id}`
+      `http://localhost:3000/api/v1/subcategories/${category._id}`
     );
   }
 
@@ -41,7 +41,7 @@ export class CategoriesService {
     subcategory
   ): Observable<CurrentCategoryAndSubcategoryResponse> {
     return this.http.get<CurrentCategoryAndSubcategoryResponse>(
-      `http://localhost:3000/api/tasks/${category}/${subcategory}`
+      `http://localhost:3000/api/v1/tasks/${category}/${subcategory}`
     );
   }
 }

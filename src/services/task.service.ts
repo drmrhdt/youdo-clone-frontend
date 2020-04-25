@@ -12,17 +12,20 @@ export class TaskService {
 
   getTasksList(): Observable<TasksResponse> {
     return this.httpClient.get<TasksResponse>(
-      "http://localhost:3000/api/tasks"
+      "http://localhost:3000/api/v1/tasks"
     );
   }
 
   getTaskById(id: string): Observable<TaskResponse> {
     return this.httpClient.get<TaskResponse>(
-      `http://localhost:3000/api/tasks/${id}`
+      `http://localhost:3000/api/v1/tasks/${id}`
     );
   }
 
   createTask(formValues) {
-    return this.httpClient.post("http://localhost:3000/api/tasks", formValues);
+    return this.httpClient.post(
+      "http://localhost:3000/api/v1/tasks",
+      formValues
+    );
   }
 }
