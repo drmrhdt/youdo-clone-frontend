@@ -22,21 +22,23 @@
     >Исполнители</a
   >
   <div class="user-menu">
-    <span href="#" class="user-menu__link">Вход</span>
+    <span href="#" class="user-menu__link" (click)="showSignInDialog()"
+      >Вход</span
+    >
     <span class="user-menu__delemeter">или</span>
-    <span href="#" class="user-menu__link" (click)="isShowDialog = true"
+    <span href="#" class="user-menu__link" (click)="showSignUpDialog()"
       >регистрация</span
     >
   </div>
   <app-popup
     *ngIf="isShowDialog"
-    submitTitle="Зарегистрироваться"
-    popupTitle="Регистрация"
+    submitTitle="Отправить"
+    popupTitle="{{ popupTitle }}"
     (close)="isShowDialog = false"
     [bodyComponent]="body"
   >
     <ng-template #body>
-      <app-auth-form></app-auth-form>
+      <app-auth-form authFormType="{{ authFormType }}"></app-auth-form>
     </ng-template>
   </app-popup>
 </nav>
