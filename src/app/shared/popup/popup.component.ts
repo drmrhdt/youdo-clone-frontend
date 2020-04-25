@@ -16,7 +16,7 @@ export class PopupComponent implements OnInit {
   @Input() isShowSubmitBtn: boolean = true;
   @Input() submitTitle: string = "Подтвердить";
   @Input() isShowCloseBtn: boolean = true;
-  @Input() isShowCancelBtn: boolean = true;
+  @Input() isShowCancelBtn: boolean = false;
   @Input() cancelTitle: string = "Отменить";
   @Input() popupTitle: string = "";
 
