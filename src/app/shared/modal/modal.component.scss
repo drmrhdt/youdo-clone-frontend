@@ -30,4 +30,10 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  &__btn {
+    color: $color-black-opacity-darken;
+
+    background-color: $color-transparent;
+  }
 }
