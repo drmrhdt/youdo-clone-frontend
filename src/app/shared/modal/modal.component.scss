@@ -25,26 +25,9 @@
     background-color: $color-white;
   }
 
-  &__header,
-  &__footer {
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  // TODO move to future button component
-  &__btn {
-    padding: 10px;
-
-    font-size: 1em;
-    line-height: 24px;
-    text-align: center;
-    color: $color-white;
-    letter-spacing: 0.3px;
-
-    background: $color-orange-normal;
-    border-radius: 8px;
-
-    transition: all 0.3s ease;
   }
 }
