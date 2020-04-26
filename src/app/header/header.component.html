@@ -30,7 +30,6 @@
 
 <app-modal
   *ngIf="isShowDialog"
-  submitTitle="Отправить"
   modalTitle="{{ modalTitle }}"
   (close)="isShowDialog = false"
   [bodyComponent]="body"
