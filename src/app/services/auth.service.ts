@@ -16,14 +16,14 @@ export class AuthService {
     passwordConfirm,
   }): Observable<IAuthSignUpResponse> {
     return this.httpClient.post<IAuthSignUpResponse>(
-      "https://localhost:3000/youdo/api/v1/signUp",
+      "http://localhost:3000/api/v1/users/signup",
       { email, password, passwordConfirm }
     );
   }
 
   signIn({ email, password }): Observable<IAuthSignInResponse> {
     return this.httpClient.post<IAuthSignInResponse>(
-      "https://localhost:3000/youdo/api/v1/login",
+      "http://localhost:3000/api/v1/users/login",
       { email, password }
     );
   }
