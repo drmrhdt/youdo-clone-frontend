@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 
@@ -20,6 +20,7 @@ import { ExecutorsPageComponent } from "./executors-page/executors-page.componen
 import { ExecutorPreviewComponent } from "./executors-page/executor-preview/executor-preview.component";
 import { ModalComponent } from "./shared/modal/modal.component";
 import { AuthFormComponent } from "./auth-form/auth-form.component";
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,9 @@ import { AuthFormComponent } from "./auth-form/auth-form.component";
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
