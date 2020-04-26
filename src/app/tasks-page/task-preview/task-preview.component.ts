@@ -4,7 +4,7 @@ import { Task } from "../../../models/Task.model";
 @Component({
   selector: "app-task-preview",
   templateUrl: "./task-preview.component.html",
-  styleUrls: ["./task-preview.component.scss"]
+  styleUrls: ["./task-preview.component.scss"],
 })
 export class TaskComponent implements OnInit {
   constructor() {}

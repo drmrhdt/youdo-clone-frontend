@@ -8,17 +8,17 @@ import {
 } from "@angular/core";
 
 @Component({
-  selector: "app-popup",
-  templateUrl: "./popup.component.html",
-  styleUrls: ["./popup.component.scss"],
+  selector: "app-modal",
+  templateUrl: "./modal.component.html",
+  styleUrls: ["./modal.component.scss"],
 })
-export class PopupComponent implements OnInit {
+export class ModalComponent implements OnInit {
   @Input() isShowSubmitBtn: boolean = true;
   @Input() submitTitle: string = "Подтвердить";
   @Input() isShowCloseBtn: boolean = true;
   @Input() isShowCancelBtn: boolean = false;
   @Input() cancelTitle: string = "Отменить";
-  @Input() popupTitle: string = "";
+  @Input() modalTitle: string = "";
 
   @Input() bodyComponent: TemplateRef<any>;
 

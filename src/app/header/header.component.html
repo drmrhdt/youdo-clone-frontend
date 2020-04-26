@@ -28,14 +28,14 @@
   </div>
 </nav>
 
-<app-popup
+<app-modal
   *ngIf="isShowDialog"
   submitTitle="Отправить"
-  popupTitle="{{ popupTitle }}"
+  modalTitle="{{ modalTitle }}"
   (close)="isShowDialog = false"
   [bodyComponent]="body"
 >
   <ng-template #body>
     <app-auth-form authFormType="{{ authFormType }}"></app-auth-form>
   </ng-template>
-</app-popup>
+</app-modal>

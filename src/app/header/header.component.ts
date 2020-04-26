@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   categories: Category[] = [];
   isShowDialog: boolean = false;
   authFormType: string = "";
-  popupTitle: string = "";
+  modalTitle: string = "";
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
 
@@ -41,13 +41,13 @@ export class HeaderComponent implements OnInit {
 
   showSignUpDialog() {
     this.authFormType = "signUp";
-    this.popupTitle = "Регистрация";
+    this.modalTitle = "Регистрация";
     this.isShowDialog = true;
   }
 
   showSignInDialog() {
     this.authFormType = "signIn";
-    this.popupTitle = "Вход";
+    this.modalTitle = "Вход";
     this.isShowDialog = true;
   }
 }

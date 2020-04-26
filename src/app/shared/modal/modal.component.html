@@ -1,0 +1,15 @@
+<div class="modal__modal">
+  <header class="modal__header">
+    <h3>{{ modalTitle }}</h3>
+    <button *ngIf="isShowCloseBtn" (click)="closeDialog()">x</button>
+  </header>
+  <ng-content *ngTemplateOutlet="bodyComponent"> </ng-content>
+  <footer class="modal__footer">
+    <button *ngIf="isShowSubmitBtn" class="modal__btn" (click)="onSubmit()">
+      {{ submitTitle }}
+    </button>
+    <button *ngIf="isShowCancelBtn" class="modal__btn" (click)="closeDialog()">
+      {{ cancelTitle }}
+    </button>
+  </footer>
+</div>

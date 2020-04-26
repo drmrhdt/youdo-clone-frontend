@@ -18,8 +18,8 @@ import { TaskPageComponent } from "./tasks-page/task-page/task-page.component";
 import { TaskDetailComponent } from "./tasks-page/task-page/task-detail/task-detail.component";
 import { ExecutorsPageComponent } from "./executors-page/executors-page.component";
 import { ExecutorPreviewComponent } from "./executors-page/executor-preview/executor-preview.component";
-import { PopupComponent } from './shared/popup/popup.component';
-import { AuthFormComponent } from './auth-form/auth-form.component';
+import { ModalComponent } from "./shared/modal/modal.component";
+import { AuthFormComponent } from "./auth-form/auth-form.component";
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { AuthFormComponent } from './auth-form/auth-form.component';
     TaskDetailComponent,
     ExecutorsPageComponent,
     ExecutorPreviewComponent,
-    PopupComponent,
+    ModalComponent,
     AuthFormComponent,
   ],
   imports: [
