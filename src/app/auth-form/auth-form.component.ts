@@ -34,12 +34,12 @@ export class AuthFormComponent implements OnInit {
     });
   }
 
-  signUp() {
-    this.authService.signUp(this.formSignUp.value).subscribe(console.log);
+  signUp(): void {
+    this.authService.signUp(this.formSignUp.value);
   }
 
-  signIn() {
-    this.authService.signIn(this.formSignIn.value).subscribe(console.log);
+  signIn(): void {
+    this.authService.signIn(this.formSignIn.value);
   }
 
   ngOnInit(): void {}
