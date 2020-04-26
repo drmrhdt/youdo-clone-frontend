@@ -3,7 +3,26 @@
 :host {
   .auth {
     &__form {
-      padding: 0.5rem 0 1rem 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 0;
+    }
+
+    // TODO move to future button component
+    &__btn {
+      align-self: center;
+      margin: 1rem 0 0 0;
+      padding: 10px 15px;
+
+      font-size: 1em;
+      text-align: center;
+      color: $color-white;
+      letter-spacing: 0.3px;
+
+      background: $color-orange-normal;
+      border-radius: 8px;
+
+      transition: all 0.3s ease;
     }
   }
 }
@@ -11,7 +30,6 @@
 // WARNING duplicate code
 // TODO move to diff scss file for form's styles or label component
 label {
-  display: block;
   margin-bottom: 5px;
 
   font-size: 0.9rem;
@@ -22,6 +40,7 @@ label {
 // TODO move to diff scss file for form's styles or input component
 input {
   width: 100%;
+  margin: 0 0 0.5rem 0;
   padding: 0.5rem 0.8rem;
 
   font-weight: 400;
