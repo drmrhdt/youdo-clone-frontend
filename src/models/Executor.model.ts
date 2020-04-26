@@ -1,8 +1,8 @@
 export interface Executor {
-  avatar: String;
-  name: String;
-  reviews: Number;
-  rating: Number;
-  last_online: String;
-  description: String;
+  avatar: string;
+  name: string;
+  reviews: number;
+  rating: number;
+  last_online: string;
+  description: string;
 }

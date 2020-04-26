@@ -1,58 +1,57 @@
 export interface IUser {
-    personalInfo: {
-      firstName: String,
-      middleName: String,
-      lastName: String,
-      username: String,
-      gender: String,
-      birthday: String,
-      age: Number,
-      description: String,
-      avatar: {
-        id: String,
-      },
-      city: {
-        id: String,
-        name: String,
-      },
-    },
-    contacts: {
-      phone: String,
-      email:  String,
-        
-    },
-    workInfo: {
-      isMaster:  Boolean,
-      isExecutor: Boolean,
-      isAvailable: Boolean,
-      categories: Number,
-      subcategories: Number,
-      serviceExamples: String,
-      сompanyName: String,
-      reviews: {
-        positive: Number,
-        negative: Number,
-        total: Number,
-      },
-    },
-    taskInfo: {
-      total: Number,
-      inProcess: Number,
-      finishedTasks: Number,
-      successfulTasks: Number,
-      failedTasks: Number,
-    },
-    moderationInfo: {
-      isBanned: Boolean,
-      role: String
-      },
-    lastActivityDate: String,
-    viewsCounter: Number,
-    isOnline: Boolean,
-    password: String,
-    passwordConfirm: String,
-    passwordChangedAt: Date,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
-    isActiveAccount: Boolean
+  personalInfo: {
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    username: string;
+    gender: string;
+    birthday: string;
+    age: number;
+    description: string;
+    avatar: {
+      id: string;
+    };
+    city: {
+      id: string;
+      name: string;
+    };
   };
+  contacts: {
+    phone: string;
+    email: string;
+  };
+  workInfo: {
+    isMaster: boolean;
+    isExecutor: boolean;
+    isAvailable: boolean;
+    categories: number;
+    subcategories: number;
+    serviceExamples: string;
+    сompanyName: string;
+    reviews: {
+      positive: number;
+      negative: number;
+      total: number;
+    };
+  };
+  taskInfo: {
+    total: number;
+    inProcess: number;
+    finishedTasks: number;
+    successfulTasks: number;
+    failedTasks: number;
+  };
+  moderationInfo: {
+    isBanned: boolean;
+    role: string;
+  };
+  lastActivityDate: string;
+  viewsCounter: number;
+  isOnline: boolean;
+  password: string;
+  passwordConfirm: string;
+  passwordChangedAt: Date;
+  passwordResetToken: string;
+  passwordResetExpires: Date;
+  isActiveAccount: boolean;
+}
