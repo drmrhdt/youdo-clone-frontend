@@ -46,4 +46,9 @@ export class AuthService {
         this.authStatusListener$.next(true);
       });
   }
+
+  signOut(): void {
+    this.token = "";
+    this.authStatusListener$.next(false);
+  }
 }
