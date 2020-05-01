@@ -32,7 +32,7 @@
     <a
       *ngIf="isAuthenticated; else signInSignUp"
       class="user-menu__link"
-      (click)="showSignInDialog()"
+      (click)="onSignOut()"
       >Выход</a
     >
     <ng-template #signInSignUp>

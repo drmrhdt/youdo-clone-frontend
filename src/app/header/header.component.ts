@@ -60,4 +60,8 @@ export class HeaderComponent implements OnInit {
     this.modalTitle = "Вход";
     this.isShowDialog = true;
   }
+
+  onSignOut() {
+    this.authService.signOut();
+  }
 }
