@@ -21,10 +21,25 @@
   <a routerLink="/youdo/executors/Courier/1" class="header-nav__link"
     >Исполнители</a
   >
+  <a
+    *ngIf="isAuthenticated"
+    routerLink="/youdo/tasks-my"
+    class="header-nav__link"
+    >Мои заказы</a
+  >
+
   <div class="user-menu">
-    <a class="user-menu__link" (click)="showSignInDialog()">Вход</a>
-    <span class="user-menu__delemeter">или</span>
-    <a class="user-menu__link" (click)="showSignUpDialog()">регистрация</a>
+    <a
+      *ngIf="isAuthenticated; else signInSignUp"
+      class="user-menu__link"
+      (click)="showSignInDialog()"
+      >Выход</a
+    >
+    <ng-template #signInSignUp>
+      <a class="user-menu__link" (click)="showSignInDialog()">Вход</a>
+      <span class="user-menu__delemeter">или</span>
+      <a class="user-menu__link" (click)="showSignUpDialog()">регистрация</a>
+    </ng-template>
   </div>
 </nav>
 
