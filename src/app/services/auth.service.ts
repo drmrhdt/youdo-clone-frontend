@@ -12,12 +12,17 @@ import { IAuthSignInRequest } from "../../models/IAuthSignInRequest.model";
 })
 export class AuthService {
   private token: string = "";
+  private isAuthenticated: boolean = false;
   private authStatusListener$ = new Subject<boolean>();
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   getToken(): string {
     return this.token;
+  }
+
+  getAuthStatus(): boolean {
+    return this.isAuthenticated;
   }
 
   getAuthStatusListener() {
@@ -32,8 +37,10 @@ export class AuthService {
       )
       .subscribe((response: IAuthSignUpResponse) => {
         this.token = response.token;
+        this.isAuthenticated = true;
         this.authStatusListener$.next(true);
         this.router.navigateByUrl("/");
+        this.saveAuthData(this.token);
       });
   }
 
@@ -45,8 +52,10 @@ export class AuthService {
       )
       .subscribe((response: IAuthSignInResponse) => {
         this.token = response.token;
+        this.isAuthenticated = true;
         this.authStatusListener$.next(true);
         this.router.navigateByUrl("/");
+        this.saveAuthData(this.token);
       });
   }
 
@@ -54,5 +63,33 @@ export class AuthService {
     this.token = "";
     this.authStatusListener$.next(false);
     this.router.navigateByUrl("/");
+    this.clearAuthData();
+  }
+
+  autoAuthUser(): void {
+    const token = this.getAuthData();
+
+    if (token) {
+      this.isAuthenticated = true;
+      this.authStatusListener$.next(true);
+    }
+  }
+
+  private saveAuthData(token: string): void {
+    localStorage.setItem("token", token);
+  }
+
+  private clearAuthData(): void {
+    localStorage.removeItem("token");
+  }
+
+  private getAuthData(): string {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    return token;
   }
 }
