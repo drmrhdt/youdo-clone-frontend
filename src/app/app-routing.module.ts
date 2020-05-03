@@ -17,9 +17,13 @@ const routes: Routes = [
   { path: "youdo", component: JumbotronComponent },
   { path: "youdo/tasks/add/:category/:subcategory", component: FormComponent },
   {
-    path: "youdo/tasks/:category/:page",
+    path: "youdo/tasks/my",
     component: TasksPageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "youdo/tasks/:category/:page",
+    component: TasksPageComponent,
   },
   {
     path: "youdo/tasks/:category/:subcategory/:page",
