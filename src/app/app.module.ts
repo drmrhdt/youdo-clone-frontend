@@ -21,6 +21,8 @@ import { ExecutorPreviewComponent } from "./executors-page/executor-preview/exec
 import { ModalComponent } from "./shared/modal/modal.component";
 import { AuthFormComponent } from "./auth-form/auth-form.component";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ProfileSummaryComponent } from './profile-page/profile-summary/profile-summary.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
     ExecutorPreviewComponent,
     ModalComponent,
     AuthFormComponent,
+    ProfilePageComponent,
+    ProfileSummaryComponent,
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,11 @@ a {
   .user-menu {
     margin-left: auto;
 
+    // TODO remove !important
+    &__exit {
+      margin-left: 20px !important;
+    }
+
     &__link {
       border-bottom: 1px dotted $color-black-opacity-darken;
 

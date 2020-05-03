@@ -29,12 +29,11 @@
   >
 
   <div class="user-menu">
-    <a
-      *ngIf="isAuthenticated; else signInSignUp"
-      class="user-menu__link"
-      (click)="onSignOut()"
-      >Выход</a
-    >
+    <ng-container *ngIf="isAuthenticated; else signInSignUp">
+      <a class="header-nav__link" routerLink="/youdo/profile">Профиль</a>
+      <a class="user-menu__exit" (click)="onSignOut()">Выход</a>
+    </ng-container>
+
     <ng-template #signInSignUp>
       <a class="user-menu__link" (click)="showSignInDialog()">Вход</a>
       <span class="user-menu__delemeter">или</span>

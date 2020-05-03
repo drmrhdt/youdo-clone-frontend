@@ -7,6 +7,7 @@ import { TasksPageComponent } from "./tasks-page/tasks-page.component";
 import { TaskPageComponent } from "./tasks-page/task-page/task-page.component";
 import { ExecutorsPageComponent } from "./executors-page/executors-page.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { ProfilePageComponent } from "./profile-page/profile-page.component";
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     path: "youdo/executors/:category/:subcategory/:page",
     component: ExecutorsPageComponent,
   },
+  { path: "youdo/profile", component: ProfilePageComponent },
 ];
 
 @NgModule({
