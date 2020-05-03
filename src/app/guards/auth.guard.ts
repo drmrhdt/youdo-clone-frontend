@@ -23,13 +23,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let isAuth = null;
-    this.authService
-      .getAuthStatusListener()
-      .subscribe((isAuthenticated) => (isAuth = isAuthenticated));
+    const isAuth = this.authService.getAuthStatus();
+
     if (!isAuth) {
       this.router.navigateByUrl("/");
     }
+
     return isAuth;
   }
 }
