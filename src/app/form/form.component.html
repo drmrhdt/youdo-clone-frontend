@@ -1,5 +1,5 @@
 <form
-  *ngIf="!isLoading"
+  *ngIf="!isLoading; else loader"
   class="form"
   (ngSubmit)="onSubmit()"
   [formGroup]="form"
@@ -24,9 +24,9 @@
       required
       (change)="updateSelectSubcategory()"
     >
-    <option value="{{ currentCategoryObject.key }}">
-      {{ currentCategoryObject.text }}
-    </option>
+      <option value="{{ currentCategoryObject.key }}">
+        {{ currentCategoryObject.text }}
+      </option>
       <option *ngFor="let category of categories" value="{{ category.key }}">
         {{ category.text }}
       </option>
@@ -287,3 +287,5 @@
     </p>
   </div>
 </form>
+
+<ng-template #loader>...is loading</ng-template>
