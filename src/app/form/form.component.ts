@@ -19,13 +19,19 @@ export class FormComponent implements OnInit {
     private taskService: TaskService
   ) {}
 
-  isLoading: boolean = false;
+  get categoryFromUrl(): string {
+    return this.route.snapshot.paramMap.get("category");
+  }
 
-  categoryFromUrl: string = this.route.snapshot.paramMap.get("category");
-  subcategoryFromUrl: string = this.route.snapshot.paramMap.get("subcategory");
+  get subcategoryFromUrl(): string {
+    return this.route.snapshot.paramMap.get("subcategory");
+  }
+
+  isLoading: boolean = false;
   currentCategoryObject: Category;
   currentSubcategoryObject: Subcategory;
   categories: Category[] = [];
+
   // form: FormGroup;
   form = this.formBuilder.group({
     description: ["", Validators.required],
@@ -52,42 +58,37 @@ export class FormComponent implements OnInit {
     isSbr: true,
   });
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isLoading = true;
-    this.categoriesService.categories$.subscribe(
-      (value) => (this.categories = value)
-    );
 
-    this.categoriesService
-      .getCurrentCategoryAndSubcategory(
-        this.categoryFromUrl,
-        this.subcategoryFromUrl
-      )
-      .subscribe((response) => {
-        this.currentCategoryObject = response.data.currentCategory;
-        this.categoriesService
-          .getSubcategoriesByCategoryId(this.currentCategoryObject)
-          .subscribe(
-            (response) =>
-              (this.currentCategoryObject.subcategories =
-                response.data.subcategories)
-          );
-        this.currentSubcategoryObject = response.data.currentSubcategory;
-      });
+    this.categoriesService.categories$.subscribe((value: Category[]) => {
+      this.categories = value;
 
-    this.isLoading = false;
+      if (this.categories) {
+        this.currentCategoryObject = this.categories.find(
+          (category: Category) => category.key === this.categoryFromUrl
+        );
+
+        this.currentSubcategoryObject = this.currentCategoryObject.subcategories.find(
+          (subcategory: Subcategory) =>
+            subcategory.code === this.subcategoryFromUrl
+        );
+
+        this.isLoading = false;
+      }
+    });
   }
 
-  updateSelectSubcategory() {
+  updateSelectSubcategory(): void {
     this.currentCategoryObject = this.categories.find(
-      (category) => category.key === this.form.get("category").value
+      (category: Category) => category.key === this.form.get("category").value
     );
     this.form.controls.subcategory.patchValue(
       this.currentCategoryObject.subcategories[0].code
     );
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.form.invalid) {
       return;
     }
