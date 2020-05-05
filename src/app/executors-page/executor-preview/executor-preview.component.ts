@@ -14,7 +14,7 @@ export class ExecutorPreviewComponent implements OnInit {
 
   // TODO rewrite with routerLink
   navigateToUserProfile(id: string): void {
-    this.route.navigateByUrl(`/youdo/profile/${id}`);
+    this.route.navigateByUrl(`/youdo-clone/profile/${id}`);
   }
 
   ngOnInit(): void {}

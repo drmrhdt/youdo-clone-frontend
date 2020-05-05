@@ -12,34 +12,37 @@ import { ProfilePageComponent } from "./profile-page/profile-page.component";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "/youdo",
+    redirectTo: "/youdo-clone",
     pathMatch: "full",
   },
-  { path: "youdo", component: JumbotronComponent },
-  { path: "youdo/tasks/add/:category/:subcategory", component: FormComponent },
+  { path: "youdo-clone", component: JumbotronComponent },
   {
-    path: "youdo/tasks/my",
+    path: "youdo-clone/tasks/add/:category/:subcategory",
+    component: FormComponent,
+  },
+  {
+    path: "youdo-clone/tasks/my",
     component: TasksPageComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: "youdo/tasks/:category/:page",
+    path: "youdo-clone/tasks/:category/:page",
     component: TasksPageComponent,
   },
   {
-    path: "youdo/tasks/:category/:subcategory/:page",
+    path: "youdo-clone/tasks/:category/:subcategory/:page",
     component: TasksPageComponent,
   },
-  { path: "youdo/tasks/:taskId", component: TaskPageComponent },
+  { path: "youdo-clone/tasks/:taskId", component: TaskPageComponent },
   {
-    path: "youdo/executors/:category/:page",
+    path: "youdo-clone/executors/:category/:page",
     component: ExecutorsPageComponent,
   },
   {
-    path: "youdo/executors/:category/:subcategory/:page",
+    path: "youdo-clone/executors/:category/:subcategory/:page",
     component: ExecutorsPageComponent,
   },
-  { path: "youdo/profile/:id", component: ProfilePageComponent },
+  { path: "youdo-clone/profile/:id", component: ProfilePageComponent },
 ];
 
 @NgModule({
