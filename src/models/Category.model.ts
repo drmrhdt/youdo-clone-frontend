@@ -1,7 +1,7 @@
 import { Subcategory } from "./Subcategory.model";
 
 export interface Category {
-  id: number;
+  _id: number;
   key?: string;
   text: string;
   cities: string;
