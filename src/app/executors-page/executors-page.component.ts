@@ -1,20 +1,20 @@
 import { Component, OnInit } from "@angular/core";
-import { ExecutorsService } from "../../services/executors.service";
 import { Executor } from "src/models/Executor.model";
+import { UserService } from "src/services/user.service";
 
 @Component({
   selector: "app-executors-page",
   templateUrl: "./executors-page.component.html",
-  styleUrls: ["./executors-page.component.scss"]
+  styleUrls: ["./executors-page.component.scss"],
 })
 export class ExecutorsPageComponent implements OnInit {
   executors: Executor[] = [];
 
-  constructor(private executorsService: ExecutorsService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.executorsService
-      .getExecutorsList()
-      .subscribe(response => (this.executors = response.data.executors));
+    this.userService
+      .getUsersByFilter("isExecutor", true)
+      .subscribe((response) => (this.executors = response.data.users));
   }
 }
