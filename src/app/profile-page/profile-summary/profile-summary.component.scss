@@ -1,0 +1,36 @@
+@import "../../../styles/variables.scss";
+
+.profile-summary {
+  &__status-bar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__status_online {
+    color: $color-green;
+  }
+
+  &__info-block {
+    display: flex;
+  }
+
+  &__avatar {
+    width: 30%;
+  }
+
+  &__btn {
+    align-self: center;
+    margin: 1rem 0 0 0;
+    padding: 10px 15px;
+
+    font-size: 1em;
+    text-align: center;
+    color: $color-white;
+    letter-spacing: 0.3px;
+
+    background: $color-orange-normal;
+    border-radius: 8px;
+
+    transition: all 0.3s ease;
+  }
+}
