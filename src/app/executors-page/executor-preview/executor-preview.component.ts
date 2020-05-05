@@ -10,11 +10,12 @@ import { Router } from "@angular/router";
 export class ExecutorPreviewComponent implements OnInit {
   @Input() executor: Executor;
 
+  constructor(private route: Router) {}
+
+  // TODO rewrite with routerLink
   navigateToUserProfile(id): void {
     this.route.navigateByUrl(`/youdo/profile/${id}`);
   }
-
-  constructor(private route: Router) {}
 
   ngOnInit(): void {}
 }
