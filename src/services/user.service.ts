@@ -13,4 +13,8 @@ export class UserService {
   getCurrentUserInfo() {
     return this.httpClient.get("http://localhost:3000/api/v1/users/me/info");
   }
+
+  getUserInfoById(id: string) {
+    return this.httpClient.get(`http://localhost:3000/api/v1/users/${id}`);
+  }
 }
