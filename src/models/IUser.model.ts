@@ -55,4 +55,5 @@ export interface IUser {
   passwordResetToken: string;
   passwordResetExpires: Date;
   isActiveAccount: boolean;
+  _id: string;
 }
