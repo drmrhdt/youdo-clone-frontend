@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/services/user.service";
 import { ActivatedRoute } from "@angular/router";
+import { IUser } from "src/models/IUser.model";
 
 @Component({
   selector: "app-profile-page",
@@ -16,6 +17,7 @@ export class ProfilePageComponent implements OnInit {
     return this.idFromUrl === this.signedInUserId;
   }
 
+  user: IUser;
   signedInUserId: string = "";
 
   constructor(
@@ -28,8 +30,13 @@ export class ProfilePageComponent implements OnInit {
       (response) => (this.signedInUserId = response.data.currentUser._id)
     );
 
-    if (!this.isMyProfile) {
-      this.userService.getUserInfoById(this.idFromUrl).subscribe(console.log);
-    }
+    if (!this.isMyProfile)
+      this.userService.getUserInfoById(this.idFromUrl).subscribe((response) => {
+        this.user = response.data.findedByIdUser;
+      });
+    else
+      this.userService.currentUser$.subscribe((response) => {
+        this.user = response.data.currentUser;
+      });
   }
 }
