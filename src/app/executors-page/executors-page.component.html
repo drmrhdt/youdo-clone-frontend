@@ -7,10 +7,7 @@
     <app-filter-header></app-filter-header>
     <ul>
       <li>
-        <app-executor-preview
-          *ngFor="let executor of executors"
-          [executor]="executor"
-        >
+        <app-executor-preview *ngFor="let executor of users" [executor]="executor">
         </app-executor-preview>
       </li>
     </ul>

@@ -13,7 +13,7 @@ export class ExecutorPreviewComponent implements OnInit {
   constructor(private route: Router) {}
 
   // TODO rewrite with routerLink
-  navigateToUserProfile(id): void {
+  navigateToUserProfile(id: string): void {
     this.route.navigateByUrl(`/youdo/profile/${id}`);
   }
 
