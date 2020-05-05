@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Executor } from "src/models/Executor.model";
 import { Router } from "@angular/router";
+import { IUser } from "src/models/IUser.model";
 
 @Component({
   selector: "app-executor-preview",
@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./executor-preview.component.scss"],
 })
 export class ExecutorPreviewComponent implements OnInit {
-  @Input() executor: Executor;
+  @Input() executor: IUser;
 
   constructor(private route: Router) {}
 
