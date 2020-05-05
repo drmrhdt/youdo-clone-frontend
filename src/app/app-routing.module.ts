@@ -39,7 +39,7 @@ const routes: Routes = [
     path: "youdo/executors/:category/:subcategory/:page",
     component: ExecutorsPageComponent,
   },
-  { path: "youdo/profile", component: ProfilePageComponent },
+  { path: "youdo/profile/:id", component: ProfilePageComponent },
 ];
 
 @NgModule({
