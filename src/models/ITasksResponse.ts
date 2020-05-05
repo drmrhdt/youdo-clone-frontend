@@ -1,8 +1,7 @@
 import { ITask } from "./ITask.model";
+import { IResponseMultiple } from "./IResponseMultiple.model";
 
-export interface TasksResponse {
-  status: "success";
-  results: number;
+export interface ITasksResponse extends IResponseMultiple {
   data: {
     tasks: ITask[];
   };

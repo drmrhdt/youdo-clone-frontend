@@ -1,8 +1,7 @@
 import { ICategory } from "./ICategory.model";
+import { IResponseMultiple } from "./IResponseMultiple.model";
 
-export interface ICategoriesResponse {
-  status: string;
-  results: number;
+export interface ICategoriesResponse extends IResponseMultiple {
   data: {
     categories: ICategory[];
   };

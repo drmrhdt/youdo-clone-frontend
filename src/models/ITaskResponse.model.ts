@@ -1,7 +1,7 @@
 import { ITask } from "./ITask.model";
+import { IResponseSingle } from "./IResponseSingle.model";
 
-export interface ITaskResponse {
-  status: string;
+export interface ITaskResponse extends IResponseSingle {
   data: {
     task: ITask;
   };
