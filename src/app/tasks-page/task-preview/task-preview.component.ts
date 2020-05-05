@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Task } from "../../../models/Task.model";
+import { ITask } from "../../../models/ITask.model";
 
 @Component({
   selector: "app-task-preview",
@@ -9,7 +9,7 @@ import { Task } from "../../../models/Task.model";
 export class TaskComponent implements OnInit {
   constructor() {}
 
-  @Input() task: Task;
+  @Input() task: ITask;
 
   ngOnInit(): void {}
 }

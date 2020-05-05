@@ -3,8 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { CategoriesService } from "../../services/categories.service";
 import { TaskService } from "../../services/task.service";
-import { Category } from "../../models/Category.model";
-import { Subcategory } from "../../models/Subcategory.model";
+import { ICategory } from "../../models/ICategory.model";
+import { ISubcategory } from "../../models/ISubcategory.model";
 
 @Component({
   selector: "app-form",
@@ -28,9 +28,9 @@ export class FormComponent implements OnInit {
   }
 
   isLoading: boolean = false;
-  currentCategoryObject: Category;
-  currentSubcategoryObject: Subcategory;
-  categories: Category[] = [];
+  currentCategoryObject: ICategory;
+  currentSubcategoryObject: ISubcategory;
+  categories: ICategory[] = [];
 
   // form: FormGroup;
   form = this.formBuilder.group({
@@ -61,16 +61,16 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.categoriesService.categories$.subscribe((value: Category[]) => {
+    this.categoriesService.categories$.subscribe((value: ICategory[]) => {
       this.categories = value;
 
       if (this.categories) {
         this.currentCategoryObject = this.categories.find(
-          (category: Category) => category.key === this.categoryFromUrl
+          (category: ICategory) => category.key === this.categoryFromUrl
         );
 
         this.currentSubcategoryObject = this.currentCategoryObject.subcategories.find(
-          (subcategory: Subcategory) =>
+          (subcategory: ISubcategory) =>
             subcategory.code === this.subcategoryFromUrl
         );
 
@@ -81,7 +81,7 @@ export class FormComponent implements OnInit {
 
   updateSelectSubcategory(): void {
     this.currentCategoryObject = this.categories.find(
-      (category: Category) => category.key === this.form.get("category").value
+      (category: ICategory) => category.key === this.form.get("category").value
     );
     this.form.controls.subcategory.patchValue(
       this.currentCategoryObject.subcategories[0].code

@@ -8,7 +8,7 @@ import {
 
 import { defaultPage } from "../../config/routes";
 import { CategoriesService } from "src/services/categories.service";
-import { Category } from "../../models/Category.model";
+import { ICategory } from "../../models/ICategory.model";
 import { AuthService } from "../../services/auth.service";
 import { UserService } from "src/services/user.service";
 import { IUserResponse } from "src/models/IUserResponse.model";
@@ -21,7 +21,7 @@ import { IUserResponse } from "src/models/IUserResponse.model";
 export class HeaderComponent implements OnInit {
   isShowDropdown: boolean = false;
   defaultPage: number = defaultPage;
-  categories: Category[] = [];
+  categories: ICategory[] = [];
   isShowDialog: boolean = false;
   authFormType: string = "";
   modalTitle: string = "";

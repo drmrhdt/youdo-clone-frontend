@@ -3,7 +3,7 @@ import { CategoriesService } from "../services/categories.service";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "src/services/user.service";
 import { IUserResponse } from "src/models/IUserResponse.model";
-import { CategoriesResponse } from "src/models/CategoriesResponse.model";
+import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
 
 @Component({
   selector: "app-root",
@@ -26,7 +26,7 @@ export class AppComponent {
 
     this.categoriesService
       .getCategoriesWithSubcategories()
-      .subscribe((response: CategoriesResponse) => {
+      .subscribe((response: ICategoriesResponse) => {
         this.categoriesService.categories$.next(response.data.categories);
         this.isLoading = false;
       });

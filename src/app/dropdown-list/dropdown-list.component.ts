@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Category } from "../../models/Category.model";
+import { ICategory } from "../../models/ICategory.model";
 
 @Component({
   selector: "app-dropdown-list",
@@ -7,7 +7,7 @@ import { Category } from "../../models/Category.model";
   styleUrls: ["./dropdown-list.component.scss"],
 })
 export class DropdownListComponent implements OnInit {
-  @Input() categories: Category[] = [];
+  @Input() categories: ICategory[] = [];
 
   constructor() {}
 

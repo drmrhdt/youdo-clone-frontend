@@ -1,4 +1,4 @@
-export interface Subcategory {
+export interface ISubcategory {
   id: number;
   category: number;
   code: string;
@@ -18,10 +18,10 @@ export interface Subcategory {
   useBudget: boolean;
   priceRequired: boolean;
   sbrCanCreateNewTasks: boolean;
-  pricesByCity: PriceByCity[];
+  pricesByCity: IPriceByCity[];
 }
 
-interface PriceByCity {
+interface IPriceByCity {
   subcategoryId: number;
   offerPrice: number;
   taskPriceMin: number;

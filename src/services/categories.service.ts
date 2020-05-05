@@ -1,31 +1,31 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Category } from "../models/Category.model";
-import { CategoriesResponse } from "../models/CategoriesResponse.model";
-import { SubcategoriesResponse } from "../models/SubcategoriesResponse.model";
-import { CurrentCategoryAndSubcategoryResponse } from "src/models/CurrentCategoryAndSubcategoryResponse.model";
+import { ICategory } from "../models/ICategory.model";
+import { ICategoriesResponse } from "../models/ICategoriesResponse.model";
+import { ISubcategoriesResponse } from "../models/ISubcategoriesResponse.model";
+import { ICurrentCategoryAndSubcategoryResponse } from "src/models/ICurrentCategoryAndSubcategoryResponse.model";
 import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class CategoriesService {
-  categories$ = new BehaviorSubject<Category[]>(null);
+  categories$ = new BehaviorSubject<ICategory[]>(null);
 
   constructor(private http: HttpClient) {
     this.getCategoriesWithSubcategories();
   }
 
-  getCategoriesWithSubcategories(): Observable<CategoriesResponse> {
-    return this.http.get<CategoriesResponse>(
+  getCategoriesWithSubcategories(): Observable<ICategoriesResponse> {
+    return this.http.get<ICategoriesResponse>(
       "http://localhost:3000/api/v1/categories"
     );
   }
 
   getSubcategoriesByCategoryId(
-    category: Category
-  ): Observable<SubcategoriesResponse> {
-    return this.http.get<SubcategoriesResponse>(
+    category: ICategory
+  ): Observable<ISubcategoriesResponse> {
+    return this.http.get<ISubcategoriesResponse>(
       `http://localhost:3000/api/v1/subcategories/${category._id}`
     );
   }
@@ -33,8 +33,8 @@ export class CategoriesService {
   getCurrentCategoryAndSubcategory(
     category: string,
     subcategory: string
-  ): Observable<CurrentCategoryAndSubcategoryResponse> {
-    return this.http.get<CurrentCategoryAndSubcategoryResponse>(
+  ): Observable<ICurrentCategoryAndSubcategoryResponse> {
+    return this.http.get<ICurrentCategoryAndSubcategoryResponse>(
       `http://localhost:3000/api/v1/tasks/${category}/${subcategory}`
     );
   }

@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { TaskService } from "../../../../services/task.service";
 import { ActivatedRoute } from "@angular/router";
-import { Task } from "../../../../models/Task.model";
+import { ITask } from "../../../../models/ITask.model";
 
 @Component({
   selector: "app-task-detail",
   templateUrl: "./task-detail.component.html",
-  styleUrls: ["./task-detail.component.scss"]
+  styleUrls: ["./task-detail.component.scss"],
 })
 export class TaskDetailComponent implements OnInit {
   constructor(
@@ -15,12 +15,12 @@ export class TaskDetailComponent implements OnInit {
   ) {}
 
   isLoading: boolean;
-  task: Task;
+  task: ITask;
 
   ngOnInit(): void {
     this.isLoading = true;
     const _id = this.route.snapshot.paramMap.get("taskId");
-    this.taskService.getTaskById(_id).subscribe(response => {
+    this.taskService.getTaskById(_id).subscribe((response) => {
       this.isLoading = false;
       return (this.task = response.data.task);
     });

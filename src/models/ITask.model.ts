@@ -1,4 +1,4 @@
-export interface Task {
+export interface ITask {
   _id: number;
   description: string;
   category: string; // do I need it?

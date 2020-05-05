@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Category } from "../../../models/Category.model";
+import { ICategory } from "../../../models/ICategory.model";
 import { CategoriesService } from "../../../services/categories.service";
 import { defaultPage } from "../../../config/routes";
 
@@ -10,7 +10,7 @@ import { defaultPage } from "../../../config/routes";
   styleUrls: ["./categories-list.component.scss"],
 })
 export class CategoriesListComponent implements OnInit {
-  categories: Category[] = [];
+  categories: ICategory[] = [];
   selectedCategory: string = "";
   defaultPage: number = defaultPage;
 
