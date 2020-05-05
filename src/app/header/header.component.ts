@@ -9,8 +9,9 @@ import {
 import { defaultPage } from "../../config/routes";
 import { CategoriesService } from "src/services/categories.service";
 import { Category } from "../../models/Category.model";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../../services/auth.service";
 import { UserService } from "src/services/user.service";
+import { IUserResponse } from "src/models/IUserResponse.model";
 
 @Component({
   selector: "app-header",
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
   @HostListener("document:click")
-  onClick() {
+  onClick(): void {
     if (!this.createTaskLink.nativeElement.contains(event.target))
       this.isShowDropdown = false;
   }
@@ -54,24 +55,24 @@ export class HeaderComponent implements OnInit {
     if (this.isAuthenticated) {
       // TODO get id from localstorage, and if it's empty then from currentUser$
       this.userService.currentUser$.subscribe(
-        (response) => (this.id = response.data.currentUser._id)
+        (response: IUserResponse) => (this.id = response.data.currentUser._id)
       );
     }
   }
 
-  showSignUpDialog() {
+  showSignUpDialog(): void {
     this.authFormType = "signUp";
     this.modalTitle = "Регистрация";
     this.isShowDialog = true;
   }
 
-  showSignInDialog() {
+  showSignInDialog(): void {
     this.authFormType = "signIn";
     this.modalTitle = "Вход";
     this.isShowDialog = true;
   }
 
-  onSignOut() {
+  onSignOut(): void {
     this.authService.signOut();
   }
 }

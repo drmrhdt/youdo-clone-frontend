@@ -10,7 +10,7 @@ export class ProfileSummaryComponent implements OnInit {
   @Input() user: IUser;
   @Input() isMyProfile: boolean = false;
 
-  get userIsOnline() {
+  get userIsOnline(): boolean {
     return window.navigator.onLine;
   }
 

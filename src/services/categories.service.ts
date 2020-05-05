@@ -22,15 +22,17 @@ export class CategoriesService {
     );
   }
 
-  getSubcategoriesByCategoryId(category): Observable<SubcategoriesResponse> {
+  getSubcategoriesByCategoryId(
+    category: Category
+  ): Observable<SubcategoriesResponse> {
     return this.http.get<SubcategoriesResponse>(
       `http://localhost:3000/api/v1/subcategories/${category._id}`
     );
   }
 
   getCurrentCategoryAndSubcategory(
-    category,
-    subcategory
+    category: string,
+    subcategory: string
   ): Observable<CurrentCategoryAndSubcategoryResponse> {
     return this.http.get<CurrentCategoryAndSubcategoryResponse>(
       `http://localhost:3000/api/v1/tasks/${category}/${subcategory}`
