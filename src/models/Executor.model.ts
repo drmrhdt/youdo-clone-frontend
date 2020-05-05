@@ -5,4 +5,5 @@ export interface Executor {
   rating: number;
   last_online: string;
   description: string;
+  id: string | number;
 }

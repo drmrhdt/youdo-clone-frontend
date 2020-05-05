@@ -1,10 +1,6 @@
 <div class="executor-preview">
   <div class="executor-preview__left-block">
-    <img
-      src="{{ executor.avatar }}"
-      alt="executor-avatar"
-      class="executor-preview__avatar"
-    />
+    <img src="{{ executor.avatar }}" alt="executor-avatar" class="executor-preview__avatar" />
     <div class="executor-preview__reviews">
       <span class="executor-preview__reviews-text">Отзывы:</span>
       {{ executor.reviews }}
@@ -13,7 +9,7 @@
   </div>
   <div class="executor-preview__right-block">
     <div class="executor-preview__header">
-      <span class="executor-preview__name link">{{ executor.name }}</span>
+      <a (click)="navigateToUserProfile(executor.id)" class="executor-preview__name link">{{ executor.name }}</a>
     </div>
     <p class="executor-preview__last-online">{{ executor.last_online }}</p>
     <p class="executor-preview__description">{{ executor.description }}</p>
