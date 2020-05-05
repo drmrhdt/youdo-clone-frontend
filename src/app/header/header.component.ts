@@ -10,6 +10,7 @@ import { defaultPage } from "../../config/routes";
 import { CategoriesService } from "src/services/categories.service";
 import { Category } from "../../models/Category.model";
 import { AuthService } from "../services/auth.service";
+import { UserService } from "src/services/user.service";
 
 @Component({
   selector: "app-header",
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   isShowDialog: boolean = false;
   authFormType: string = "";
   modalTitle: string = "";
+  id: string = "";
 
   isAuthenticated: boolean = false;
 
@@ -35,7 +37,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +51,12 @@ export class HeaderComponent implements OnInit {
       .subscribe((isAuthenticated: boolean) => {
         this.isAuthenticated = isAuthenticated;
       });
+    if (this.isAuthenticated) {
+      // TODO get id from localstorage, and if it's empty then from currentUser$
+      this.userService.currentUser$.subscribe(
+        (response) => (this.id = response.data.currentUser._id)
+      );
+    }
   }
 
   showSignUpDialog() {

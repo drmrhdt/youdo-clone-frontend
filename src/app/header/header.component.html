@@ -3,34 +3,18 @@
     <img src="../../assets/download.svg" alt="youdo-logo" />
   </a>
   <div class="header-nav__link-container">
-    <a
-      class="header-nav__link"
-      (click)="isShowDropdown = !isShowDropdown"
-      #createTaskLink
-    >
+    <a class="header-nav__link" (click)="isShowDropdown = !isShowDropdown" #createTaskLink>
       Создать задание
     </a>
-    <app-dropdown-list
-      [categories]="categories"
-      *ngIf="isShowDropdown"
-    ></app-dropdown-list>
+    <app-dropdown-list [categories]="categories" *ngIf="isShowDropdown"></app-dropdown-list>
   </div>
-  <a routerLink="/youdo/tasks/all/{{ defaultPage }}" class="header-nav__link"
-    >Найти задание</a
-  >
-  <a routerLink="/youdo/executors/Courier/1" class="header-nav__link"
-    >Исполнители</a
-  >
-  <a
-    *ngIf="isAuthenticated"
-    routerLink="/youdo/tasks/my"
-    class="header-nav__link"
-    >Мои заказы</a
-  >
+  <a routerLink="/youdo/tasks/all/{{ defaultPage }}" class="header-nav__link">Найти задание</a>
+  <a routerLink="/youdo/executors/Courier/1" class="header-nav__link">Исполнители</a>
+  <a *ngIf="isAuthenticated" routerLink="/youdo/tasks/my" class="header-nav__link">Мои заказы</a>
 
   <div class="user-menu">
     <ng-container *ngIf="isAuthenticated; else signInSignUp">
-      <a class="header-nav__link" routerLink="/youdo/profile">Профиль</a>
+      <a class="header-nav__link" routerLink="/youdo/profile/{{id}}">Профиль</a>
       <a class="user-menu__exit" (click)="onSignOut()">Выход</a>
     </ng-container>
 
@@ -42,12 +26,7 @@
   </div>
 </nav>
 
-<app-modal
-  *ngIf="isShowDialog"
-  modalTitle="{{ modalTitle }}"
-  (close)="isShowDialog = false"
-  [bodyComponent]="body"
->
+<app-modal *ngIf="isShowDialog" modalTitle="{{ modalTitle }}" (close)="isShowDialog = false" [bodyComponent]="body">
   <ng-template #body>
     <app-auth-form authFormType="{{ authFormType }}"></app-auth-form>
   </ng-template>
