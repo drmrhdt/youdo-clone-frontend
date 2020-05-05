@@ -17,4 +17,10 @@ export class UserService {
   getUserInfoById(id: string) {
     return this.httpClient.get(`http://localhost:3000/api/v1/users/${id}`);
   }
+
+  getUsersByFilter(filter: string, value: any) {
+    return this.httpClient.get(
+      `http://localhost:3000/api/v1/users?${filter}=${value}`
+    );
+  }
 }
