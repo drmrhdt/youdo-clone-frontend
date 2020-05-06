@@ -13,6 +13,8 @@ import { AuthService } from "../../services/auth.service";
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
+  isAuthenticated: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -23,12 +25,14 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const isAuth = this.authService.getAuthStatus();
+    this.authService
+      .getAuthStatusListener()
+      .subscribe((response: boolean) => (this.isAuthenticated = response));
 
-    if (!isAuth) {
+    if (!this.isAuthenticated) {
       this.router.navigateByUrl("/");
     }
 
-    return isAuth;
+    return this.isAuthenticated;
   }
 }

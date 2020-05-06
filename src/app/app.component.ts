@@ -13,6 +13,7 @@ import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
 export class AppComponent {
   title: string = "youdo-clone-clone";
   isLoading: boolean = true;
+  isAuthenticated: boolean = false;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -22,7 +23,11 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.authService.autoAuthUser();
-    const isAuth = this.authService.getAuthStatus();
+
+    // TODO we need send token to the server each time when user reloads page
+    this.authService
+      .getAuthStatusListener()
+      .subscribe((response: boolean) => (this.isAuthenticated = response));
 
     this.categoriesService
       .getCategoriesWithSubcategories()
@@ -31,7 +36,7 @@ export class AppComponent {
         this.isLoading = false;
       });
 
-    if (isAuth) {
+    if (this.isAuthenticated) {
       this.userService.getCurrentUserInfo().subscribe((user: IUserResponse) => {
         this.userService.currentUser$.next(user);
       });

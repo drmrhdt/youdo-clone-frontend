@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { IAuthSignUpResponse } from "src/models/IAuthSignUpResponse.model";
 import { IAuthSignInResponse } from "src/models/IAuthSignInResponse.model";
 import { IAuthSignUpRequest } from "../models/IAuthSignUpRequest.model";
@@ -12,20 +12,16 @@ import { IAuthSignInRequest } from "../models/IAuthSignInRequest.model";
 })
 export class AuthService {
   private token: string = "";
-  private isAuthenticated: boolean = false;
-  private authStatusListener$ = new Subject<boolean>();
+
+  private authStatusListener$ = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   getToken(): string {
-    return this.token || localStorage.getItem("token");
+    return this.token;
   }
 
-  getAuthStatus(): boolean {
-    return this.isAuthenticated;
-  }
-
-  getAuthStatusListener() {
+  getAuthStatusListener(): Observable<boolean> {
     return this.authStatusListener$.asObservable();
   }
 
@@ -37,7 +33,6 @@ export class AuthService {
       )
       .subscribe((response: IAuthSignUpResponse) => {
         this.token = response.token;
-        this.isAuthenticated = true;
         this.authStatusListener$.next(true);
         this.router.navigateByUrl("/");
         this.saveAuthData(this.token);
@@ -52,7 +47,6 @@ export class AuthService {
       )
       .subscribe((response: IAuthSignInResponse) => {
         this.token = response.token;
-        this.isAuthenticated = true;
         this.authStatusListener$.next(true);
         this.router.navigateByUrl("/");
         this.saveAuthData(this.token);
@@ -70,7 +64,6 @@ export class AuthService {
     const token = this.getAuthData();
 
     if (token) {
-      this.isAuthenticated = true;
       this.authStatusListener$.next(true);
     }
   }

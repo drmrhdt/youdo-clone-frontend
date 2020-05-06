@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit {
     this.categoriesService.categories$.subscribe(
       (value) => (this.categories = value)
     );
-    this.isAuthenticated = this.authService.getAuthStatus();
     this.authService
       .getAuthStatusListener()
       .subscribe((isAuthenticated: boolean) => {
