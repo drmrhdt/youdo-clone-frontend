@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   getToken(): string {
-    return this.token;
+    return this.token || localStorage.getItem("token");
   }
 
   getAuthStatusListener(): Observable<boolean> {
