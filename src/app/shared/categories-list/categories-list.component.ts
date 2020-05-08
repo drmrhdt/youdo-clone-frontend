@@ -35,7 +35,7 @@ export class CategoriesListComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.selectedCategory = params["category"];
     });
-    this.categoriesService.categories$.subscribe(
+    this.categoriesService.categoriesListener$.subscribe(
       (value) => (this.categories = value)
     );
   }

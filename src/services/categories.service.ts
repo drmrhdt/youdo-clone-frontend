@@ -10,7 +10,7 @@ import { Observable, BehaviorSubject } from "rxjs";
   providedIn: "root",
 })
 export class CategoriesService {
-  categories$ = new BehaviorSubject<ICategory[]>(null);
+  categoriesListener$ = new BehaviorSubject<ICategory[]>(null);
 
   constructor(private http: HttpClient) {
     this.getCategoriesWithSubcategories();

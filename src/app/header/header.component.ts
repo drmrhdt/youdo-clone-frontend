@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoriesService.categories$.subscribe(
+    this.categoriesService.categoriesListener$.subscribe(
       (value) => (this.categories = value)
     );
     this.authService
@@ -52,8 +52,8 @@ export class HeaderComponent implements OnInit {
         this.isAuthenticated = isAuthenticated;
       });
     if (this.isAuthenticated) {
-      // TODO get id from localstorage, and if it's empty then from currentUser$
-      this.userService.currentUser$.subscribe(
+      // TODO get id from localstorage, and if it's empty then from currentUserListener$
+      this.userService.currentUserListener$.subscribe(
         (response: IUserResponse) => (this.id = response.data.currentUser._id)
       );
     }

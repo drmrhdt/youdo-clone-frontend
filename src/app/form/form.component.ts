@@ -61,22 +61,24 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.categoriesService.categories$.subscribe((value: ICategory[]) => {
-      this.categories = value;
+    this.categoriesService.categoriesListener$.subscribe(
+      (value: ICategory[]) => {
+        this.categories = value;
 
-      if (this.categories) {
-        this.currentCategoryObject = this.categories.find(
-          (category: ICategory) => category.key === this.categoryFromUrl
-        );
+        if (this.categories) {
+          this.currentCategoryObject = this.categories.find(
+            (category: ICategory) => category.key === this.categoryFromUrl
+          );
 
-        this.currentSubcategoryObject = this.currentCategoryObject.subcategories.find(
-          (subcategory: ISubcategory) =>
-            subcategory.code === this.subcategoryFromUrl
-        );
+          this.currentSubcategoryObject = this.currentCategoryObject.subcategories.find(
+            (subcategory: ISubcategory) =>
+              subcategory.code === this.subcategoryFromUrl
+          );
 
-        this.isLoading = false;
+          this.isLoading = false;
+        }
       }
-    });
+    );
   }
 
   updateSelectSubcategory(): void {

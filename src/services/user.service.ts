@@ -8,7 +8,7 @@ import { IUserResponse } from "src/models/IUserResponse.model";
   providedIn: "root",
 })
 export class UserService {
-  currentUser$ = new BehaviorSubject(null);
+  currentUserListener$ = new BehaviorSubject(null);
 
   constructor(private httpClient: HttpClient) {}
 

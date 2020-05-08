@@ -32,13 +32,15 @@ export class AppComponent {
     this.categoriesService
       .getCategoriesWithSubcategories()
       .subscribe((response: ICategoriesResponse) => {
-        this.categoriesService.categories$.next(response.data.categories);
+        this.categoriesService.categoriesListener$.next(
+          response.data.categories
+        );
         this.isLoading = false;
       });
 
     if (this.isAuthenticated) {
       this.userService.getCurrentUserInfo().subscribe((user: IUserResponse) => {
-        this.userService.currentUser$.next(user);
+        this.userService.currentUserListener$.next(user);
       });
     }
   }

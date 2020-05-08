@@ -27,7 +27,7 @@ export class ProfilePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.currentUser$.subscribe(
+    this.userService.currentUserListener$.subscribe(
       (response: IUserResponse) =>
         (this.signedInUserId = response.data.currentUser._id)
     );
@@ -39,8 +39,10 @@ export class ProfilePageComponent implements OnInit {
           this.user = response.data.findedByIdUser;
         });
     else
-      this.userService.currentUser$.subscribe((response: IUserResponse) => {
-        this.user = response.data.currentUser;
-      });
+      this.userService.currentUserListener$.subscribe(
+        (response: IUserResponse) => {
+          this.user = response.data.currentUser;
+        }
+      );
   }
 }
