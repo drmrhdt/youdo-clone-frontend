@@ -39,9 +39,11 @@ export class AppComponent {
       });
 
     if (this.isAuthenticated) {
-      this.userService.getCurrentUserInfo().subscribe((user: IUserResponse) => {
-        this.userService.currentUserListener$.next(user);
-      });
+      this.userService
+        .getCurrentUserInfo()
+        .subscribe((response: IUserResponse) => {
+          this.userService.currentUserListener$.next(response.data.currentUser);
+        });
     }
   }
 }

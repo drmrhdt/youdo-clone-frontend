@@ -28,8 +28,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.currentUserListener$.subscribe(
-      (response: IUserResponse) =>
-        (this.signedInUserId = response.data.currentUser._id)
+      (response: IUser) => (this.signedInUserId = response._id)
     );
 
     if (!this.isMyProfile)
@@ -39,10 +38,8 @@ export class ProfilePageComponent implements OnInit {
           this.user = response.data.findedByIdUser;
         });
     else
-      this.userService.currentUserListener$.subscribe(
-        (response: IUserResponse) => {
-          this.user = response.data.currentUser;
-        }
-      );
+      this.userService.currentUserListener$.subscribe((response: IUser) => {
+        this.user = response;
+      });
   }
 }

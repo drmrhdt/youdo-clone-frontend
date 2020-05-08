@@ -11,7 +11,7 @@ import { CategoriesService } from "src/services/categories.service";
 import { ICategory } from "../../models/ICategory.model";
 import { AuthService } from "../../services/auth.service";
 import { UserService } from "src/services/user.service";
-import { IUserResponse } from "src/models/IUserResponse.model";
+import { IUser } from "src/models/IUser.model";
 
 @Component({
   selector: "app-header",
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
     if (this.isAuthenticated) {
       // TODO get id from localstorage, and if it's empty then from currentUserListener$
       this.userService.currentUserListener$.subscribe(
-        (response: IUserResponse) => (this.id = response.data.currentUser._id)
+        (response: IUser) => (this.id = response._id)
       );
     }
   }
