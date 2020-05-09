@@ -14,14 +14,14 @@
 
   <div class="user-menu">
     <ng-container *ngIf="isAuthenticated; else signInSignUp">
+      <a *ngIf="isAdminOrModerator" class="header-nav__link" routerLink="/youdo-clone/admin">Админка</a>
       <a class="header-nav__link" routerLink="/youdo-clone/profile/{{id}}">Профиль</a>
       <a class="user-menu__exit" (click)="onSignOut()">Выход</a>
     </ng-container>
 
     <ng-template #signInSignUp>
       <a class="user-menu__link" (click)="showSignInDialog()">Вход</a>
-      <span class="user-menu__delemeter">или</span>
-      <a class="user-menu__link" (click)="showSignUpDialog()">регистрация</a>
+      <a class="user-menu__link" (click)="showSignUpDialog()">Регистрация</a>
     </ng-template>
   </div>
 </nav>

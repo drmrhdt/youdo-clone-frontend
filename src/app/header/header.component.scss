@@ -27,9 +27,8 @@ a {
   .user-menu {
     margin-left: auto;
 
-    // TODO remove !important
-    &__exit {
-      margin-left: 20px !important;
+    & > :nth-child(n) {
+      margin-left: 20px;
     }
 
     &__link {
@@ -38,10 +37,6 @@ a {
       &:hover {
         border-bottom: none;
       }
-    }
-
-    &__delemeter {
-      margin: 0 10px;
     }
   }
 }

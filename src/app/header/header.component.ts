@@ -12,6 +12,7 @@ import { ICategory } from "../../models/ICategory.model";
 import { AuthService } from "../../services/auth.service";
 import { UserService } from "src/services/user.service";
 import { IUser } from "src/models/IUser.model";
+import { Roles } from "../guards/role.guard";
 
 @Component({
   selector: "app-header",
@@ -19,15 +20,15 @@ import { IUser } from "src/models/IUser.model";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  isShowDropdown: boolean = false;
-  defaultPage: number = defaultPage;
   categories: ICategory[] = [];
+  defaultPage: number = defaultPage;
+  isShowDropdown: boolean = false;
   isShowDialog: boolean = false;
+  isAdminOrModerator: boolean = false;
+  isAuthenticated: boolean = false;
   authFormType: string = "";
   modalTitle: string = "";
   id: string = "";
-
-  isAuthenticated: boolean = false;
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
   @HostListener("document:click")
@@ -53,9 +54,12 @@ export class HeaderComponent implements OnInit {
       });
     if (this.isAuthenticated) {
       // TODO get id from localstorage, and if it's empty then from currentUserListener$
-      this.userService.currentUserListener$.subscribe(
-        (response: IUser) => (this.id = response._id)
-      );
+      this.userService.currentUserListener$.subscribe((response: IUser) => {
+        this.id = response._id;
+        this.isAdminOrModerator =
+          response.moderationInfo.role === Roles.admin ||
+          response.moderationInfo.role === Roles.moderator;
+      });
     }
   }
 
