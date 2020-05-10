@@ -1,3 +1,5 @@
+import { IPossibleExecutorSuggestion } from "./IPossibleExecutorSuggestion.model";
+
 export interface ITask {
   _id: number;
   description: string;
@@ -28,4 +30,5 @@ export interface ITask {
   };
   isSbr: boolean;
   createDate: number;
+  possibleExecutorSuggestions: IPossibleExecutorSuggestion[];
 }
