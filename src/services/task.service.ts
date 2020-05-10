@@ -22,6 +22,12 @@ export class TaskService {
     );
   }
 
+  getTasksListByFilter(filter, value): Observable<ITasksResponse> {
+    return this.httpClient.get<ITasksResponse>(
+      `http://localhost:3000/api/v1/tasks?${filter}=${value}`
+    );
+  }
+
   createTask(formValues) {
     return this.httpClient.post(
       "http://localhost:3000/api/v1/tasks",
