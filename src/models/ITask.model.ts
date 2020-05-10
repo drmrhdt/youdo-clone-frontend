@@ -14,6 +14,7 @@ export interface ITask {
   address: string; // it will be FormArray
   budget: number;
   author: string;
+  authorId: string;
   email: string;
   tel: string;
   isBusiness: false;
