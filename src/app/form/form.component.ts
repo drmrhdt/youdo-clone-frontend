@@ -5,6 +5,8 @@ import { CategoriesService } from "../../services/categories.service";
 import { TaskService } from "../../services/task.service";
 import { ICategory } from "../../models/ICategory.model";
 import { ISubcategory } from "../../models/ISubcategory.model";
+import { UserService } from "src/services/user.service";
+import { IUser } from "src/models/IUser.model";
 
 @Component({
   selector: "app-form",
@@ -12,11 +14,18 @@ import { ISubcategory } from "../../models/ISubcategory.model";
   styleUrls: ["./form.component.scss"],
 })
 export class FormComponent implements OnInit {
+  isLoading: boolean = false;
+  currentCategoryObject: ICategory;
+  currentSubcategoryObject: ISubcategory;
+  categories: ICategory[] = [];
+  signedInUser: IUser;
+
   constructor(
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private userService: UserService
   ) {}
 
   get categoryFromUrl(): string {
@@ -26,11 +35,6 @@ export class FormComponent implements OnInit {
   get subcategoryFromUrl(): string {
     return this.route.snapshot.paramMap.get("subcategory");
   }
-
-  isLoading: boolean = false;
-  currentCategoryObject: ICategory;
-  currentSubcategoryObject: ISubcategory;
-  categories: ICategory[] = [];
 
   // form: FormGroup;
   form = this.formBuilder.group({
@@ -47,7 +51,8 @@ export class FormComponent implements OnInit {
     }),
     address: ["", Validators.required], // it will be FormArray
     budget: "",
-    author: ["", Validators.required],
+    author: [""],
+    authorId: ["", Validators.required],
     email: ["", Validators.required],
     tel: ["", Validators.required],
     additionalConditions: this.formBuilder.group({
@@ -79,6 +84,18 @@ export class FormComponent implements OnInit {
         }
       }
     );
+
+    this.userService.currentUserListener$.subscribe((response: IUser) => {
+      this.signedInUser = response;
+      if (this.signedInUser) {
+        this.form.get("authorId").patchValue(this.signedInUser._id);
+        this.form.get("email").patchValue(this.signedInUser.contacts.email);
+        this.form.get("tel").patchValue(this.signedInUser.contacts.phone);
+        this.form
+          .get("author")
+          .patchValue(this.signedInUser.personalInfo.firstName);
+      }
+    });
   }
 
   updateSelectSubcategory(): void {
@@ -94,6 +111,7 @@ export class FormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
     const newTask = {
       createDate: +new Date(),
       ...this.form.value,
