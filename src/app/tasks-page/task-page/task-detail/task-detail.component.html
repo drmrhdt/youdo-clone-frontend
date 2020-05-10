@@ -12,17 +12,13 @@
   <article class="task-detail__card">
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Начать</strong>
-      <span class="task-detail__task-value"
-        >{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
-        {{ task.executionTime.startTime | date: "hh:mm" }}</span
-      >
+      <span class="task-detail__task-value">{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
+        {{ task.executionTime.startTime | date: "hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Завершить</strong>
-      <span class="task-detail__task-value"
-        >{{ task.executionTime.endDate | date: "dd.MM.yy" }},
-        {{ task.executionTime.endTime | date: "hh:mm" }}</span
-      >
+      <span class="task-detail__task-value">{{ task.executionTime.endDate | date: "dd.MM.yy" }},
+        {{ task.executionTime.endTime | date: "hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Стоимость</strong>
@@ -30,9 +26,7 @@
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Оплата задания</strong>
-      <span class="task-detail__task-value"
-        >Напрямую исполнителю без гарантий и компенсаций</span
-      >
+      <span class="task-detail__task-value">Напрямую исполнителю без гарантий и компенсаций</span>
     </div>
     <div class="task-detail__task-item task-detail__task-item_type_important">
       <strong class="task-detail__task-property">Описание</strong>
@@ -40,12 +34,10 @@
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Дополнительные условия</strong>
-      <span class="task-detail__task-value"
-        >Исполнитель должен иметь документы для оформления
-        расписки/доверенности</span
-      >
+      <span class="task-detail__task-value">Исполнитель должен иметь документы для оформления
+        расписки/доверенности</span>
     </div>
-    <button class="task-detail__btn_type_submit" type="submit">
+    <button class="task-detail__btn_type_submit" (click)="onSubmit()" type="submit">
       Предложить свои услуги
     </button>
   </article>
