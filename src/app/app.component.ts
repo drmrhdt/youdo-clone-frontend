@@ -4,6 +4,7 @@ import { AuthService } from "../services/auth.service";
 import { UserService } from "src/services/user.service";
 import { IUserResponse } from "src/models/IUserResponse.model";
 import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
+import { flatMap } from "rxjs/operators";
 
 @Component({
   selector: "app-root",
@@ -13,7 +14,6 @@ import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
 export class AppComponent {
   title: string = "youdo-clone-clone";
   isLoading: boolean = true;
-  isAuthenticated: boolean = false;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -27,23 +27,25 @@ export class AppComponent {
     // TODO we need send token to the server each time when user reloads page
     this.authService
       .getAuthStatusListener()
-      .subscribe((response: boolean) => (this.isAuthenticated = response));
+      .pipe(
+        flatMap((response) => {
+          if (response) {
+            return this.userService.getCurrentUserInfo();
+          }
+        })
+      )
+      .subscribe((response: IUserResponse) => {
+        this.userService.currentUserListener$.next(response.data.currentUser);
 
-    this.categoriesService
-      .getCategoriesWithSubcategories()
-      .subscribe((response: ICategoriesResponse) => {
-        this.categoriesService.categoriesListener$.next(
-          response.data.categories
-        );
-        this.isLoading = false;
+        // TODO do it sequantially in valid way
+        this.categoriesService
+          .getCategoriesWithSubcategories()
+          .subscribe((response: ICategoriesResponse) => {
+            this.categoriesService.categoriesListener$.next(
+              response.data.categories
+            );
+            this.isLoading = false;
+          });
       });
-
-    if (this.isAuthenticated) {
-      this.userService
-        .getCurrentUserInfo()
-        .subscribe((response: IUserResponse) => {
-          this.userService.currentUserListener$.next(response.data.currentUser);
-        });
-    }
   }
 }
