@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriesService.categoriesListener$.subscribe(
-      (value) => (this.categories = value)
+      (response: ICategory[]) => (this.categories = response)
     );
     this.authService
       .getAuthStatusListener()

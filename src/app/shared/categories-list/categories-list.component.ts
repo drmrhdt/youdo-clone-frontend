@@ -19,11 +19,11 @@ export class CategoriesListComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  get section() {
+  get section(): string {
     return this.route.snapshot.url[1].path;
   }
 
-  selectCategory(category) {
+  selectCategory(category): void {
     if (category.key === this.selectedCategory) {
       this.selectedCategory = null;
       return;
@@ -36,7 +36,7 @@ export class CategoriesListComponent implements OnInit {
       this.selectedCategory = params["category"];
     });
     this.categoriesService.categoriesListener$.subscribe(
-      (value) => (this.categories = value)
+      (response: ICategory[]) => (this.categories = response)
     );
   }
 }
