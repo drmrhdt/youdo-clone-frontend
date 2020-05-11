@@ -27,9 +27,9 @@ export class ProfilePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.currentUserListener$.subscribe(
-      (response: IUser) => (this.signedInUserId = response._id)
-    );
+    this.userService.currentUserListener$.subscribe((response: IUser) => {
+      if (response) this.signedInUserId = response._id;
+    });
 
     if (!this.isMyProfile)
       this.userService

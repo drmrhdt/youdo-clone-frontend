@@ -23,7 +23,7 @@ export class TasksPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.currentUserListener$.subscribe((response: IUser) => {
-      this.signedInUserId = response._id;
+      if (response) this.signedInUserId = response._id;
     });
 
     if (this.route.snapshot.url[2].path === "my") {
