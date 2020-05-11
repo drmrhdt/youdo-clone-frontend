@@ -74,6 +74,7 @@ export class AuthService {
 
   private clearAuthData(): void {
     localStorage.removeItem("token");
+    localStorage.removeItem("signedInUser");
   }
 
   private getAuthData(): string {
