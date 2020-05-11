@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ExecutorPreviewComponent } from "./executor-preview.component";
 
-import { ExecutorPreviewComponent } from './executor-preview.component';
-
-describe('ExecutorPreviewComponent', () => {
+describe("ExecutorPreviewComponent", () => {
   let component: ExecutorPreviewComponent;
   let fixture: ComponentFixture<ExecutorPreviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExecutorPreviewComponent ]
-    })
-    .compileComponents();
+      declarations: [ExecutorPreviewComponent],
+      imports: [RouterTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('ExecutorPreviewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

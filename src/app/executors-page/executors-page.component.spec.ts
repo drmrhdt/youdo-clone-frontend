@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { ExecutorsPageComponent } from "./executors-page.component";
 
-import { ExecutorsPageComponent } from './executors-page.component';
-
-describe('ExecutorsPageComponent', () => {
+describe("ExecutorsPageComponent", () => {
   let component: ExecutorsPageComponent;
   let fixture: ComponentFixture<ExecutorsPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExecutorsPageComponent ]
-    })
-    .compileComponents();
+      declarations: [ExecutorsPageComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('ExecutorsPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

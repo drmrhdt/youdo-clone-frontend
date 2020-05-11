@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { VerificationBannerComponent } from './verification-banner.component';
+import { VerificationBannerComponent } from "./verification-banner.component";
 
-describe('VerificationBannerComponent', () => {
+describe("VerificationBannerComponent", () => {
   let component: VerificationBannerComponent;
   let fixture: ComponentFixture<VerificationBannerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VerificationBannerComponent ]
-    })
-    .compileComponents();
+      declarations: [VerificationBannerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('VerificationBannerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

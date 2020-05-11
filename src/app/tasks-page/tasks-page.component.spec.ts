@@ -1,16 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { RouterModule } from "@angular/router";
+import { TasksPageComponent } from "./tasks-page.component";
 
-import { TasksPageComponent } from './tasks-page.component';
-
-describe('TasksPageComponent', () => {
+describe("TasksPageComponent", () => {
   let component: TasksPageComponent;
   let fixture: ComponentFixture<TasksPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TasksPageComponent ]
-    })
-    .compileComponents();
+      declarations: [TasksPageComponent],
+      imports: [HttpClientTestingModule, RouterModule.forRoot([])],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +20,7 @@ describe('TasksPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
