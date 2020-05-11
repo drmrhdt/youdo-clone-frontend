@@ -1,19 +1,19 @@
 <div class="executor-preview">
   <div class="executor-preview__left-block">
-    <img src="{{ executor.personalInfo.avatar }}" alt="executor-avatar" class="executor-preview__avatar" />
+    <img src="{{ executor?.personalInfo.avatar }}" alt="executor-avatar" class="executor-preview__avatar" />
     <div class="executor-preview__reviews">
       <span class="executor-preview__reviews-text">Отзывы:</span>
-      {{ executor.workInfo.reviews.total }}
+      {{ executor?.workInfo.reviews.total }}
     </div>
     <!-- <div class="executor-preview__rating">{{ executor?.rating }}</div> -->
   </div>
   <div class="executor-preview__right-block">
     <div class="executor-preview__header">
-      <a (click)="navigateToUserProfile(executor._id)"
-        class="executor-preview__name link">{{ executor.personalInfo.firstName }}&nbsp;{{ executor.personalInfo.lastName }}</a>
+      <a (click)="navigateToUserProfile(executor?._id)"
+        class="executor-preview__name link">{{ executor?.personalInfo.firstName }}&nbsp;{{ executor?.personalInfo.lastName }}</a>
     </div>
     <p class="executor-preview__last-online">{{ executor?.lastActivityDate }}</p>
-    <p class="executor-preview__description">{{ executor.personalInfo.description }}</p>
+    <p class="executor-preview__description">{{ executor?.personalInfo.description }}</p>
     <button class="executor-preview__btn-offer">Предложить задание</button>
   </div>
 </div>
