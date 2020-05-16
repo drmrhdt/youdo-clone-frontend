@@ -29,4 +29,11 @@ export class UserService {
       `http://localhost:3000/api/v1/users?${filter}=${value}`
     );
   }
+
+  updateMe(body): Observable<IUserResponse> {
+    return this.httpClient.patch<IUserResponse>(
+      `http://localhost:3000/api/v1/users/updateMe`,
+      body
+    );
+  }
 }
