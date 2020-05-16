@@ -8,6 +8,7 @@ import { TaskPageComponent } from "./tasks-page/task-page/task-page.component";
 import { ExecutorsPageComponent } from "./executors-page/executors-page.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { ProfilePageComponent } from "./profile-page/profile-page.component";
+import { ExecutorFormComponent } from "./executor-form/executor-form.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
     component: ExecutorsPageComponent,
   },
   { path: "youdo-clone/profile/:id", component: ProfilePageComponent },
+  {
+    path: "youdo-clone/verification/personalinfo",
+    component: ExecutorFormComponent,
+  },
 ];
 
 @NgModule({
