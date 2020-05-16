@@ -25,9 +25,18 @@ export class AppComponent {
     this.authService.autoAuthUser();
 
     // TODO we need send token to the server each time when user reloads page
-    this.authService
-      .getAuthStatusListener()
-      .subscribe((response: boolean) => (this.isAuthenticated = response));
+    this.authService.getAuthStatusListener().subscribe((response: boolean) => {
+      this.isAuthenticated = response;
+      if (this.isAuthenticated) {
+        this.userService
+          .getCurrentUserInfo()
+          .subscribe((response: IUserResponse) => {
+            this.userService.currentUserListener$.next(
+              response.data.currentUser
+            );
+          });
+      }
+    });
 
     this.categoriesService
       .getCategoriesWithSubcategories()
@@ -37,13 +46,5 @@ export class AppComponent {
         );
         this.isLoading = false;
       });
-
-    if (this.isAuthenticated) {
-      this.userService
-        .getCurrentUserInfo()
-        .subscribe((response: IUserResponse) => {
-          this.userService.currentUserListener$.next(response.data.currentUser);
-        });
-    }
   }
 }
