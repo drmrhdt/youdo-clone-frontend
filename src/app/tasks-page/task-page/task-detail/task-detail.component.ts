@@ -6,7 +6,11 @@ import { ITask } from "../../../../models/ITask.model";
 import { ITaskResponse } from "src/models/ITaskResponse.model";
 import { IUser } from "src/models/IUser.model";
 import { FormBuilder, Validators } from "@angular/forms";
-import { SuggestionService } from "src/services/suggestion.service";
+import {
+  SuggestionService,
+  ISuggestionResponse,
+} from "src/services/suggestion.service";
+import { IPossibleExecutorSuggestion } from "src/models/IPossibleExecutorSuggestion.model";
 
 @Component({
   selector: "app-task-detail",
@@ -19,6 +23,7 @@ export class TaskDetailComponent implements OnInit {
   task: ITask;
   signedInUserId: string;
   signedInUser: IUser;
+  suggestion: IPossibleExecutorSuggestion;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,7 +65,16 @@ export class TaskDetailComponent implements OnInit {
       this.userService.currentUserListener$.subscribe((response: IUser) => {
         this.signedInUserId = response._id;
         this.signedInUser = response;
-        this.isLoading = false;
+
+        this.suggestionService
+          .getSuggestionByTaskIdAndExecutorId(
+            this.task._id,
+            this.signedInUserId
+          )
+          .subscribe((response: ISuggestionResponse) => {
+            this.suggestion = response.data.suggestion;
+            this.isLoading = false;
+          });
       });
     });
   }
@@ -77,7 +91,8 @@ export class TaskDetailComponent implements OnInit {
       this.signedInUser.workInfo.isExecutor
     ) {
       this.suggestionService
-        .addNewSuggestion(this.task._id, {
+        .addNewSuggestion({
+          taskId: this.task._id,
           executorId: this.signedInUserId,
           ...this.form.value,
         })

@@ -37,11 +37,13 @@
       <span class="task-detail__task-value">Исполнитель должен иметь документы для оформления
         расписки/доверенности</span>
     </div>
-    <button class="task-detail__btn_type_submit" (click)="showDialog()">
+    <button *ngIf="!suggestion" class="task-detail__btn_type_submit" (click)="showDialog()">
       Предложить свои услуги
     </button>
   </article>
 </section>
+
+<app-suggestion *ngIf="suggestion" [suggestion]="suggestion"></app-suggestion>
 
 <app-modal *ngIf="isShowDialog" modalTitle="Предложить свои услуги" (close)="isShowDialog = false"
   [bodyComponent]="body">
