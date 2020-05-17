@@ -1,7 +1,7 @@
 import { IPossibleExecutorSuggestion } from "./IPossibleExecutorSuggestion.model";
 
 export interface ITask {
-  _id: number;
+  _id: any;
   description: string;
   category: string; // do I need it?
   subcategory: string;
