@@ -84,7 +84,7 @@ export class TaskDetailComponent implements OnInit {
     // TODO it works only after we go to another route and return here
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (
       !this.form.invalid &&
       this.signedInUserId &&
