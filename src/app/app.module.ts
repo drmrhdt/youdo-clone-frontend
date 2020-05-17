@@ -26,6 +26,7 @@ import { ProfileSummaryComponent } from "./profile-page/profile-summary/profile-
 import { ExecutorFormComponent } from "./executor-form/executor-form.component";
 import { SuggestionComponent } from "./suggestion/suggestion.component";
 import { LayoutComponent } from "./shared/layout/layout.component";
+import { ButtonComponent } from './shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { LayoutComponent } from "./shared/layout/layout.component";
     ExecutorFormComponent,
     SuggestionComponent,
     LayoutComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
