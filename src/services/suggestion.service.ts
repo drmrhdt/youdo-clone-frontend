@@ -16,7 +16,9 @@ export interface ISuggestionResponse extends IResponseSingle {
 export class SuggestionService {
   constructor(private httpClient: HttpClient) {}
 
-  addNewSuggestion(suggestion): Observable<ISuggestionResponse> {
+  addNewSuggestion(
+    suggestion: IPossibleExecutorSuggestion
+  ): Observable<ISuggestionResponse> {
     return this.httpClient.post<ISuggestionResponse>(
       `http://localhost:3000/api/v1/suggestions`,
       { suggestion }
