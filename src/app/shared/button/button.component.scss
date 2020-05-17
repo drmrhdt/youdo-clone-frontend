@@ -1,0 +1,24 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  align-self: center;
+
+  button {
+    margin: 1rem auto 0 auto;
+    padding: 10px 15px;
+
+    font-size: 1em;
+    text-align: center;
+    color: $color-white;
+    letter-spacing: 0.3px;
+
+    background: $color-orange-normal;
+    border-radius: 8px;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $color-orange-light;
+    }
+  }
+}
