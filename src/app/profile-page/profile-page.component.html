@@ -1,8 +1,8 @@
-<div class="profile-page">
-  <div class="left-block">
+<app-layout [layout]="'fromBigToSmall'" [leftBlock]="leftBlock" [rightBlock]="rightBlock">
+  <ng-template #leftBlock>
     <app-profile-summary [user]="user" [isMyProfile]="isMyProfile"></app-profile-summary>
-  </div>
-  <div class="right-block">
+  </ng-template>
+  <ng-template #rightBlock>
     <app-verification-banner></app-verification-banner>
-  </div>
-</div>
+  </ng-template>
+</app-layout>

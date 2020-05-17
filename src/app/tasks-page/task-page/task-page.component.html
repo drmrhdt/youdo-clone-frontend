@@ -1,8 +1,8 @@
-<div class="task-page">
-  <div class="left-block">
+<app-layout [layout]="'fromSmallToBig'" [leftBlock]="leftBlock" [rightBlock]="rightBlock">
+  <ng-template #leftBlock>
     <app-task-detail></app-task-detail>
-  </div>
-  <div class="right-block">
+  </ng-template>
+  <ng-template #rightBlock>
     <div>Заказчик</div>
-  </div>
-</div>
+  </ng-template>
+</app-layout>

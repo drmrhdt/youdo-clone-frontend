@@ -1,17 +1,14 @@
-<div class="tasks-page">
-  <div class="left-block">
+<app-layout [layout]="'fromBigToSmall'" [leftBlock]="leftBlock" [rightBlock]="rightBlock">
+  <ng-template #leftBlock>
     <app-filter-header></app-filter-header>
     <ul class="tasks-page__tasks-list">
       <li>
-        <app-task-preview
-          *ngFor="let task of tasks"
-          [task]="task"
-        ></app-task-preview>
+        <app-task-preview *ngFor="let task of tasks" [task]="task"></app-task-preview>
       </li>
     </ul>
-  </div>
-  <div class="right-block">
+  </ng-template>
+  <ng-template #rightBlock>
     <app-verification-banner></app-verification-banner>
     <app-categories-list></app-categories-list>
-  </div>
-</div>
+  </ng-template>
+</app-layout>
