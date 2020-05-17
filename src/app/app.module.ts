@@ -24,6 +24,7 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileSummaryComponent } from './profile-page/profile-summary/profile-summary.component';
 import { ExecutorFormComponent } from './executor-form/executor-form.component';
+import { SuggestionComponent } from './suggestion/suggestion.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ExecutorFormComponent } from './executor-form/executor-form.component';
     ProfilePageComponent,
     ProfileSummaryComponent,
     ExecutorFormComponent,
+    SuggestionComponent,
   ],
   imports: [
     BrowserModule,
