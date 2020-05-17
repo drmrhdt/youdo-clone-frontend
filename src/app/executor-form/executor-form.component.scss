@@ -9,22 +9,5 @@
     &__text {
       text-align: center;
     }
-
-    &__btn {
-      // TODO move to future button component
-      align-self: center;
-      margin: 1rem 0 0 0;
-      padding: 10px 15px;
-
-      font-size: 1em;
-      text-align: center;
-      color: $color-white;
-      letter-spacing: 0.3px;
-
-      background: $color-orange-normal;
-      border-radius: 8px;
-
-      transition: all 0.3s ease;
-    }
   }
 }

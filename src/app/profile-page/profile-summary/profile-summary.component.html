@@ -10,6 +10,7 @@
 <h1>
     {{isMyProfile ? 'Здравствуйте, ' : 'Здравствуйте, меня зовут '}} {{user?.personalInfo.firstName}}
 </h1>
+<!-- TODO check if I could use app-layout here -->
 <div class="profile-summary__info-block">
     <img class="profile-summary__avatar" src="{{user?.personalInfo.avatar}}" alt="avatar" />
     <div>
@@ -23,4 +24,4 @@
         <p class="profile-summary__reviews-count">Всего отзывов: {{user?.workInfo.reviews.total}}</p>
     </div>
 </div>
-<button *ngIf="!isMyProfile" class="profile-summary__btn">Задать вопрос</button>
+<app-button *ngIf="!isMyProfile" [title]="'Задать вопрос'"></app-button>

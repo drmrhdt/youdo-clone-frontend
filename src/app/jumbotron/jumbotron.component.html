@@ -5,39 +5,19 @@
       Поможем найти надежного исполнителя для любых задач
     </h2>
     <form class="jumbotron__form">
-      <input
-        class="jumbotron__input"
-        type="text"
-        [value]="inputValue"
-        placeholder="Напишите, чем вам помочь..."
-      />
-      <button class="jumbotron__button">Заказать услугу</button>
+      <input class="jumbotron__input" type="text" [value]="inputValue" placeholder="Напишите, чем вам помочь..." />
+      <app-button [title]="'Заказать услугу'" class="jumbotron__button"></app-button>
     </form>
     <p class="jumbotron__example-query">
       Например:
-      <span
-        (click)="moveTextToInput()"
-        [textContent]="exampleQuery"
-        class="jumbotron__example-link"
-      >
+      <span (click)="moveTextToInput()" [textContent]="exampleQuery" class="jumbotron__example-link">
       </span>
     </p>
-    <a class="jumbotron__action-link" href="#"
-      >стать исполнителем и начать зарабатывать</a
-    >
+    <a class="jumbotron__action-link" href="#">стать исполнителем и начать зарабатывать</a>
   </div>
   <div class="jumbotron__video-container">
-    <video
-      class="jumbotron__video"
-      poster="https://static.youdo.com/i/video/frame.jpg"
-      loop
-      autoplay
-      muted
-    >
-      <source
-        src="https://static.youdo.com/i/video/hero_video.mp4"
-        type="video/mp4"
-      />
+    <video class="jumbotron__video" poster="https://static.youdo.com/i/video/frame.jpg" loop autoplay muted>
+      <source src="https://static.youdo.com/i/video/hero_video.mp4" type="video/mp4" />
     </video>
   </div>
 </section>

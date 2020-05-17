@@ -60,19 +60,12 @@
     color: $color-black-opacity-normal;
   }
 
-  &__btn-offer {
+  &__btn {
     align-self: flex-start;
-    padding: 0.5rem 20px;
-
-    font-size: 1rem;
-    text-align: center;
-    color: $color-white;
-
-    background-color: $color-orange-normal;
-    border-radius: $border-radius-normal;
-
-    &:hover {
-      background-color: $color-orange-light;
+    ::ng-deep {
+      button {
+        padding: 0.5rem 20px;
+      }
     }
   }
 }

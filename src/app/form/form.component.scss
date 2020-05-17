@@ -53,7 +53,7 @@
 
     &:checked + label::after {
       background: $color-orange-light url("../../assets/checked.svg") 50% 50%
-      no-repeat;
+        no-repeat;
       border-color: $color-orange-normal;
     }
   }
@@ -76,18 +76,12 @@
     width: 100%;
   }
 
-  &__btn_type_submit {
-    padding: 1rem 45px;
-
+  &__btn {
     font-size: 1.5rem;
-    text-align: center;
-    color: $color-black-opacity-normal;
-
-    background-color: $color-orange-normal;
-    border-radius: $border-radius-normal;
-
-    &:hover {
-      background-color: $color-orange-light;
+    ::ng-deep {
+      button {
+        padding: 1rem 45px !important;
+      }
     }
   }
 

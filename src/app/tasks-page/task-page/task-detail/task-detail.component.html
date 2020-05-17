@@ -37,9 +37,7 @@
       <span class="task-detail__task-value">Исполнитель должен иметь документы для оформления
         расписки/доверенности</span>
     </div>
-    <button *ngIf="!suggestion" class="task-detail__btn_type_submit" (click)="showDialog()">
-      Предложить свои услуги
-    </button>
+    <app-button *ngIf="!suggestion" [title]="'Предложить свои услуги'" (click)="showDialog()"></app-button>
   </article>
 </section>
 
@@ -65,7 +63,7 @@
         <textarea formControlName="commentary" class="task-detail__field" id="suggestion-commentary" cols="50"
           rows="10"></textarea>
       </div>
-      <button class="task-detail__btn_type_submit task-detail__btn" (click)="onSubmit()">Отправить</button>
+      <app-button [title]="'Отправить'" (click)="onSubmit()"></app-button>
     </form>
   </ng-template>
 </app-modal>

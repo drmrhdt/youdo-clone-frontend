@@ -13,7 +13,7 @@
   <input formControlName="password" id="password" type="password" placeholder="Пароль" />
   <label for="confirmPassword">Повторите пароль</label>
   <input formControlName="passwordConfirm" id="confirmPassword" type="password" placeholder="Пароль" />
-  <button class="auth__btn" (click)="signUp()">Отправить</button>
+  <app-button [title]="'Отправить'" (click)="signUp()"></app-button>
 </form>
 
 <form *ngIf="authFormType === 'signIn'" class="auth__form" [formGroup]="formSignIn">
@@ -21,5 +21,5 @@
   <input formControlName="email" id="login" type="email" placeholder="email" />
   <label for="password">Пароль</label>
   <input id="password" type="password" placeholder="Пароль" formControlName="password" />
-  <button class="auth__btn" (click)="signIn()">Отправить</button>
+  <app-button [title]="'Отправить'" (click)="signIn()"></app-button>
 </form>

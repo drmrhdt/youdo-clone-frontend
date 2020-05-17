@@ -133,9 +133,7 @@
   </div>
 
   <div class="form__group">
-    <button type="submit" [disabled]="!form.valid" class="form__btn_type_submit">
-      Опубликовать
-    </button>
+    <app-button class="form__btn" [isDisabled]="!form.valid" [title]="'Опубликовать'"></app-button>
   </div>
 
   <div class="form__group">
