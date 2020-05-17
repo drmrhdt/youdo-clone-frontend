@@ -55,13 +55,13 @@ export class TaskDetailComponent implements OnInit {
     // this.taskService.getTaskById(_id).pipe(flatMap(()=>this.userService.currentUserListener$))
 
     this.taskService.getTaskById(_id).subscribe((response: ITaskResponse) => {
-      this.isLoading = false;
       this.task = response.data.task;
-    });
 
-    this.userService.currentUserListener$.subscribe((response: IUser) => {
-      this.signedInUserId = response._id;
-      this.signedInUser = response;
+      this.userService.currentUserListener$.subscribe((response: IUser) => {
+        this.signedInUserId = response._id;
+        this.signedInUser = response;
+        this.isLoading = false;
+      });
     });
   }
 
