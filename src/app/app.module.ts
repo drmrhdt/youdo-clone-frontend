@@ -21,10 +21,11 @@ import { ExecutorPreviewComponent } from "./executors-page/executor-preview/exec
 import { ModalComponent } from "./shared/modal/modal.component";
 import { AuthFormComponent } from "./auth-form/auth-form.component";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
-import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { ProfileSummaryComponent } from './profile-page/profile-summary/profile-summary.component';
-import { ExecutorFormComponent } from './executor-form/executor-form.component';
-import { SuggestionComponent } from './suggestion/suggestion.component';
+import { ProfilePageComponent } from "./profile-page/profile-page.component";
+import { ProfileSummaryComponent } from "./profile-page/profile-summary/profile-summary.component";
+import { ExecutorFormComponent } from "./executor-form/executor-form.component";
+import { SuggestionComponent } from "./suggestion/suggestion.component";
+import { LayoutComponent } from "./shared/layout/layout.component";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
     ProfileSummaryComponent,
     ExecutorFormComponent,
     SuggestionComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
