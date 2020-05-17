@@ -1,0 +1,6 @@
+<section [ngStyle]="{'width': layout === layouts.FromSmallToBig ? '30%' : '68%'}">
+    <ng-content *ngTemplateOutlet="leftBlock"> </ng-content>
+</section>
+<section [ngStyle]="{'width': layout === layouts.FromSmallToBig ? '68%' : '30%'}">
+    <ng-content *ngTemplateOutlet="rightBlock"> </ng-content>
+</section>
