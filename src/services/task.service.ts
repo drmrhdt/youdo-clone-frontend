@@ -34,4 +34,11 @@ export class TaskService {
       formValues
     );
   }
+  // for editing task
+  updateTask(id, body): Observable<ITaskResponse> {
+    return this.httpClient.patch<ITaskResponse>(
+      "http://localhost:3000/api/v1/tasks",
+      { id, body }
+    );
+  }
 }
