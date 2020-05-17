@@ -1,6 +1,16 @@
-<app-layout [layout]="'fromBigToSmall'" [leftBlock]="leftBlock" [rightBlock]="rightBlock">
+<app-layout *ngIf="!isLoading; else loading" [layout]="'fromBigToSmall'" [leftBlock]="leftBlock"
+  [rightBlock]="rightBlock">
   <ng-template #leftBlock>
-    <app-filter-header></app-filter-header>
+    <app-filter-header [title]="title" [bodyComponent]="isMyTasks ? myTasks : allTasks">
+      <ng-template #allTasks>
+        <a routerLink="#">По рейтингу</a>
+        <a routerLink="#">Сейчас на сайте</a>
+      </ng-template>
+      <ng-template #myTasks>
+        <a routerLink="#">Я исполнитель</a>
+        <a routerLink="#">Я заказчик</a>
+      </ng-template>
+    </app-filter-header>
     <ul class="tasks-page__tasks-list">
       <li>
         <app-task-preview *ngFor="let task of tasks" [task]="task"></app-task-preview>
@@ -12,3 +22,5 @@
     <app-categories-list></app-categories-list>
   </ng-template>
 </app-layout>
+
+<ng-template #loading>...loading</ng-template>
