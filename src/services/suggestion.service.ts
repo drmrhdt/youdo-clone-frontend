@@ -6,7 +6,7 @@ import { IResponseSingle } from "../models/IResponseSingle.model";
 
 export interface ISuggestionResponse extends IResponseSingle {
   data: {
-    newSuggestion: IPossibleExecutorSuggestion;
+    suggestion: IPossibleExecutorSuggestion;
   };
 }
 
@@ -16,10 +16,19 @@ export interface ISuggestionResponse extends IResponseSingle {
 export class SuggestionService {
   constructor(private httpClient: HttpClient) {}
 
-  addNewSuggestion(taskId, suggestion): Observable<ISuggestionResponse> {
+  addNewSuggestion(suggestion): Observable<ISuggestionResponse> {
     return this.httpClient.post<ISuggestionResponse>(
       `http://localhost:3000/api/v1/suggestions`,
-      { taskId, suggestion }
+      { suggestion }
+    );
+  }
+
+  getSuggestionByTaskIdAndExecutorId(
+    taskId: string,
+    executorId: string
+  ): Observable<ISuggestionResponse> {
+    return this.httpClient.get<ISuggestionResponse>(
+      `http://localhost:3000/api/v1/suggestions/${taskId}/${executorId}`
     );
   }
 }
