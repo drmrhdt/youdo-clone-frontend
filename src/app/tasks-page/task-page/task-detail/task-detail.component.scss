@@ -67,4 +67,34 @@
       background-color: $color-orange-light;
     }
   }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    & > .form-group {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+    }
+  }
+
+  &__btn {
+    align-self: center;
+  }
+
+  //TODO clean duplicates
+  &__field {
+    padding: 0.5rem 0.8rem;
+
+    font-weight: 400;
+    font-size: 1rem;
+    color: $color-lightgray-dark;
+
+    background-color: $color-white;
+    border: 1px solid $color-lightgray-light;
+    border-radius: $border-radius-normal;
+
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
 }

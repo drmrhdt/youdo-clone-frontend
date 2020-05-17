@@ -5,6 +5,8 @@ import { UserService } from "src/services/user.service";
 import { ITask } from "../../../../models/ITask.model";
 import { ITaskResponse } from "src/models/ITaskResponse.model";
 import { IUser } from "src/models/IUser.model";
+import { FormBuilder, Validators } from "@angular/forms";
+import { SuggestionService } from "src/services/suggestion.service";
 
 @Component({
   selector: "app-task-detail",
@@ -13,14 +15,24 @@ import { IUser } from "src/models/IUser.model";
 })
 export class TaskDetailComponent implements OnInit {
   isLoading: boolean = true;
+  isShowDialog: boolean = false;
   task: ITask;
   signedInUserId: string;
+  signedInUser: IUser;
 
   constructor(
     private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
     private taskService: TaskService,
-    private userService: UserService
+    private userService: UserService,
+    private suggestionService: SuggestionService
   ) {}
+
+  form = this.formBuilder.group({
+    paymentType: ["cash", Validators.required],
+    price: [200, [Validators.required, Validators.min(200)]],
+    commentary: "",
+  });
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -49,13 +61,27 @@ export class TaskDetailComponent implements OnInit {
 
     this.userService.currentUserListener$.subscribe((response: IUser) => {
       this.signedInUserId = response._id;
+      this.signedInUser = response;
     });
   }
 
-  onSubmit(): void {
+  showDialog(): void {
+    this.isShowDialog = true;
     // TODO it works only after we go to another route and return here
-    if (this.signedInUserId) {
-      console.log("ok, but are you executor?");
+  }
+
+  onSubmit() {
+    if (
+      !this.form.invalid &&
+      this.signedInUserId &&
+      this.signedInUser.workInfo.isExecutor
+    ) {
+      this.suggestionService
+        .addNewSuggestion(this.task._id, {
+          executorId: this.signedInUserId,
+          ...this.form.value,
+        })
+        .subscribe(console.log);
     } else {
       console.log("no, you must sign in");
     }
