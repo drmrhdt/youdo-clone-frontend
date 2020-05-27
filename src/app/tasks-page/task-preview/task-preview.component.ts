@@ -6,7 +6,7 @@ import { ITask } from "../../../models/ITask.model";
   templateUrl: "./task-preview.component.html",
   styleUrls: ["./task-preview.component.scss"],
 })
-export class TaskComponent implements OnInit {
+export class TaskPreviewComponent implements OnInit {
   constructor() {}
 
   @Input() task: ITask;

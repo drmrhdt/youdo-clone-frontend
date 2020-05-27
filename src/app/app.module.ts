@@ -9,7 +9,7 @@ import { HeaderComponent } from "./header/header.component";
 import { JumbotronComponent } from "./jumbotron/jumbotron.component";
 import { DropdownListComponent } from "./dropdown-list/dropdown-list.component";
 import { FormComponent } from "./form/form.component";
-import { TaskComponent } from "./tasks-page/task-preview/task-preview.component";
+import { TaskPreviewComponent } from "./tasks-page/task-preview/task-preview.component";
 import { TasksPageComponent } from "./tasks-page/tasks-page.component";
 import { CategoriesListComponent } from "./shared/categories-list/categories-list.component";
 import { VerificationBannerComponent } from "./shared/verification-banner/verification-banner.component";
@@ -26,7 +26,7 @@ import { ProfileSummaryComponent } from "./profile-page/profile-summary/profile-
 import { ExecutorFormComponent } from "./executor-form/executor-form.component";
 import { SuggestionComponent } from "./suggestion/suggestion.component";
 import { LayoutComponent } from "./shared/layout/layout.component";
-import { ButtonComponent } from './shared/button/button.component';
+import { ButtonComponent } from "./shared/button/button.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { ButtonComponent } from './shared/button/button.component';
     JumbotronComponent,
     DropdownListComponent,
     FormComponent,
-    TaskComponent,
+    TaskPreviewComponent,
     TasksPageComponent,
     CategoriesListComponent,
     VerificationBannerComponent,
