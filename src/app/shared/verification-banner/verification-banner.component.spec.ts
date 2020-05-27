@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { VerificationBannerComponent } from "./verification-banner.component";
 
@@ -9,6 +11,7 @@ describe("VerificationBannerComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [VerificationBannerComponent],
+      imports: [RouterModule.forRoot([]), ReactiveFormsModule],
     }).compileComponents();
   }));
 

@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { SuggestionComponent } from "./suggestion.component";
 
-import { SuggestionComponent } from './suggestion.component';
-
-describe('SuggestionComponent', () => {
+describe("SuggestionComponent", () => {
   let component: SuggestionComponent;
   let fixture: ComponentFixture<SuggestionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SuggestionComponent ]
-    })
-    .compileComponents();
+      declarations: [SuggestionComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('SuggestionComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

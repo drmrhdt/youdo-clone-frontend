@@ -1,16 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-import { ExecutorFormComponent } from './executor-form.component';
+import { ExecutorFormComponent } from "./executor-form.component";
 
-describe('ExecutorFormComponent', () => {
+describe("ExecutorFormComponent", () => {
   let component: ExecutorFormComponent;
   let fixture: ComponentFixture<ExecutorFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExecutorFormComponent ]
-    })
-    .compileComponents();
+      declarations: [ExecutorFormComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +20,7 @@ describe('ExecutorFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
