@@ -11,7 +11,7 @@ import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title: string = "youdo-clone-clone";
+  title: string = "youdo-clone";
   isLoading: boolean = true;
   isAuthenticated: boolean = false;
 
