@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TaskPageComponent } from './task-page.component';
+import { TaskPageComponent } from "./task-page.component";
 
-describe('TaskPageComponent', () => {
+describe("TaskPageComponent", () => {
   let component: TaskPageComponent;
   let fixture: ComponentFixture<TaskPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskPageComponent ]
-    })
-    .compileComponents();
+      declarations: [TaskPageComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('TaskPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

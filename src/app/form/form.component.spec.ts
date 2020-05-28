@@ -28,4 +28,15 @@ describe("FormComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it("should have description", () => {
+    expect(component.form.contains("description")).toBeTruthy();
+  });
+
+  it("should be required", () => {
+    const descriptionControl = component.form.get("description");
+    descriptionControl.setValue("");
+
+    expect(descriptionControl.valid).toBeFalsy();
+  });
 });
