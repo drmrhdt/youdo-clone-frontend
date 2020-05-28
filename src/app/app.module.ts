@@ -13,7 +13,7 @@ import { TaskPreviewComponent } from "./tasks-page/task-preview/task-preview.com
 import { TasksPageComponent } from "./tasks-page/tasks-page.component";
 import { CategoriesListComponent } from "./shared/categories-list/categories-list.component";
 import { VerificationBannerComponent } from "./shared/verification-banner/verification-banner.component";
-import { FilterHeaderComponent } from "./shared/filter-header/filter-header.component";
+import { SectionHeaderComponent } from "./shared/section-header/section-header.component";
 import { TaskPageComponent } from "./tasks-page/task-page/task-page.component";
 import { TaskDetailComponent } from "./tasks-page/task-page/task-detail/task-detail.component";
 import { ExecutorsPageComponent } from "./executors-page/executors-page.component";
@@ -39,7 +39,7 @@ import { ButtonComponent } from "./shared/button/button.component";
     TasksPageComponent,
     CategoriesListComponent,
     VerificationBannerComponent,
-    FilterHeaderComponent,
+    SectionHeaderComponent,
     TaskPageComponent,
     TaskDetailComponent,
     ExecutorsPageComponent,
