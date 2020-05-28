@@ -12,7 +12,7 @@ import { ICategory } from "../../models/ICategory.model";
 import { AuthService } from "../../services/auth.service";
 import { UserService } from "src/services/user.service";
 import { IUser } from "src/models/IUser.model";
-import { Roles } from "../guards/role.guard";
+import { Roles } from "../../guards/role.guard";
 
 @Component({
   selector: "app-header",

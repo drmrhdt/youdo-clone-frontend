@@ -20,7 +20,7 @@ import { ExecutorsPageComponent } from "./executors-page/executors-page.componen
 import { ExecutorPreviewComponent } from "./executors-page/executor-preview/executor-preview.component";
 import { ModalComponent } from "./shared/modal/modal.component";
 import { AuthFormComponent } from "./auth-form/auth-form.component";
-import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { AuthInterceptor } from "../interceptors/auth.interceptor";
 import { ProfilePageComponent } from "./profile-page/profile-page.component";
 import { ProfileSummaryComponent } from "./profile-page/profile-summary/profile-summary.component";
 import { ExecutorFormComponent } from "./executor-form/executor-form.component";

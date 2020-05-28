@@ -6,7 +6,7 @@ import { FormComponent } from "./form/form.component";
 import { TasksPageComponent } from "./tasks-page/tasks-page.component";
 import { TaskPageComponent } from "./tasks-page/task-page/task-page.component";
 import { ExecutorsPageComponent } from "./executors-page/executors-page.component";
-import { AuthGuard } from "./guards/auth.guard";
+import { AuthGuard } from "../guards/auth.guard";
 import { ProfilePageComponent } from "./profile-page/profile-page.component";
 import { ExecutorFormComponent } from "./executor-form/executor-form.component";
 
