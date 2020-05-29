@@ -6,6 +6,8 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { CategoriesService } from "src/services/categories.service";
 import { ICategory } from "src/models/ICategory.model";
 
@@ -20,29 +22,36 @@ export class SectionHeaderComponent implements OnInit, OnDestroy {
 
   categories: ICategory[] = [];
 
+  private _unsubscriber$ = new Subject();
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private categoriesService: CategoriesService
   ) {
-    this.categoriesService.categoriesListener$.subscribe(
-      (response: ICategory[]) => (this.categories = response)
-    );
+    this.categoriesService.categoriesListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: ICategory[]) => (this.categories = response));
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.setTitle();
-      }
-    });
+    this.router.events
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.setTitle();
+        }
+      });
   }
 
   ngOnInit(): void {
-    this.route.url.subscribe(() => {
+    this.route.url.pipe(takeUntil(this._unsubscriber$)).subscribe(() => {
       this.setTitle();
     });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
+  }
 
   setTitle(): void {
     const path = location.pathname.split("/");

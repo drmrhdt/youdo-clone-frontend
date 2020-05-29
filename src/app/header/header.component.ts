@@ -4,8 +4,10 @@ import {
   HostListener,
   ViewChild,
   ElementRef,
+  OnDestroy,
 } from "@angular/core";
-
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { defaultPage } from "../../config/routes";
 import { CategoriesService } from "src/services/categories.service";
 import { ICategory } from "../../models/ICategory.model";
@@ -19,7 +21,7 @@ import { Roles } from "../../guards/role.guard";
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   categories: ICategory[] = [];
   defaultPage: number = defaultPage;
   isShowDropdown: boolean = false;
@@ -29,6 +31,8 @@ export class HeaderComponent implements OnInit {
   authFormType: string = "";
   modalTitle: string = "";
   id: string = "";
+
+  private _unsubscriber$ = new Subject();
 
   @ViewChild("createTaskLink") createTaskLink: ElementRef;
   @HostListener("document:click")
@@ -44,23 +48,31 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoriesService.categoriesListener$.subscribe(
-      (response: ICategory[]) => (this.categories = response)
-    );
+    this.categoriesService.categoriesListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: ICategory[]) => (this.categories = response));
     this.authService
       .getAuthStatusListener()
+      .pipe(takeUntil(this._unsubscriber$))
       .subscribe((isAuthenticated: boolean) => {
         this.isAuthenticated = isAuthenticated;
       });
     if (this.isAuthenticated) {
       // TODO get id from localstorage, and if it's empty then from currentUserListener$
-      this.userService.currentUserListener$.subscribe((response: IUser) => {
-        this.id = response._id;
-        this.isAdminOrModerator =
-          response.moderationInfo.role === Roles.admin ||
-          response.moderationInfo.role === Roles.moderator;
-      });
+      this.userService.currentUserListener$
+        .pipe(takeUntil(this._unsubscriber$))
+        .subscribe((response: IUser) => {
+          this.id = response._id;
+          this.isAdminOrModerator =
+            response.moderationInfo.role === Roles.admin ||
+            response.moderationInfo.role === Roles.moderator;
+        });
     }
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 
   showSignUpDialog(): void {

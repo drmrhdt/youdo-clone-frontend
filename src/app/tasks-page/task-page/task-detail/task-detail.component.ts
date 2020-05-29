@@ -1,11 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { FormBuilder, Validators } from "@angular/forms";
 import { TaskService } from "../../../../services/task.service";
 import { UserService } from "src/services/user.service";
 import { ITask } from "../../../../models/ITask.model";
 import { ITaskResponse } from "src/models/ITaskResponse.model";
 import { IUser } from "src/models/IUser.model";
-import { FormBuilder, Validators } from "@angular/forms";
 import {
   SuggestionService,
   ISuggestionResponse,
@@ -17,13 +19,15 @@ import { IPossibleExecutorSuggestion } from "src/models/IPossibleExecutorSuggest
   templateUrl: "./task-detail.component.html",
   styleUrls: ["./task-detail.component.scss"],
 })
-export class TaskDetailComponent implements OnInit {
+export class TaskDetailComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   isShowDialog: boolean = false;
   task: ITask;
   signedInUserId: string;
   signedInUser: IUser;
   suggestion: IPossibleExecutorSuggestion;
+
+  private _unsubscriber$ = new Subject();
 
   constructor(
     private route: ActivatedRoute,
@@ -59,24 +63,35 @@ export class TaskDetailComponent implements OnInit {
 
     // this.taskService.getTaskById(_id).pipe(flatMap(()=>this.userService.currentUserListener$))
 
-    this.taskService.getTaskById(_id).subscribe((response: ITaskResponse) => {
-      this.task = response.data.task;
+    this.taskService
+      .getTaskById(_id)
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: ITaskResponse) => {
+        this.task = response.data.task;
 
-      this.userService.currentUserListener$.subscribe((response: IUser) => {
-        this.signedInUserId = response._id;
-        this.signedInUser = response;
+        this.userService.currentUserListener$
+          .pipe(takeUntil(this._unsubscriber$))
+          .subscribe((response: IUser) => {
+            this.signedInUserId = response._id;
+            this.signedInUser = response;
 
-        this.suggestionService
-          .getSuggestionByTaskIdAndExecutorId(
-            this.task._id,
-            this.signedInUserId
-          )
-          .subscribe((response: ISuggestionResponse) => {
-            this.suggestion = response.data.suggestion;
-            this.isLoading = false;
+            this.suggestionService
+              .getSuggestionByTaskIdAndExecutorId(
+                this.task._id,
+                this.signedInUserId
+              )
+              .pipe(takeUntil(this._unsubscriber$))
+              .subscribe((response: ISuggestionResponse) => {
+                this.suggestion = response.data.suggestion;
+                this.isLoading = false;
+              });
           });
       });
-    });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 
   showDialog(): void {
@@ -96,6 +111,7 @@ export class TaskDetailComponent implements OnInit {
           executorId: this.signedInUserId,
           ...this.form.value,
         })
+        .pipe(takeUntil(this._unsubscriber$))
         .subscribe(console.log);
     } else {
       console.log("no, you must sign in");

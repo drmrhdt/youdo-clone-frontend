@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { TaskService } from "../../services/task.service";
 import { UserService } from "src/services/user.service";
 import { ITask } from "../../models/ITask.model";
@@ -21,6 +23,8 @@ export class TasksPageComponent implements OnInit {
     return this.route.snapshot.url[2].path === "my";
   }
 
+  private _unsubscriber$ = new Subject();
+
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
@@ -38,6 +42,7 @@ export class TasksPageComponent implements OnInit {
       if (this.isMyTasks) {
         this.taskService
           .getTasksListByFilter("authorId", this.signedInUserId)
+          .pipe(takeUntil(this._unsubscriber$))
           .subscribe((response: ITasksResponse) => {
             this.tasks = response.data.tasks;
             this.isLoading = false;
@@ -45,11 +50,17 @@ export class TasksPageComponent implements OnInit {
       } else {
         this.taskService
           .getTasksList()
+          .pipe(takeUntil(this._unsubscriber$))
           .subscribe((response: ITasksResponse) => {
             this.tasks = response.data.tasks;
             this.isLoading = false;
           });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 }

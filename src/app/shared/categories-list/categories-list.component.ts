@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { ICategory } from "../../../models/ICategory.model";
 import { CategoriesService } from "../../../services/categories.service";
 import { defaultPage } from "../../../config/routes";
@@ -9,10 +11,12 @@ import { defaultPage } from "../../../config/routes";
   templateUrl: "./categories-list.component.html",
   styleUrls: ["./categories-list.component.scss"],
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnDestroy {
   categories: ICategory[] = [];
   selectedCategory: string = "";
   defaultPage: number = defaultPage;
+
+  private _unsubscriber$ = new Subject();
 
   constructor(
     private categoriesService: CategoriesService,
@@ -32,11 +36,18 @@ export class CategoriesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.selectedCategory = params["category"];
-    });
-    this.categoriesService.categoriesListener$.subscribe(
-      (response: ICategory[]) => (this.categories = response)
-    );
+    this.route.params
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((params) => {
+        this.selectedCategory = params["category"];
+      });
+    this.categoriesService.categoriesListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: ICategory[]) => (this.categories = response));
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 }

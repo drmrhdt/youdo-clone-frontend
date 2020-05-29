@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -6,14 +6,17 @@ import {
   UrlTree,
   Router,
 } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 
 @Injectable({
   providedIn: "root",
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, OnDestroy {
   isAuthenticated: boolean = false;
+
+  private _unsubscriber$ = new Subject();
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -27,6 +30,7 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     this.authService
       .getAuthStatusListener()
+      .pipe(takeUntil(this._unsubscriber$))
       .subscribe((response: boolean) => (this.isAuthenticated = response));
 
     if (!this.isAuthenticated) {
@@ -34,5 +38,10 @@ export class AuthGuard implements CanActivate {
     }
 
     return this.isAuthenticated;
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 }

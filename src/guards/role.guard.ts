@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -6,7 +6,8 @@ import {
   UrlTree,
   Router,
 } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { UserService } from "src/services/user.service";
 import { IUser } from "src/models/IUser.model";
 
@@ -19,8 +20,10 @@ export enum Roles {
 @Injectable({
   providedIn: "root",
 })
-export class RoleGuard implements CanActivate {
+export class RoleGuard implements CanActivate, OnDestroy {
   signedInUserRole: string;
+
+  private _unsubscriber$ = new Subject();
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -32,9 +35,11 @@ export class RoleGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.userService.currentUserListener$.subscribe((response: IUser) => {
-      this.signedInUserRole = response.moderationInfo.role;
-    });
+    this.userService.currentUserListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: IUser) => {
+        this.signedInUserRole = response.moderationInfo.role;
+      });
 
     const isAdminOrModerator =
       this.signedInUserRole === Roles.admin ||
@@ -45,5 +50,10 @@ export class RoleGuard implements CanActivate {
     }
 
     return isAdminOrModerator;
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 }

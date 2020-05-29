@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { CategoriesService } from "../../services/categories.service";
@@ -7,18 +7,22 @@ import { ICategory } from "../../models/ICategory.model";
 import { ISubcategory } from "../../models/ISubcategory.model";
 import { UserService } from "src/services/user.service";
 import { IUser } from "src/models/IUser.model";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "app-form",
   templateUrl: "./form.component.html",
   styleUrls: ["./form.component.scss"],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   currentCategoryObject: ICategory;
   currentSubcategoryObject: ISubcategory;
   categories: ICategory[] = [];
   signedInUser: IUser;
+
+  private _unsubscriber$ = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,8 +70,9 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.categoriesService.categoriesListener$.subscribe(
-      (value: ICategory[]) => {
+    this.categoriesService.categoriesListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((value: ICategory[]) => {
         this.categories = value;
 
         if (this.categories) {
@@ -82,20 +87,26 @@ export class FormComponent implements OnInit {
 
           this.isLoading = false;
         }
-      }
-    );
+      });
 
-    this.userService.currentUserListener$.subscribe((response: IUser) => {
-      this.signedInUser = response;
-      if (this.signedInUser) {
-        this.form.get("authorId").patchValue(this.signedInUser._id);
-        this.form.get("email").patchValue(this.signedInUser.contacts.email);
-        this.form.get("tel").patchValue(this.signedInUser.contacts.phone);
-        this.form
-          .get("author")
-          .patchValue(this.signedInUser.personalInfo.firstName);
-      }
-    });
+    this.userService.currentUserListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: IUser) => {
+        this.signedInUser = response;
+        if (this.signedInUser) {
+          this.form.get("authorId").patchValue(this.signedInUser._id);
+          this.form.get("email").patchValue(this.signedInUser.contacts.email);
+          this.form.get("tel").patchValue(this.signedInUser.contacts.phone);
+          this.form
+            .get("author")
+            .patchValue(this.signedInUser.personalInfo.firstName);
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 
   updateSelectSubcategory(): void {
@@ -134,7 +145,10 @@ export class FormComponent implements OnInit {
         newTask.executionTime.endTime + " " + newTask.executionTime.endDate
       ),
     };
-    this.taskService.createTask(newTask).subscribe(console.log);
+    this.taskService
+      .createTask(newTask)
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe(console.log);
     console.warn(this.form.value);
     this.form.reset();
   }

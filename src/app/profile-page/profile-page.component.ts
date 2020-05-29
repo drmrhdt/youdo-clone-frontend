@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/services/user.service";
 import { ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { IUser } from "src/models/IUser.model";
 import { IUserResponse } from "src/models/IUserResponse.model";
 
@@ -21,25 +23,37 @@ export class ProfilePageComponent implements OnInit {
   user: IUser;
   signedInUserId: string = "";
 
+  private _unsubscriber$ = new Subject();
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.userService.currentUserListener$.subscribe((response: IUser) => {
-      if (response) this.signedInUserId = response._id;
-    });
+    this.userService.currentUserListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: IUser) => {
+        if (response) this.signedInUserId = response._id;
+      });
 
     if (!this.isMyProfile)
       this.userService
         .getUserInfoById(this.idFromUrl)
+        .pipe(takeUntil(this._unsubscriber$))
         .subscribe((response: IUserResponse) => {
           this.user = response.data.findedByIdUser;
         });
     else
-      this.userService.currentUserListener$.subscribe((response: IUser) => {
-        this.user = response;
-      });
+      this.userService.currentUserListener$
+        .pipe(takeUntil(this._unsubscriber$))
+        .subscribe((response: IUser) => {
+          this.user = response;
+        });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 }
