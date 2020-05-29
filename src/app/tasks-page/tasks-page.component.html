@@ -1,8 +1,12 @@
 <app-layout *ngIf="!isLoading; else loading" [layout]="'fromBigToSmall'" [leftBlock]="leftBlock"
   [rightBlock]="rightBlock">
   <ng-template #leftBlock>
-    <app-section-header [title]="title" [bodyComponent]="isMyTasks ? myTasks : allTasks">
+    <app-section-header [bodyComponent]="isMyTasks ? myTasks : allTasks">
       <ng-template #allTasks>
+        <p>
+          Отклики на задания доступны только для
+          <a href="#" class="link">исполнителей</a> YouDo
+        </p>
         <a routerLink="#">По рейтингу</a>
         <a routerLink="#">Сейчас на сайте</a>
       </ng-template>

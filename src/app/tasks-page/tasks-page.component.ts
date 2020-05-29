@@ -15,7 +15,7 @@ export class TasksPageComponent implements OnInit {
   isLoading: boolean = true;
   tasks: ITask[] = [];
   signedInUserId: string;
-  title: string = this.isMyTasks ? "Мои заказы" : "Все категории";
+  // title: string;
 
   get isMyTasks() {
     return this.route.snapshot.url[2].path === "my";
@@ -25,7 +25,12 @@ export class TasksPageComponent implements OnInit {
     private taskService: TaskService,
     private route: ActivatedRoute,
     private userService: UserService
-  ) {}
+  ) {
+    // TODO set title for isMyTasks
+    // if (this.isMyTasks) {
+    //   this.title = "Мои заказы";
+    // }
+  }
 
   ngOnInit(): void {
     this.userService.currentUserListener$.subscribe((response: IUser) => {
