@@ -41,4 +41,13 @@ export class TaskService {
       { id, body }
     );
   }
+
+  getTasksByCategoryAndSubcategory(
+    category: string,
+    subcategory: string
+  ): Observable<ITasksResponse> {
+    return this.httpClient.get<ITasksResponse>(
+      `http://localhost:3000/api/v1/tasks/${category}/${subcategory}`
+    );
+  }
 }
