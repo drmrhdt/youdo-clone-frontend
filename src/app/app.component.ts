@@ -1,18 +1,18 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { CategoriesService } from "../services/categories.service";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "src/services/user.service";
 import { IUserResponse } from "src/models/IUserResponse.model";
 import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title: string = "youdo-clone";
   isLoading: boolean = true;
   isAuthenticated: boolean = false;

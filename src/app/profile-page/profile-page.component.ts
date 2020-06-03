@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { UserService } from "src/services/user.service";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { UserService } from "src/services/user.service";
 import { IUser } from "src/models/IUser.model";
 import { IUserResponse } from "src/models/IUserResponse.model";
 
@@ -11,7 +11,7 @@ import { IUserResponse } from "src/models/IUserResponse.model";
   templateUrl: "./profile-page.component.html",
   styleUrls: ["./profile-page.component.scss"],
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent implements OnInit, OnDestroy {
   get idFromUrl(): string {
     return this.route.snapshot.paramMap.get("id");
   }
