@@ -44,10 +44,11 @@ export class TaskService {
 
   getTasksByCategoryAndSubcategory(
     category: string,
-    subcategory: string
+    subcategory: string,
+    _id: string
   ): Observable<ITasksResponse> {
     return this.httpClient.get<ITasksResponse>(
-      `http://localhost:3000/api/v1/tasks/${category}/${subcategory}`
+      `http://localhost:3000/api/v1/tasks/${category}/${subcategory}/${_id}`
     );
   }
 }
