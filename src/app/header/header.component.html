@@ -10,7 +10,8 @@
   </div>
   <a routerLink="/youdo-clone/tasks/all/{{ defaultPage }}" class="header-nav__link">Найти задание</a>
   <a routerLink="/youdo-clone/executors/Courier/1" class="header-nav__link">Исполнители</a>
-  <a *ngIf="isAuthenticated" routerLink="/youdo-clone/tasks/my" class="header-nav__link">Мои заказы</a>
+  <a *ngIf="isAuthenticated" routerLink="/youdo-clone/tasks-my/all/{{ defaultPage }}" class="header-nav__link">Мои
+    заказы</a>
 
   <div class="user-menu">
     <ng-container *ngIf="isAuthenticated; else signInSignUp">
