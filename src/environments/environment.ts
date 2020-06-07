@@ -10,9 +10,9 @@
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-
 // url backend api
-export const baseUrl = 'https://localhost:3000/api/v1'
+
+export const baseUrl = 'http://localhost:3000/api/v1'
 
 export const environment = {
 	production: false,
