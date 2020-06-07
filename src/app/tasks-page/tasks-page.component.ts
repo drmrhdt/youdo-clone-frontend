@@ -1,107 +1,101 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
+import { Component, OnDestroy } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { takeUntil, flatMap } from "rxjs/operators";
 import { TaskService } from "../../services/task.service";
 import { UserService } from "src/services/user.service";
+import { CategoriesService } from "src/services/categories.service";
 import { ITask } from "../../models/ITask.model";
 import { ITasksResponse } from "src/models/ITasksResponse";
 import { IUser } from "src/models/IUser.model";
-import { CategoriesService } from "src/services/categories.service";
 import { ICategory } from "src/models/ICategory.model";
+import { Filters } from "src/models/enum/Filters";
 
 @Component({
   selector: "app-tasks-page",
   templateUrl: "./tasks-page.component.html",
   styleUrls: ["./tasks-page.component.scss"],
 })
-export class TasksPageComponent implements OnInit, OnDestroy {
-  // isLoading: boolean = true;
+export class TasksPageComponent implements OnDestroy {
+  isLoading: boolean = true;
   tasks: ITask[] = [];
   signedInUserId: string;
   title: string;
   categories: ICategory[] = [];
+  filters = Filters;
+  tab: Filters;
 
-  get isMyTasks() {
-    return this.route.snapshot.url[2].path === "my";
+  get isMyTasks(): boolean {
+    return location.pathname.split("/").includes("tasks-my");
   }
 
   private _unsubscriber$ = new Subject();
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private taskService: TaskService,
     private categoriesService: CategoriesService,
     private userService: UserService
   ) {
-    // TODO set title for isMyTasks
-    // if (this.isMyTasks) {
-    //   this.title = "Мои заказы";
-    // }
-    this.userService.currentUserListener$.subscribe((response: IUser) => {
-      if (response) this.signedInUserId = response._id;
-      if (this.isMyTasks) {
-        // TODO get tasks according to tasks field and category,subcategory in url
-        // и раз уж мне тут подписывать на изменения урла, то, видимо, имеет смысл
-        // убрать подсписку на изменение урла в section-header, и передавать title
-        // отсюда в section-header, тем более, что section header ни за что не отвечает
-        // у нужен ли тогда компонент section header? если всё упирается в тот стиль,
-        // то можно просто сделать его глобальным
-        // this.taskService
-        //   .getTasksListByFilter("authorId", this.signedInUserId)
-        //   .pipe(takeUntil(this._unsubscriber$))
-        //   .subscribe((response: ITasksResponse) => {
-        //     this.tasks = response.data.tasks;
-        //     this.isLoading = false;
-        //   });
-      } else {
-        // this.taskService
-        //   .getTasksList()
-        //   .pipe(takeUntil(this._unsubscriber$))
-        //   .subscribe((response: ITasksResponse) => {
-        //     this.tasks = response.data.tasks;
-        //     this.isLoading = false;
-        //   });
-      }
-    });
-
-    this.categoriesService.categoriesListener$
-      .pipe(takeUntil(this._unsubscriber$))
-      .subscribe((response: ICategory[]) => (this.categories = response));
-
-    this.router.events
-      .pipe(takeUntil(this._unsubscriber$))
-      .subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          this.setTitle();
-        }
+    this.userService.currentUserListener$
+      .pipe(
+        takeUntil(this._unsubscriber$),
+        flatMap((response: IUser) => {
+          if (response) this.signedInUserId = response._id;
+          return this.categoriesService.categoriesListener$;
+        })
+      )
+      .subscribe((response: ICategory[]) => {
+        this.categories = response;
+        this.getTasks(this.route.snapshot.params);
+        this.setTitle();
+        this.setInitialTab();
       });
 
     this.route.params
       .pipe(takeUntil(this._unsubscriber$))
       .subscribe((params) => {
-        this.taskService
-          .getTasksByCategoryAndSubcategory(
-            params.category,
-            params.subcategory,
-            this.signedInUserId
-          )
-          .pipe(takeUntil(this._unsubscriber$))
-          .subscribe((response) => (this.tasks = response.data.tasks));
+        this.getTasks(params);
+        this.setTitle();
       });
   }
 
-  ngOnInit(): void {
-    this.route.url
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
+  }
+
+  getTasks(params): void {
+    const filters = this.filterParams(params);
+    this.isLoading = true;
+
+    this.taskService
+      .getTasksByFilter(filters)
       .pipe(takeUntil(this._unsubscriber$))
-      .subscribe(() => this.setTitle());
+      .subscribe((response: ITasksResponse) => {
+        this.tasks = response.data.tasks;
+        this.isLoading = false;
+      });
+  }
+
+  filterParams(params): object {
+    const filters = this.isMyTasks ? { authorId: this.signedInUserId } : {};
+    for (const key in params) {
+      if (
+        key === "page" ||
+        params[key] === null ||
+        (key === "category" && params[key] === "all")
+      ) {
+        continue;
+      } else filters[key] = params[key];
+    }
+
+    return filters;
   }
 
   setTitle(): void {
     if (this.categories) {
-      const path = location.pathname.split("/");
-      const categoryFromUrl = path[3];
+      const categoryFromUrl = this.route.snapshot.params.category;
 
       const findedCategory = this.categories.find(
         (item: ICategory) => item.key === categoryFromUrl
@@ -111,8 +105,11 @@ export class TasksPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this._unsubscriber$.next(true);
-    this._unsubscriber$.complete();
+  setInitialTab(): void {
+    this.tab = this.isMyTasks ? this.filters.Executor : this.filters.Rating;
+  }
+
+  onTabClick(filter: Filters): void {
+    this.tab = filter;
   }
 }
