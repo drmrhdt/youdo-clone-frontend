@@ -27,26 +27,6 @@
     color: $color-black-opacity-normal;
   }
 
-  &__reviews-text {
-    position: relative;
-
-    padding: 0 20px 0 0;
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-
-      display: block;
-      width: 15px;
-      height: 15px;
-
-      background: $color-transparent url("../../../assets/like.svg") no-repeat
-      center;
-    }
-  }
-
   &__name {
     display: inline;
 
