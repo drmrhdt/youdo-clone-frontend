@@ -22,7 +22,7 @@ export class RoleGuard implements CanActivate, OnDestroy {
 
 	private _unsubscriber$ = new Subject()
 
-	constructor(private userService: UserService, private router: Router) {}
+	constructor(private _userService: UserService, private _router: Router) {}
 
 	canActivate(
 		next: ActivatedRouteSnapshot,
@@ -32,7 +32,7 @@ export class RoleGuard implements CanActivate, OnDestroy {
 		| Promise<boolean | UrlTree>
 		| boolean
 		| UrlTree {
-		this.userService.currentUserListener$
+		this._userService.currentUserListener$
 			.pipe(takeUntil(this._unsubscriber$))
 			.subscribe((response: IUser) => {
 				this.signedInUserRole = response.moderationInfo.role
@@ -43,7 +43,7 @@ export class RoleGuard implements CanActivate, OnDestroy {
 			this.signedInUserRole === Roles.moderator
 
 		if (!isAdminOrModerator) {
-			this.router.navigateByUrl('/')
+			this._router.navigateByUrl('/')
 		}
 
 		return isAdminOrModerator

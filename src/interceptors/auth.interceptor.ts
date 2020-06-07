@@ -12,13 +12,13 @@ import { AuthService } from 'src/services'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-	constructor(private authService: AuthService) {}
+	constructor(private _authService: AuthService) {}
 
 	intercept(
 		req: HttpRequest<any>,
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
-		const authToken = this.authService.getToken()
+		const authToken = this._authService.getToken()
 		const authRequest = req.clone({
 			headers: req.headers.set('Authorization', `Bearer ${authToken}`)
 		})

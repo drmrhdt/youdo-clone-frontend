@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
 
 	private _unsubscriber$ = new Subject()
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(private _authService: AuthService, private _router: Router) {}
 
 	canActivate(
 		next: ActivatedRouteSnapshot,
@@ -30,13 +30,13 @@ export class AuthGuard implements CanActivate, OnDestroy {
 		| Promise<boolean | UrlTree>
 		| boolean
 		| UrlTree {
-		this.authService
+		this._authService
 			.getAuthStatusListener()
 			.pipe(takeUntil(this._unsubscriber$))
 			.subscribe((response: boolean) => (this.isAuthenticated = response))
 
 		if (!this.isAuthenticated) {
-			this.router.navigateByUrl('/')
+			this._router.navigateByUrl('/')
 		}
 
 		return this.isAuthenticated

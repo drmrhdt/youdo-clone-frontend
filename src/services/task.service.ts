@@ -11,23 +11,23 @@ import { ITaskResponse, ITasksResponse } from 'src/models'
 	providedIn: 'root'
 })
 export class TaskService {
-	constructor(private httpClient: HttpClient) {}
+	constructor(private _httpClient: HttpClient) {}
 
 	getTasksByFilter(values?): Observable<ITasksResponse> {
-		return this.httpClient.get<ITasksResponse>(`${baseUrl}/tasks`, {
+		return this._httpClient.get<ITasksResponse>(`${baseUrl}/tasks`, {
 			params: values
 		})
 	}
 	getTaskById(id: string): Observable<ITaskResponse> {
-		return this.httpClient.get<ITaskResponse>(`${baseUrl}/tasks/${id}`)
+		return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/${id}`)
 	}
 
 	createTask(formValues) {
-		return this.httpClient.post(`${baseUrl}/tasks`, formValues)
+		return this._httpClient.post(`${baseUrl}/tasks`, formValues)
 	}
 
 	updateTask(id, body): Observable<ITaskResponse> {
-		return this.httpClient.patch<ITaskResponse>(`${baseUrl}/tasks`, {
+		return this._httpClient.patch<ITaskResponse>(`${baseUrl}/tasks`, {
 			id,
 			body
 		})

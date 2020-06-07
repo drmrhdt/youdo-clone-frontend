@@ -18,18 +18,18 @@ import {
 export class CategoriesService {
 	categoriesListener$ = new BehaviorSubject<ICategory[]>(null)
 
-	constructor(private http: HttpClient) {
+	constructor(private _httpClient: HttpClient) {
 		this.getCategoriesWithSubcategories()
 	}
 
 	getCategoriesWithSubcategories(): Observable<ICategoriesResponse> {
-		return this.http.get<ICategoriesResponse>(`${baseUrl}/categories`)
+		return this._httpClient.get<ICategoriesResponse>(`${baseUrl}/categories`)
 	}
 
 	getSubcategoriesByCategoryId(
 		category: ICategory
 	): Observable<ISubcategoriesResponse> {
-		return this.http.get<ISubcategoriesResponse>(
+		return this._httpClient.get<ISubcategoriesResponse>(
 			`${baseUrl}/subcategories/${category._id}`
 		)
 	}
@@ -38,7 +38,7 @@ export class CategoriesService {
 		category: string,
 		subcategory: string
 	): Observable<ICurrentCategoryAndSubcategoryResponse> {
-		return this.http.get<ICurrentCategoryAndSubcategoryResponse>(
+		return this._httpClient.get<ICurrentCategoryAndSubcategoryResponse>(
 			`${baseUrl}/tasks/${category}/${subcategory}`
 		)
 	}
