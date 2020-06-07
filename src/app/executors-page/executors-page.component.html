@@ -1,4 +1,6 @@
-<app-layout [layout]="'fromSmallToBig'" [leftBlock]="leftBlock" [rightBlock]="rightBlock">
+<app-layout [layout]="'fromSmallToBig'"
+  [leftBlock]="leftBlock"
+  [rightBlock]="rightBlock">
   <ng-template #leftBlock>
     <app-verification-banner></app-verification-banner>
     <app-categories-list></app-categories-list>
@@ -6,11 +8,12 @@
   <ng-template #rightBlock>
     <app-section-header [bodyComponent]="filters">
       <ng-template #filters>
-        <button (click)="onTabClick(filters.Rating)">По рейтингу</button>
-        <button (click)="onTabClick(filters.Online)">Сейчас на сайте</button>
+        <button (click)="onTabClick('rating')">По рейтингу</button>
+        <button (click)="onTabClick('online')">Сейчас на сайте</button>
       </ng-template>
     </app-section-header>
-    <app-executor-preview *ngFor="let executor of users" [executor]="executor">
+    <app-executor-preview *ngFor="let executor of users"
+      [executor]="executor">
     </app-executor-preview>
   </ng-template>
 </app-layout>
