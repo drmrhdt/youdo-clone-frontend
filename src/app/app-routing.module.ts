@@ -18,13 +18,23 @@ const routes: Routes = [
   },
   { path: "youdo-clone", component: JumbotronComponent },
   {
-    path: "youdo-clone/tasks/add/:category/:subcategory",
-    component: FormComponent,
-  },
-  {
-    path: "youdo-clone/tasks/my",
+    path: "youdo-clone/tasks-my",
     component: TasksPageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "youdo-clone/tasks-my/:category/:page",
+    component: TasksPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "youdo-clone/tasks-my/:category/:subcategory/:page",
+    component: TasksPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "youdo-clone/tasks",
+    component: TasksPageComponent,
   },
   {
     path: "youdo-clone/tasks/:category/:page",
@@ -34,7 +44,15 @@ const routes: Routes = [
     path: "youdo-clone/tasks/:category/:subcategory/:page",
     component: TasksPageComponent,
   },
+  {
+    path: "youdo-clone/tasks-add/:category/:subcategory",
+    component: FormComponent,
+  },
   { path: "youdo-clone/tasks/:taskId", component: TaskPageComponent },
+  {
+    path: "youdo-clone/executors",
+    component: ExecutorsPageComponent,
+  },
   {
     path: "youdo-clone/executors/:category/:page",
     component: ExecutorsPageComponent,
