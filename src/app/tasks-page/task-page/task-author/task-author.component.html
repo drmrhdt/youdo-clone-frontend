@@ -1,0 +1,21 @@
+<div>
+    Заказчик этого задания:
+</div>
+<div class="author">
+    <img class="author__avatar"
+        src="{{taskAuthor?.personalInfo.avatar}}"
+        alt="author's avatar">
+    <div class="author__info">
+        <a routerLink="/youdo-clone/profile/{{taskAuthor?._id}}">
+            {{taskAuthor?.personalInfo.firstName}}
+            &nbsp;
+            {{taskAuthor?.personalInfo.lastName.toUpperCase().substring(0,1)}}
+        </a>
+        <div>Возраст:
+            {{taskAuthor?.personalInfo.age}},{{taskAuthor?.personalInfo.address}}
+        </div>
+        <div class="review--positive">Отзывы:
+            {{taskAuthor?.workInfo.reviews.positive}}
+        </div>
+    </div>
+</div>

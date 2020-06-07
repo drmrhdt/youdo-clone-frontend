@@ -1,0 +1,11 @@
+.author {
+  display: flex;
+
+  &__avatar {
+    width: 20%;
+  }
+
+  &__info {
+    align-self: center;
+  }
+}
