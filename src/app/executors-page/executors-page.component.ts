@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { IUser } from "../../models/IUser.model";
 import { IUsersResponse } from "src/models/IUsersResponse.model";
+import { Filters } from "src/models/enum/Filters";
 
 @Component({
   selector: "app-executors-page",
@@ -12,6 +13,8 @@ import { IUsersResponse } from "src/models/IUsersResponse.model";
 })
 export class ExecutorsPageComponent implements OnInit, OnDestroy {
   users: IUser[] = [];
+  filters = Filters;
+  tab: Filters;
 
   private _unsubscriber$ = new Subject();
 
@@ -29,5 +32,9 @@ export class ExecutorsPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._unsubscriber$.next(true);
     this._unsubscriber$.complete();
+  }
+
+  onTabClick(filter: Filters): void {
+    this.tab = filter;
   }
 }
