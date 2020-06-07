@@ -1,22 +1,22 @@
-import { Component, OnInit, Input } from "@angular/core"
-import { Router } from "@angular/router"
+import { Component, OnInit, Input } from '@angular/core'
+import { Router } from '@angular/router'
 
-import { IUser } from "src/models/IUser.model"
+import { IUser } from 'src/models'
 
 @Component({
-  selector: "app-executor-preview",
-  templateUrl: "./executor-preview.component.html",
-  styleUrls: ["./executor-preview.component.scss"],
+	selector: 'app-executor-preview',
+	templateUrl: './executor-preview.component.html',
+	styleUrls: ['./executor-preview.component.scss']
 })
 export class ExecutorPreviewComponent implements OnInit {
-  @Input() executor: IUser
+	@Input() executor: IUser
 
-  constructor(private _router: Router) {}
+	constructor(private _router: Router) {}
 
-  // TODO rewrite with routerLink
-  navigateToUserProfile(id: string): void {
-    this._router.navigateByUrl(`/youdo-clone/profile/${id}`)
-  }
+	// TODO rewrite with routerLink
+	navigateToUserProfile(id: string): void {
+		this._router.navigateByUrl(`/youdo-clone/profile/${id}`)
+	}
 
-  ngOnInit(): void {}
+	ngOnInit(): void {}
 }

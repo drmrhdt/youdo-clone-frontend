@@ -1,36 +1,32 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { IPossibleExecutorSuggestion } from "src/models/IPossibleExecutorSuggestion.model";
-import { IResponseSingle } from "../models/IResponseSingle.model";
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
 
-export interface ISuggestionResponse extends IResponseSingle {
-  data: {
-    suggestion: IPossibleExecutorSuggestion;
-  };
-}
+import { Observable } from 'rxjs'
+
+import { baseUrl } from 'src/environments'
+
+import { ISuggestionResponse, IPossibleExecutorSuggestion } from 'src/models'
 
 @Injectable({
-  providedIn: "root",
+	providedIn: 'root'
 })
 export class SuggestionService {
-  constructor(private httpClient: HttpClient) {}
+	constructor(private httpClient: HttpClient) {}
 
-  addNewSuggestion(
-    suggestion: IPossibleExecutorSuggestion
-  ): Observable<ISuggestionResponse> {
-    return this.httpClient.post<ISuggestionResponse>(
-      `http://localhost:3000/api/v1/suggestions`,
-      { suggestion }
-    );
-  }
+	addNewSuggestion(
+		suggestion: IPossibleExecutorSuggestion
+	): Observable<ISuggestionResponse> {
+		return this.httpClient.post<ISuggestionResponse>(`${baseUrl}/suggestions`, {
+			suggestion
+		})
+	}
 
-  getSuggestionByTaskIdAndExecutorId(
-    taskId: string,
-    executorId: string
-  ): Observable<ISuggestionResponse> {
-    return this.httpClient.get<ISuggestionResponse>(
-      `http://localhost:3000/api/v1/suggestions/${taskId}/${executorId}`
-    );
-  }
+	getSuggestionByTaskIdAndExecutorId(
+		taskId: string,
+		executorId: string
+	): Observable<ISuggestionResponse> {
+		return this.httpClient.get<ISuggestionResponse>(
+			`${baseUrl}/suggestions/${taskId}/${executorId}`
+		)
+	}
 }

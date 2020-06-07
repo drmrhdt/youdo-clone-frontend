@@ -1,39 +1,38 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { IUsersResponse } from "src/models/IUsersResponse.model";
-import { IUserResponse } from "src/models/IUserResponse.model";
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+
+import { BehaviorSubject, Observable } from 'rxjs'
+
+import { baseUrl } from 'src/environments'
+
+import { IUsersResponse, IUserResponse } from 'src/models'
 
 @Injectable({
-  providedIn: "root",
+	providedIn: 'root'
 })
 export class UserService {
-  currentUserListener$ = new BehaviorSubject(null);
+	currentUserListener$ = new BehaviorSubject(null)
 
-  constructor(private httpClient: HttpClient) {}
+	constructor(private httpClient: HttpClient) {}
 
-  getCurrentUserInfo(): Observable<IUserResponse> {
-    return this.httpClient.get<IUserResponse>(
-      "http://localhost:3000/api/v1/users/me/info"
-    );
-  }
+	getCurrentUserInfo(): Observable<IUserResponse> {
+		return this.httpClient.get<IUserResponse>(`${baseUrl}/users/me/info`)
+	}
 
-  getUserInfoById(id: string) {
-    return this.httpClient.get<IUserResponse>(
-      `http://localhost:3000/api/v1/users/${id}`
-    );
-  }
+	getUserInfoById(id: string) {
+		return this.httpClient.get<IUserResponse>(`${baseUrl}/users/${id}`)
+	}
 
-  getUsersByFilter(filter: string, value: any): Observable<IUsersResponse> {
-    return this.httpClient.get<IUsersResponse>(
-      `http://localhost:3000/api/v1/users?${filter}=${value}`
-    );
-  }
+	getUsersByFilter(filter: string, value: any): Observable<IUsersResponse> {
+		return this.httpClient.get<IUsersResponse>(
+			`${baseUrl}/users?${filter}=${value}`
+		)
+	}
 
-  updateMe(body): Observable<IUserResponse> {
-    return this.httpClient.patch<IUserResponse>(
-      `http://localhost:3000/api/v1/users/updateMe`,
-      body
-    );
-  }
+	updateMe(body): Observable<IUserResponse> {
+		return this.httpClient.patch<IUserResponse>(
+			`${baseUrl}/users/updateMe`,
+			body
+		)
+	}
 }

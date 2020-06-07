@@ -1,62 +1,61 @@
-import { Component, OnInit, OnDestroy } from "@angular/core"
-import { ActivatedRoute } from "@angular/router"
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 
-import { Subject } from "rxjs"
-import { takeUntil } from "rxjs/operators"
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
-import { UserService } from "src/services/user.service"
+import { UserService } from 'src/services'
 
-import { IUser } from "src/models/IUser.model"
-import { IUserResponse } from "src/models/IUserResponse.model"
+import { IUser, IUserResponse } from 'src/models'
 
 @Component({
-  selector: "app-profile-page",
-  templateUrl: "./profile-page.component.html",
-  styleUrls: ["./profile-page.component.scss"],
+	selector: 'app-profile-page',
+	templateUrl: './profile-page.component.html',
+	styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
-  get idFromUrl(): string {
-    return this._route.snapshot.paramMap.get("id")
-  }
+	get idFromUrl(): string {
+		return this._route.snapshot.paramMap.get('id')
+	}
 
-  get isMyProfile(): boolean {
-    return this.idFromUrl === this.signedInUserId
-  }
+	get isMyProfile(): boolean {
+		return this.idFromUrl === this.signedInUserId
+	}
 
-  user: IUser
-  signedInUserId: string = ""
+	user: IUser
+	signedInUserId: string = ''
 
-  private _unsubscriber$ = new Subject()
+	private _unsubscriber$ = new Subject()
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _userService: UserService
-  ) {}
+	constructor(
+		private _route: ActivatedRoute,
+		private _userService: UserService
+	) {}
 
-  ngOnInit(): void {
-    this._userService.currentUserListener$
-      .pipe(takeUntil(this._unsubscriber$))
-      .subscribe((response: IUser) => {
-        if (response) this.signedInUserId = response._id
-      })
+	ngOnInit(): void {
+		this._userService.currentUserListener$
+			.pipe(takeUntil(this._unsubscriber$))
+			.subscribe((response: IUser) => {
+				if (response) this.signedInUserId = response._id
+			})
 
-    if (!this.isMyProfile)
-      this._userService
-        .getUserInfoById(this.idFromUrl)
-        .pipe(takeUntil(this._unsubscriber$))
-        .subscribe((response: IUserResponse) => {
-          this.user = response.data.findedByIdUser
-        })
-    else
-      this._userService.currentUserListener$
-        .pipe(takeUntil(this._unsubscriber$))
-        .subscribe((response: IUser) => {
-          this.user = response
-        })
-  }
+		if (!this.isMyProfile)
+			this._userService
+				.getUserInfoById(this.idFromUrl)
+				.pipe(takeUntil(this._unsubscriber$))
+				.subscribe((response: IUserResponse) => {
+					this.user = response.data.findedByIdUser
+				})
+		else
+			this._userService.currentUserListener$
+				.pipe(takeUntil(this._unsubscriber$))
+				.subscribe((response: IUser) => {
+					this.user = response
+				})
+	}
 
-  ngOnDestroy(): void {
-    this._unsubscriber$.next(true)
-    this._unsubscriber$.complete()
-  }
+	ngOnDestroy(): void {
+		this._unsubscriber$.next(true)
+		this._unsubscriber$.complete()
+	}
 }
