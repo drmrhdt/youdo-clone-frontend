@@ -1,0 +1,18 @@
+.review--positive {
+  position: relative;
+
+  padding: 0 20px 0 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: block;
+    width: 15px;
+    height: 15px;
+
+    background: transparent url("./assets/like.svg") no-repeat center;
+  }
+}
