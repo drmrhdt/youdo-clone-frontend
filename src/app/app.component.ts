@@ -1,11 +1,14 @@
-import { Component, OnDestroy } from "@angular/core";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { CategoriesService } from "../services/categories.service";
-import { AuthService } from "../services/auth.service";
-import { UserService } from "src/services/user.service";
-import { IUserResponse } from "src/models/IUserResponse.model";
-import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
+import { Component, OnDestroy } from "@angular/core"
+
+import { Subject } from "rxjs"
+import { takeUntil } from "rxjs/operators"
+
+import { CategoriesService } from "../services/categories.service"
+import { AuthService } from "../services/auth.service"
+import { UserService } from "src/services/user.service"
+
+import { IUserResponse } from "src/models/IUserResponse.model"
+import { ICategoriesResponse } from "src/models/ICategoriesResponse.model"
 
 @Component({
   selector: "app-root",
@@ -13,51 +16,50 @@ import { ICategoriesResponse } from "src/models/ICategoriesResponse.model";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnDestroy {
-  title: string = "youdo-clone";
-  isLoading: boolean = true;
-  isAuthenticated: boolean = false;
+  isLoading: boolean = true
+  isAuthenticated: boolean = false
 
-  private _unsubscriber$ = new Subject();
+  private _unsubscriber$ = new Subject()
 
   constructor(
-    private categoriesService: CategoriesService,
-    private authService: AuthService,
-    private userService: UserService
+    private _authService: AuthService,
+    private _categoriesService: CategoriesService,
+    private _userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.authService.autoAuthUser();
+    this._authService.autoAuthUser()
 
     // TODO we need send token to the server each time when user reloads page
-    this.authService
+    this._authService
       .getAuthStatusListener()
       .pipe(takeUntil(this._unsubscriber$))
       .subscribe((response: boolean) => {
-        this.isAuthenticated = response;
+        this.isAuthenticated = response
         if (this.isAuthenticated) {
-          this.userService
+          this._userService
             .getCurrentUserInfo()
             .subscribe((response: IUserResponse) => {
-              this.userService.currentUserListener$.next(
+              this._userService.currentUserListener$.next(
                 response.data.currentUser
-              );
-            });
+              )
+            })
         }
-      });
+      })
 
-    this.categoriesService
+    this._categoriesService
       .getCategoriesWithSubcategories()
       .pipe(takeUntil(this._unsubscriber$))
       .subscribe((response: ICategoriesResponse) => {
-        this.categoriesService.categoriesListener$.next(
+        this._categoriesService.categoriesListener$.next(
           response.data.categories
-        );
-        this.isLoading = false;
-      });
+        )
+        this.isLoading = false
+      })
   }
 
   ngOnDestroy(): void {
-    this._unsubscriber$.next(true);
-    this._unsubscriber$.complete();
+    this._unsubscriber$.next(true)
+    this._unsubscriber$.complete()
   }
 }

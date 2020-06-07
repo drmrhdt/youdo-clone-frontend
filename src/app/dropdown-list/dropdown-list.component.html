@@ -1,22 +1,27 @@
 <ul class="dropdown-list">
-  <li class="dropdown-list__li" *ngFor="let category of categories">
+  <li class="dropdown-list__li"
+    *ngFor="let category of categories">
     <a routerLink="/youdo-clone/tasks-add/{{ category.key }}/{{
         category.subcategories[category.subcategories.length - 1].code
-      }}" class="dropdown-list__link list-link">
+      }}"
+      class="dropdown-list__link list-link">
       {{ category.text }}
     </a>
     <ul class="nested-list">
       <li class="nested-list__li">
         <a routerLink="/youdo-clone/tasks-add/{{ category.key }}/{{
             category.subcategories[category.subcategories.length - 1].code
-          }}" class="nested-list__link list-link category-link">
+          }}"
+          class="nested-list__link list-link category-link">
           {{ category.text }}
         </a>
       </li>
-      <li class="nested-list__li" *ngFor="let subcategory of category.subcategories">
+      <li class="nested-list__li"
+        *ngFor="let subcategory of category.subcategories">
         <a routerLink="/youdo-clone/tasks-add/{{ category.key }}/{{
             subcategory.code
-          }}" class="nested-list__link list-link">
+          }}"
+          class="nested-list__link list-link">
           {{ subcategory.name }}
         </a>
       </li>

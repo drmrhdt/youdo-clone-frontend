@@ -1,25 +1,55 @@
-<form *ngIf="authFormType === 'signUp'" class="auth__form" [formGroup]="formSignUp">
+<form *ngIf="authFormType === 'signUp'"
+  class="auth__form"
+  [formGroup]="formSignUp">
+
   <ng-container formGroupName="personalInfo">
     <label for="firstName">Имя</label>
-    <input formControlName="firstName" id="firstName" type="text" placeholder="Имя" />
+    <input formControlName="firstName"
+      id="firstName"
+      type="text"
+      placeholder="Имя" />
     <label for="lastName">Фамилия</label>
-    <input formControlName="lastName" id="lastName" type="text" placeholder="Фамилия" />
+    <input formControlName="lastName"
+      id="lastName"
+      type="text"
+      placeholder="Фамилия" />
   </ng-container>
+
   <ng-container formGroupName="contacts">
     <label for="login">Введите почту</label>
-    <input formControlName="email" id="login" type="email" placeholder="email" />
+    <input formControlName="email"
+      id="login"
+      type="email"
+      placeholder="email" />
   </ng-container>
+
   <label for="password">Пароль</label>
-  <input formControlName="password" id="password" type="password" placeholder="Пароль" />
+  <input formControlName="password"
+    id="password"
+    type="password"
+    placeholder="Пароль" />
   <label for="confirmPassword">Повторите пароль</label>
-  <input formControlName="passwordConfirm" id="confirmPassword" type="password" placeholder="Пароль" />
-  <app-button [title]="'Отправить'" (click)="signUp()"></app-button>
+  <input formControlName="passwordConfirm"
+    id="confirmPassword"
+    type="password"
+    placeholder="Пароль" />
+  <app-button [title]="'Отправить'"
+    (click)="signUp()"></app-button>
 </form>
 
-<form *ngIf="authFormType === 'signIn'" class="auth__form" [formGroup]="formSignIn">
+<form *ngIf="authFormType === 'signIn'"
+  class="auth__form"
+  [formGroup]="formSignIn">
   <label for="login">Введите почту</label>
-  <input formControlName="email" id="login" type="email" placeholder="email" />
+  <input formControlName="email"
+    id="login"
+    type="email"
+    placeholder="email" />
   <label for="password">Пароль</label>
-  <input id="password" type="password" placeholder="Пароль" formControlName="password" />
-  <app-button [title]="'Отправить'" (click)="signIn()"></app-button>
+  <input id="password"
+    type="password"
+    placeholder="Пароль"
+    formControlName="password" />
+  <app-button [title]="'Отправить'"
+    (click)="signIn()"></app-button>
 </form>

@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from "@angular/core";
+import { Component, Input, TemplateRef } from "@angular/core"
 
 @Component({
   selector: "app-section-header",
@@ -6,8 +6,8 @@ import { Component, Input, TemplateRef } from "@angular/core";
   styleUrls: ["./section-header.component.scss"],
 })
 export class SectionHeaderComponent {
-  @Input() title: string;
-  @Input() bodyComponent: TemplateRef<any>;
+  @Input() title: string
+  @Input() bodyComponent: TemplateRef<any>
 
   constructor() {}
 }

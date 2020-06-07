@@ -51,8 +51,8 @@
 <app-suggestion *ngIf="suggestion"
   [suggestion]="suggestion"></app-suggestion>
 
-<app-modal *ngIf="isShowDialog"
-  modalTitle="Предложить свои услуги"
+<app-modal modalTitle="Предложить свои услуги"
+  *ngIf="isShowDialog"
   (close)="isShowDialog = false"
   [bodyComponent]="body">
   <ng-template #body>

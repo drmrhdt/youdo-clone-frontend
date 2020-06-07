@@ -1,10 +1,14 @@
-<app-layout [layout]="'fromBigToSmall'" [leftBlock]="leftBlock" [rightBlock]="rightBlock">
+<app-layout [layout]="'fromBigToSmall'"
+  [leftBlock]="leftBlock"
+  [rightBlock]="rightBlock">
   <ng-template #leftBlock>
-    <app-section-header [title]="title" [bodyComponent]="isMyTasks ? myTasks : allTasks">
+    <app-section-header [title]="title"
+      [bodyComponent]="isMyTasks ? myTasks : allTasks">
       <ng-template #allTasks>
         <p>
           Отклики на задания доступны только для
-          <a href="#" class="link">исполнителей</a> YouDo
+          <a href="#"
+            class="link">исполнителей</a> YouDo
         </p>
       </ng-template>
       <ng-template #myTasks>
@@ -14,9 +18,11 @@
         <button (click)="onTabClick(filters.Master)">Я заказчик</button>
       </ng-template>
     </app-section-header>
-    <ul class="tasks-page__tasks-list" *ngIf="!isLoading; else loading">
+    <ul class="tasks-page__tasks-list"
+      *ngIf="!isLoading; else loading">
       <li>
-        <app-task-preview *ngFor="let task of tasks" [task]="task"></app-task-preview>
+        <app-task-preview *ngFor="let task of tasks"
+          [task]="task"></app-task-preview>
       </li>
     </ul>
   </ng-template>

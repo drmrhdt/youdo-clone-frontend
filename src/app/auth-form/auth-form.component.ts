@@ -1,24 +1,28 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { AuthService } from "../../services/auth.service";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { Component, Input } from "@angular/core"
+import { FormBuilder, Validators, FormGroup } from "@angular/forms"
+
+import { AuthService } from "../../services/auth.service"
 
 @Component({
   selector: "app-auth-form",
   templateUrl: "./auth-form.component.html",
   styleUrls: ["./auth-form.component.scss"],
 })
-export class AuthFormComponent implements OnInit {
-  @Input() authFormType: string = "signUp";
-  formSignUp: FormGroup;
-  formSignIn: FormGroup;
+export class AuthFormComponent {
+  @Input() authFormType: string = "signUp"
+  formSignUp: FormGroup
+  formSignIn: FormGroup
 
-  constructor(private authService: AuthService, formBuilder: FormBuilder) {
-    this.formSignUp = formBuilder.group({
-      personalInfo: formBuilder.group({
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _authService: AuthService
+  ) {
+    this.formSignUp = this._formBuilder.group({
+      personalInfo: this._formBuilder.group({
         firstName: ["", Validators.required],
         lastName: ["", Validators.required],
       }),
-      contacts: formBuilder.group({
+      contacts: this._formBuilder.group({
         email: [
           "",
           Validators.compose([Validators.required, Validators.email]),
@@ -26,21 +30,19 @@ export class AuthFormComponent implements OnInit {
       }),
       password: ["", Validators.required],
       passwordConfirm: ["", Validators.required],
-    });
+    })
 
-    this.formSignIn = formBuilder.group({
+    this.formSignIn = this._formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password: ["", Validators.required],
-    });
+    })
   }
 
   signUp(): void {
-    this.authService.signUp(this.formSignUp.value);
+    this._authService.signUp(this.formSignUp.value)
   }
 
   signIn(): void {
-    this.authService.signIn(this.formSignIn.value);
+    this._authService.signIn(this.formSignIn.value)
   }
-
-  ngOnInit(): void {}
 }

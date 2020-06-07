@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef } from "@angular/core";
+import { Component, Input, TemplateRef } from "@angular/core"
 
 enum Layouts {
   FromSmallToBig = "fromSmallToBig",
@@ -10,13 +10,11 @@ enum Layouts {
   templateUrl: "./layout.component.html",
   styleUrls: ["./layout.component.scss"],
 })
-export class LayoutComponent implements OnInit {
-  @Input() layout: Layouts = Layouts.FromSmallToBig;
-  @Input() leftBlock: TemplateRef<any>;
-  @Input() rightBlock: TemplateRef<any>;
-  layouts = Layouts;
+export class LayoutComponent {
+  @Input() layout: Layouts = Layouts.FromSmallToBig
+  @Input() leftBlock: TemplateRef<any>
+  @Input() rightBlock: TemplateRef<any>
+  layouts = Layouts
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

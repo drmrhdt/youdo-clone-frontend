@@ -1,16 +1,24 @@
-<ul class="category-list" *ngIf="categories; else loading">
-  <li routerLink="/youdo-clone/{{ section }}/all/1" class="link category-list__li">
+<ul class="category-list"
+  *ngIf="categories; else loading">
+  <li routerLink="/youdo-clone/{{ section }}/all/1"
+    class="link category-list__li">
     Все категории
   </li>
-  <li routerLink="/youdo-clone/{{ section }}/{{ category.key }}/{{ defaultPage }}" class="link category-list__li"
-    *ngFor="let category of categories" (click)="selectCategory(category)" [ngClass]="{
+  <li
+    routerLink="/youdo-clone/{{ section }}/{{ category.key }}/{{ defaultPage }}"
+    class="link category-list__li"
+    *ngFor="let category of categories"
+    (click)="selectCategory(category)"
+    [ngClass]="{
       isActive: category.key === selectedCategory
     }">
     {{ category.text }}
     <ul class="category-list__subcategories-list">
       <li routerLink="/youdo-clone/{{ section }}/{{ category.key }}/{{
           subcategory.code
-        }}/{{ defaultPage }}" class="link category-list__li" *ngFor="let subcategory of category.subcategories">
+        }}/{{ defaultPage }}"
+        class="link category-list__li"
+        *ngFor="let subcategory of category.subcategories">
         {{ subcategory.name }}
       </li>
     </ul>

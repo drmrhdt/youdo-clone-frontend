@@ -1,18 +1,21 @@
 import { Component, OnInit, OnDestroy } from "@angular/core"
-import { ITask } from "src/models/ITask.model"
-import { IUser } from "src/models/IUser.model"
-import { IPossibleExecutorSuggestion } from "src/models/IPossibleExecutorSuggestion.model"
+import { ActivatedRoute } from "@angular/router"
+
 import { Subject } from "rxjs"
-import { TaskService } from "src/services/task.service"
+import { takeUntil, flatMap } from "rxjs/operators"
+
 import { UserService } from "src/services/user.service"
+import { TaskService } from "src/services/task.service"
 import {
   SuggestionService,
   ISuggestionResponse,
 } from "src/services/suggestion.service"
-import { takeUntil, flatMap } from "rxjs/operators"
+
+import { ITask } from "src/models/ITask.model"
+import { IUser } from "src/models/IUser.model"
+import { IPossibleExecutorSuggestion } from "src/models/IPossibleExecutorSuggestion.model"
 import { ITaskResponse } from "src/models/ITaskResponse.model"
 import { IUserResponse } from "src/models/IUserResponse.model"
-import { ActivatedRoute } from "@angular/router"
 
 @Component({
   selector: "app-task-page",
@@ -29,33 +32,33 @@ export class TaskPageComponent implements OnInit, OnDestroy {
   private _unsubscriber$ = new Subject()
 
   constructor(
-    private route: ActivatedRoute,
-    private taskService: TaskService,
-    private userService: UserService,
-    private suggestionService: SuggestionService
+    private _route: ActivatedRoute,
+    private _taskService: TaskService,
+    private _userService: UserService,
+    private _suggestionService: SuggestionService
   ) {}
 
   ngOnInit(): void {
-    const _id = this.route.snapshot.params.taskId
+    const _id = this._route.snapshot.params.taskId
 
-    this.taskService
+    this._taskService
       .getTaskById(_id)
       .pipe(
         takeUntil(this._unsubscriber$),
         flatMap((response: ITaskResponse) => {
           this.task = response.data.task
-          return this.userService.currentUserListener$
+          return this._userService.currentUserListener$
         }),
         flatMap((response: IUser) => {
           this.signedInUser = response
-          return this.suggestionService.getSuggestionByTaskIdAndExecutorId(
+          return this._suggestionService.getSuggestionByTaskIdAndExecutorId(
             this.task._id,
             this.signedInUser._id
           )
         }),
         flatMap((response: ISuggestionResponse) => {
           this.suggestion = response.data.suggestion
-          return this.userService.getUserInfoById(this.task.authorId)
+          return this._userService.getUserInfoById(this.task.authorId)
         })
       )
       .subscribe((response: IUserResponse) => {

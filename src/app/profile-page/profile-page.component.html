@@ -1,6 +1,9 @@
-<app-layout [layout]="'fromBigToSmall'" [leftBlock]="leftBlock" [rightBlock]="rightBlock">
+<app-layout [layout]="'fromBigToSmall'"
+  [leftBlock]="leftBlock"
+  [rightBlock]="rightBlock">
   <ng-template #leftBlock>
-    <app-profile-summary [user]="user" [isMyProfile]="isMyProfile"></app-profile-summary>
+    <app-profile-summary [user]="user"
+      [isMyProfile]="isMyProfile"></app-profile-summary>
   </ng-template>
   <ng-template #rightBlock>
     <app-verification-banner></app-verification-banner>

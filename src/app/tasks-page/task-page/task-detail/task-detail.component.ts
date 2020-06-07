@@ -1,14 +1,14 @@
 import { Component, Input } from "@angular/core"
-
-import { takeUntil } from "rxjs/operators"
 import { FormBuilder, Validators, FormGroup } from "@angular/forms"
 
-import { ITask } from "../../../../models/ITask.model"
-import { IUser } from "src/models/IUser.model"
-import { SuggestionService } from "src/services/suggestion.service"
 import { Subject } from "rxjs"
+import { takeUntil } from "rxjs/operators"
+
+import { SuggestionService } from "src/services/suggestion.service"
+
+import { IUser } from "src/models/IUser.model"
+import { ITask } from "../../../../models/ITask.model"
 import { IPossibleExecutorSuggestion } from "../../../../models/IPossibleExecutorSuggestion.model"
-import { ActivatedRoute } from "@angular/router"
 
 @Component({
   selector: "app-task-detail",
@@ -31,11 +31,10 @@ export class TaskDetailComponent {
   }
 
   constructor(
-    private suggestionService: SuggestionService,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private _formBuilder: FormBuilder,
+    private _suggestionService: SuggestionService
   ) {
-    this.form = this.formBuilder.group({
+    this.form = this._formBuilder.group({
       paymentType: ["cash", Validators.required],
       price: [200, [Validators.required, Validators.min(200)]],
       commentary: "",
@@ -53,7 +52,7 @@ export class TaskDetailComponent {
       this.signedInUser &&
       this.signedInUser.workInfo.isExecutor
     ) {
-      this.suggestionService
+      this._suggestionService
         .addNewSuggestion({
           taskId: this.task._id,
           executorId: this.signedInUser._id,

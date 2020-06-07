@@ -1,10 +1,14 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { ICategory } from "../../../models/ICategory.model";
-import { CategoriesService } from "../../../services/categories.service";
-import { defaultPage } from "../../../config/routes";
+import { Component, OnInit, OnDestroy } from "@angular/core"
+import { ActivatedRoute } from "@angular/router"
+
+import { Subject } from "rxjs"
+import { takeUntil } from "rxjs/operators"
+
+import { CategoriesService } from "../../../services/categories.service"
+
+import { defaultPage } from "../../../config/routes"
+
+import { ICategory } from "../../../models/ICategory.model"
 
 @Component({
   selector: "app-categories-list",
@@ -12,45 +16,45 @@ import { defaultPage } from "../../../config/routes";
   styleUrls: ["./categories-list.component.scss"],
 })
 export class CategoriesListComponent implements OnInit, OnDestroy {
-  isLoading: boolean = true;
-  categories: ICategory[] = [];
-  selectedCategory: string = "";
-  defaultPage: number = defaultPage;
+  isLoading: boolean = true
+  categories: ICategory[] = []
+  selectedCategory: string = ""
+  defaultPage: number = defaultPage
 
-  private _unsubscriber$ = new Subject();
+  private _unsubscriber$ = new Subject()
 
   get section(): string {
-    return this.route.snapshot.url[1].path;
+    return this._route.snapshot.url[1].path
   }
 
   constructor(
-    private categoriesService: CategoriesService,
-    private route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _categoriesService: CategoriesService
   ) {}
 
   ngOnInit(): void {
-    this.route.params
+    this._route.params
       .pipe(takeUntil(this._unsubscriber$))
-      .subscribe((params) => (this.selectedCategory = params["category"]));
+      .subscribe(params => (this.selectedCategory = params["category"]))
 
-    this.categoriesService.categoriesListener$
+    this._categoriesService.categoriesListener$
       .pipe(takeUntil(this._unsubscriber$))
       .subscribe((response: ICategory[]) => {
-        this.categories = response;
-        this.isLoading = false;
-      });
+        this.categories = response
+        this.isLoading = false
+      })
   }
 
   ngOnDestroy(): void {
-    this._unsubscriber$.next(true);
-    this._unsubscriber$.complete();
+    this._unsubscriber$.next(true)
+    this._unsubscriber$.complete()
   }
 
   selectCategory(category): void {
     if (category.key === this.selectedCategory) {
-      this.selectedCategory = null;
-      return;
+      this.selectedCategory = null
+      return
     }
-    this.selectedCategory = category.key;
+    this.selectedCategory = category.key
   }
 }

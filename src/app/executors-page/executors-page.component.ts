@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy } from "@angular/core"
-import { UserService } from "src/services/user.service"
+
 import { Subject } from "rxjs"
 import { takeUntil } from "rxjs/operators"
+
+import { UserService } from "src/services/user.service"
+
 import { IUser } from "../../models/IUser.model"
 import { IUsersResponse } from "src/models/IUsersResponse.model"
 import { Filters } from "src/models/enum/Filters"
@@ -12,16 +15,16 @@ import { Filters } from "src/models/enum/Filters"
   styleUrls: ["./executors-page.component.scss"],
 })
 export class ExecutorsPageComponent implements OnInit, OnDestroy {
+  tab: string
   users: IUser[] = []
   filters = Filters
-  tab: string
 
   private _unsubscriber$ = new Subject()
 
-  constructor(private userService: UserService) {}
+  constructor(private _userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService
+    this._userService
       .getUsersByFilter("isExecutor", true)
       .pipe(takeUntil(this._unsubscriber$))
       .subscribe(

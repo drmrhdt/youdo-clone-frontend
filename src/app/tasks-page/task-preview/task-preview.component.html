@@ -1,26 +1,37 @@
 <div class="task-preview">
   <div class="layout_flex">
-    <a routerLink="/youdo-clone/tasks/{{ task._id }}" class="task-preview__title link" [title]="task.description">
+    <a routerLink="/youdo-clone/tasks/{{ task._id }}"
+      class="task-preview__title link"
+      [title]="task.description">
       {{ task.description }}
     </a>
     <div class="row">
-      <img *ngIf="task.isSbr" title="Оплата онлайн через сделку без риска" src="../../assets/sdelka_online.svg"
+      <img *ngIf="task.isSbr"
+        title="Оплата онлайн через сделку без риска"
+        src="../../assets/sdelka_online.svg"
         alt="sbr" />
-      <img *ngIf="task.isBusiness" title="Оплата онлайн через сделку без риска" src="../../assets/business.svg"
+      <img *ngIf="task.isBusiness"
+        title="Оплата онлайн через сделку без риска"
+        src="../../assets/business.svg"
         alt="sbr" />
       <span class="task-preview__price">до {{ task.budget }} руб.</span>
     </div>
   </div>
   <div class="row">
-    <img class="task-preview__avatar" src="../../assets/test_avatar.png" alt="avatar" />
+    <img class="task-preview__avatar"
+      src="../../assets/test_avatar.png"
+      alt="avatar" />
     <div class="column layout_margin_left">
-      <a routerLink="/youdo-clone/profile/{{task?.authorId}}" class="link">{{ task.author }}</a>
+      <a routerLink="/youdo-clone/profile/{{task?.authorId}}"
+        class="link">{{ task.author }}</a>
       <span *ngIf="task.reviews.positive || task.reviews.negative">
         Отзывы:
-        <span class="task-preview__review_type_positive" *ngIf="task.reviews.positive">
+        <span class="task-preview__review_type_positive"
+          *ngIf="task.reviews.positive">
           {{ task.reviews.positive }}
         </span>
-        <span class="task-preview__review_type_negative" *ngIf="task.reviews.negative">
+        <span class="task-preview__review_type_negative"
+          *ngIf="task.reviews.negative">
           {{ task.reviews.negative }}
         </span>
       </span>

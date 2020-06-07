@@ -1,19 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core"
 
 @Component({
   selector: "app-jumbotron",
   templateUrl: "./jumbotron.component.html",
-  styleUrls: ["./jumbotron.component.scss"]
+  styleUrls: ["./jumbotron.component.scss"],
 })
-export class JumbotronComponent implements OnInit {
-  exampleQuery: string = "подключить водонагреватель";
-  inputValue: string = "";
-
-  moveTextToInput(): void {
-    this.inputValue = this.exampleQuery;
-  }
+export class JumbotronComponent {
+  exampleQuery: string = "подключить водонагреватель"
+  inputValue: string = ""
 
   constructor() {}
 
-  ngOnInit(): void {}
+  moveTextToInput(): void {
+    this.inputValue = this.exampleQuery
+  }
 }
