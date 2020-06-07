@@ -1,4 +1,5 @@
-<section *ngIf="isLoading === false" class="task-detail">
+<section *ngIf="isLoading === false"
+  class="task-detail">
   <h4 class="task-detail__title">{{ task.description }}</h4>
   <div class="task-detail__status-bar">
     <div class="task-detail__status">Открыто</div>
@@ -12,12 +13,14 @@
   <article class="task-detail__card">
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Начать</strong>
-      <span class="task-detail__task-value">{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
+      <span
+        class="task-detail__task-value">{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
         {{ task.executionTime.startTime | date: "hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Завершить</strong>
-      <span class="task-detail__task-value">{{ task.executionTime.endDate | date: "dd.MM.yy" }},
+      <span
+        class="task-detail__task-value">{{ task.executionTime.endDate | date: "dd.MM.yy" }},
         {{ task.executionTime.endTime | date: "hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
@@ -26,7 +29,8 @@
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Оплата задания</strong>
-      <span class="task-detail__task-value">Напрямую исполнителю без гарантий и компенсаций</span>
+      <span class="task-detail__task-value">Напрямую исполнителю без гарантий и
+        компенсаций</span>
     </div>
     <div class="task-detail__task-item task-detail__task-item_type_important">
       <strong class="task-detail__task-property">Описание</strong>
@@ -34,36 +38,52 @@
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Дополнительные условия</strong>
-      <span class="task-detail__task-value">Исполнитель должен иметь документы для оформления
+      <span class="task-detail__task-value">Исполнитель должен иметь документы
+        для оформления
         расписки/доверенности</span>
     </div>
-    <app-button *ngIf="!suggestion" [title]="'Предложить свои услуги'" (click)="showDialog()"></app-button>
+    <app-button *ngIf="!suggestion && !isMyTask"
+      [title]="'Предложить свои услуги'"
+      (click)="showDialog()"></app-button>
   </article>
 </section>
 
-<app-suggestion *ngIf="suggestion" [suggestion]="suggestion"></app-suggestion>
+<app-suggestion *ngIf="suggestion"
+  [suggestion]="suggestion"></app-suggestion>
 
-<app-modal *ngIf="isShowDialog" modalTitle="Предложить свои услуги" (close)="isShowDialog = false"
+<app-modal *ngIf="isShowDialog"
+  modalTitle="Предложить свои услуги"
+  (close)="isShowDialog = false"
   [bodyComponent]="body">
   <ng-template #body>
-    <form class="task-detail__form" [formGroup]="form">
+    <form class="task-detail__form"
+      [formGroup]="form">
       <div class="form-group">
         <label for="suggestion-price">Сколько вы хотите за работу?</label>
-        <input formControlName="price" class="task-detail__field" type="number" id="suggestion-price">
+        <input formControlName="price"
+          class="task-detail__field"
+          type="number"
+          id="suggestion-price">
       </div>
       <div class="form-group">
         <label for="suggestion-price">Выберите тип оплаты:</label>
-        <select formControlName="paymentType" name="paymentType">
-          <option value="cash" selected>Наличными</option>
+        <select formControlName="paymentType"
+          name="paymentType">
+          <option value="cash"
+            selected>Наличными</option>
           <option value="creditCard">Банковской картой</option>
         </select>
       </div>
       <div class="form-group">
         <label for="suggestion-commentary">Комментарий:</label>
-        <textarea formControlName="commentary" class="task-detail__field" id="suggestion-commentary" cols="50"
+        <textarea formControlName="commentary"
+          class="task-detail__field"
+          id="suggestion-commentary"
+          cols="50"
           rows="10"></textarea>
       </div>
-      <app-button [title]="'Отправить'" (click)="onSubmit()"></app-button>
+      <app-button [title]="'Отправить'"
+        (click)="onSubmit()"></app-button>
     </form>
   </ng-template>
 </app-modal>
