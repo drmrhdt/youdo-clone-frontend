@@ -38,16 +38,16 @@ export class TasksPageComponent implements OnDestroy {
     private userService: UserService
   ) {
     this.userService.currentUserListener$
-      .pipe(
-        takeUntil(this._unsubscriber$),
-        flatMap((response: IUser) => {
-          if (response) this.signedInUserId = response._id;
-          return this.categoriesService.categoriesListener$;
-        })
-      )
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: IUser) => {
+        if (response) this.signedInUserId = response._id;
+        this.getTasks(this.route.snapshot.params);
+      });
+
+    this.categoriesService.categoriesListener$
+      .pipe(takeUntil(this._unsubscriber$))
       .subscribe((response: ICategory[]) => {
         this.categories = response;
-        this.getTasks(this.route.snapshot.params);
         this.setTitle();
         this.setInitialTab();
       });
