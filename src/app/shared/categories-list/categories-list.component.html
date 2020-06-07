@@ -1,4 +1,4 @@
-<ul class="category-list">
+<ul class="category-list" *ngIf="categories; else loading">
   <li routerLink="/youdo-clone/{{ section }}/all/1" class="link category-list__li">
     Все категории
   </li>
@@ -16,3 +16,5 @@
     </ul>
   </li>
 </ul>
+
+<ng-template #loading>...loading</ng-template>

@@ -12,19 +12,38 @@ import { defaultPage } from "../../../config/routes";
   styleUrls: ["./categories-list.component.scss"],
 })
 export class CategoriesListComponent implements OnInit, OnDestroy {
+  isLoading: boolean = true;
   categories: ICategory[] = [];
   selectedCategory: string = "";
   defaultPage: number = defaultPage;
 
   private _unsubscriber$ = new Subject();
 
+  get section(): string {
+    return this.route.snapshot.url[1].path;
+  }
+
   constructor(
     private categoriesService: CategoriesService,
     private route: ActivatedRoute
   ) {}
 
-  get section(): string {
-    return this.route.snapshot.url[1].path;
+  ngOnInit(): void {
+    this.route.params
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((params) => (this.selectedCategory = params["category"]));
+
+    this.categoriesService.categoriesListener$
+      .pipe(takeUntil(this._unsubscriber$))
+      .subscribe((response: ICategory[]) => {
+        this.categories = response;
+        this.isLoading = false;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscriber$.next(true);
+    this._unsubscriber$.complete();
   }
 
   selectCategory(category): void {
@@ -33,21 +52,5 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedCategory = category.key;
-  }
-
-  ngOnInit(): void {
-    this.route.params
-      .pipe(takeUntil(this._unsubscriber$))
-      .subscribe((params) => {
-        this.selectedCategory = params["category"];
-      });
-    this.categoriesService.categoriesListener$
-      .pipe(takeUntil(this._unsubscriber$))
-      .subscribe((response: ICategory[]) => (this.categories = response));
-  }
-
-  ngOnDestroy(): void {
-    this._unsubscriber$.next(true);
-    this._unsubscriber$.complete();
   }
 }
