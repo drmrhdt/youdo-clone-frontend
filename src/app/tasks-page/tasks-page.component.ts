@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -30,6 +30,7 @@ export class TasksPageComponent implements OnDestroy {
 
 	constructor(
 		private _route: ActivatedRoute,
+		private _router: Router,
 		private _categoriesService: CategoriesService,
 		private _taskService: TaskService,
 		private _userService: UserService
@@ -55,6 +56,13 @@ export class TasksPageComponent implements OnDestroy {
 				this.getTasks(params)
 				this.setTitle()
 			})
+
+		this._route.queryParams
+			.pipe(takeUntil(this._unsubscriber$))
+			.subscribe(() => {
+				this.getTasks(this._route.snapshot.params)
+				this.setTitle()
+			})
 	}
 
 	ngOnDestroy(): void {
@@ -65,11 +73,11 @@ export class TasksPageComponent implements OnDestroy {
 	getTasks(params): void {
 		const filters = this.filterParams(params)
 		this.isLoading = true
-		//TODO
-		if (this.tab === this.filters.Master) {
+
+		const query = this._route.snapshot.queryParams.filter
+
+		if (!query || query === this.filters.Master) {
 			// isMaster
-			debugger
-			//TODO
 			this._taskService
 				.getTasksByFilter(filters)
 				.pipe(takeUntil(this._unsubscriber$))
@@ -77,9 +85,7 @@ export class TasksPageComponent implements OnDestroy {
 					this.tasks = response.data.tasks
 					this.isLoading = false
 				})
-			//TODO
-		} else if (this.tab === this.filters.Executor) {
-			debugger
+		} else if (query === this.filters.Executor) {
 			// isSuggestion get tasks from suggestions
 			this._taskService
 				.getTasksFromSuggestionsByExecutorIdAndFilters(filters)
@@ -89,7 +95,6 @@ export class TasksPageComponent implements OnDestroy {
 					this.isLoading = false
 				})
 		}
-		//TODO
 	}
 
 	filterParams(params): object {
@@ -125,5 +130,6 @@ export class TasksPageComponent implements OnDestroy {
 
 	onTabClick(filter: Filters): void {
 		this.tab = filter
+		this._router.navigate([], { queryParams: { filter } })
 	}
 }
