@@ -1,4 +1,5 @@
-<section class="jumbotron">
+<section class="jumbotron"
+  *ngIf="!isLoading">
   <div class="jumbotron__offer">
     <h1 class="jumbotron__title">Освободим вас от забот</h1>
     <h2 class="jumbotron__subtitle">
@@ -8,8 +9,10 @@
       <input class="jumbotron__input"
         type="text"
         placeholder="Напишите, чем вам помочь..."
-        [value]="inputValue" />
+        [(ngModel)]="inputValue"
+        [ngModelOptions]="{standalone: true}" />
       <app-button [title]="'Заказать услугу'"
+        (click)="submit()"
         class="jumbotron__button"></app-button>
     </form>
     <p class="jumbotron__example-query">
