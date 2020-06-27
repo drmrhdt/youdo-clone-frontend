@@ -87,6 +87,10 @@ export class FormComponent implements OnInit, OnDestroy {
 				}
 			})
 
+		this._route.queryParams.subscribe(params =>
+			this.form.get('description').patchValue(params['description'])
+		)
+
 		this._userService.currentUserListener$
 			.pipe(takeUntil(this._unsubscriber$))
 			.subscribe((response: IUser) => {
