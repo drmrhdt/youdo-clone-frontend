@@ -19,16 +19,14 @@ export class TaskService {
 		})
 	}
 
-	// TODO
 	getTasksFromSuggestionsByExecutorIdAndFilters(
 		values
 	): Observable<ITasksResponse> {
-		debugger
-		return this._httpClient.get<ITasksResponse>(`${baseUrl}/suggestions`, {
-			params: { ...values, category: 'WebDevelopment', subcategory: 'WebDev' }
-		})
+		// TODO { params : {...values } }
+		return this._httpClient.get<ITasksResponse>(
+			`${baseUrl}/suggestions/${values.authorId}/${values.category}/${values.subcategory}`
+		)
 	}
-	//TODO
 
 	getTaskById(id: string): Observable<ITaskResponse> {
 		return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/${id}`)
