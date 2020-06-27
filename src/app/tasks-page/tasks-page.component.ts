@@ -20,7 +20,7 @@ export class TasksPageComponent implements OnDestroy {
 	categories: ICategory[] = []
 	title: string
 	filters = Filters
-	tab: Filters
+	tab: Filters = this.filters.Master
 
 	get isMyTasks(): boolean {
 		return location.pathname.split('/').includes('tasks-my')
@@ -65,14 +65,31 @@ export class TasksPageComponent implements OnDestroy {
 	getTasks(params): void {
 		const filters = this.filterParams(params)
 		this.isLoading = true
-
-		this._taskService
-			.getTasksByFilter(filters)
-			.pipe(takeUntil(this._unsubscriber$))
-			.subscribe((response: ITasksResponse) => {
-				this.tasks = response.data.tasks
-				this.isLoading = false
-			})
+		//TODO
+		if (this.tab === this.filters.Master) {
+			// isMaster
+			debugger
+			//TODO
+			this._taskService
+				.getTasksByFilter(filters)
+				.pipe(takeUntil(this._unsubscriber$))
+				.subscribe((response: ITasksResponse) => {
+					this.tasks = response.data.tasks
+					this.isLoading = false
+				})
+			//TODO
+		} else if (this.tab === this.filters.Executor) {
+			debugger
+			// isSuggestion get tasks from suggestions
+			this._taskService
+				.getTasksFromSuggestionsByExecutorIdAndFilters(filters)
+				.pipe(takeUntil(this._unsubscriber$))
+				.subscribe((response: ITasksResponse) => {
+					this.tasks = response.data.tasks
+					this.isLoading = false
+				})
+		}
+		//TODO
 	}
 
 	filterParams(params): object {
