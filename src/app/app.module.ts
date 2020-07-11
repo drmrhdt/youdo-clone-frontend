@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
+import { NgModule, APP_INITIALIZER } from '@angular/core'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module'
@@ -40,42 +40,51 @@ import { ProfileSummaryComponent } from './profile-page/profile-summary/profile-
 
 import { SuggestionComponent } from './suggestion/suggestion.component'
 
+import { AuthService } from 'src/services'
+
 @NgModule({
-	declarations: [
-		AppComponent,
-		HeaderComponent,
-		JumbotronComponent,
-		DropdownListComponent,
-		FormComponent,
-		TaskPreviewComponent,
-		TasksPageComponent,
-		CategoriesListComponent,
-		VerificationBannerComponent,
-		SectionHeaderComponent,
-		TaskPageComponent,
-		TaskDetailComponent,
-		ExecutorsPageComponent,
-		ExecutorPreviewComponent,
-		ModalComponent,
-		AuthFormComponent,
-		ProfilePageComponent,
-		ProfileSummaryComponent,
-		ExecutorFormComponent,
-		SuggestionComponent,
-		LayoutComponent,
-		ButtonComponent,
-		TaskAuthorComponent
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		HttpClientModule,
-		ReactiveFormsModule,
-		FormsModule
-	],
-	providers: [
-		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-	],
-	bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        JumbotronComponent,
+        DropdownListComponent,
+        FormComponent,
+        TaskPreviewComponent,
+        TasksPageComponent,
+        CategoriesListComponent,
+        VerificationBannerComponent,
+        SectionHeaderComponent,
+        TaskPageComponent,
+        TaskDetailComponent,
+        ExecutorsPageComponent,
+        ExecutorPreviewComponent,
+        ModalComponent,
+        AuthFormComponent,
+        ProfilePageComponent,
+        ProfileSummaryComponent,
+        ExecutorFormComponent,
+        SuggestionComponent,
+        LayoutComponent,
+        ButtonComponent,
+        TaskAuthorComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (authService: AuthService) => () =>
+                Promise.resolve(authService.init()),
+            multi: true,
+            deps: [AuthService]
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
