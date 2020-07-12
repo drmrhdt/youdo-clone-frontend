@@ -8,48 +8,57 @@ import { baseUrl } from 'src/environments'
 import { ITaskResponse, ITasksResponse } from 'src/models'
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class TaskService {
-	constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient) {}
 
-	getTasksByFilter(values?): Observable<ITasksResponse> {
-		return this._httpClient.get<ITasksResponse>(`${baseUrl}/tasks`, {
-			params: values
-		})
-	}
+    getTasksByFilter(values?): Observable<ITasksResponse> {
+        return this._httpClient.get<ITasksResponse>(`${baseUrl}/tasks`, {
+            params: values
+        })
+    }
 
-	getTasksFromSuggestionsByExecutorIdAndFilters(
-		values
-	): Observable<ITasksResponse> {
-		// TODO { params : {...values } }
-		return this._httpClient.get<ITasksResponse>(
-			`${baseUrl}/suggestions/${values.authorId}/${values.category}/${values.subcategory}`
-		)
-	}
+    getTasksFromSuggestionsByExecutorIdAndFilters(
+        values
+    ): Observable<ITasksResponse> {
+        // TODO { params : {...values } }
+        return this._httpClient.get<ITasksResponse>(
+            `${baseUrl}/suggestions/${values.authorId}/${values.category}/${values.subcategory}`
+        )
+    }
 
-	getTaskById(id: string): Observable<ITaskResponse> {
-		return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/${id}`)
-	}
+    getTaskById(id: string): Observable<ITaskResponse> {
+        return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/${id}`)
+    }
 
-	createTask(formValues) {
-		return this._httpClient.post(`${baseUrl}/tasks`, formValues)
-	}
+    createTask(formValues) {
+        return this._httpClient.post(`${baseUrl}/tasks`, formValues)
+    }
 
-	updateTask(id, body): Observable<ITaskResponse> {
-		return this._httpClient.patch<ITaskResponse>(`${baseUrl}/tasks`, {
-			id,
-			body
-		})
-	}
+    updateTask(id, body): Observable<ITaskResponse> {
+        return this._httpClient.patch<ITaskResponse>(`${baseUrl}/tasks`, {
+            id,
+            body
+        })
+    }
 
-	getRandomTask(): Observable<ITaskResponse> {
-		return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/random`)
-	}
+    getRandomTask(): Observable<ITaskResponse> {
+        return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/random`)
+    }
 
-	getMatchingTaskToInput(input: string): Observable<ITaskResponse> {
-		return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/match`, {
-			params: { input }
-		})
-	}
+    getMatchingTaskToInput(input: string): Observable<ITaskResponse> {
+        return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/match`, {
+            params: { input }
+        })
+    }
+
+    getTasksByInput(input: string): Observable<ITasksResponse> {
+        return this._httpClient.get<ITasksResponse>(
+            `${baseUrl}/tasks/match-many`,
+            {
+                params: { input }
+            }
+        )
+    }
 }
