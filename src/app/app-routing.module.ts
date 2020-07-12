@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { AuthGuard } from 'src/guards'
 
-import { JumbotronComponent } from './jumbotron/jumbotron.component'
 import { FormComponent } from './form/form.component'
 
 import { TasksPageComponent } from './tasks-page/tasks-page.component'
@@ -18,7 +17,11 @@ const routes: Routes = [
     //     redirectTo: '/youdo-clone',
     //     pathMatch: 'full'
     // },
-    { path: '', component: JumbotronComponent },
+    {
+        path: '',
+        loadChildren: () =>
+            import('./main-page/main-page.module').then(m => m.MainPageModule)
+    },
     {
         path: 'tasks-my',
         component: TasksPageComponent,

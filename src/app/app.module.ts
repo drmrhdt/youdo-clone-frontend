@@ -8,8 +8,6 @@ import { AppComponent } from './app.component'
 
 import { HeaderComponent } from './header/header.component'
 
-import { JumbotronComponent } from './jumbotron/jumbotron.component'
-
 import { DropdownListComponent } from './dropdown-list/dropdown-list.component'
 
 import { FormComponent } from './form/form.component'
@@ -34,24 +32,24 @@ import { AuthService } from 'src/services'
 
 import { SharedModule } from './shared/shared.module'
 import { ProfilePageModule } from './profile-page/profile-page.module'
+import { MainPageModule } from './main-page/main-page.module'
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
-        JumbotronComponent,
         DropdownListComponent,
         FormComponent,
         TaskPreviewComponent,
         TasksPageComponent,
         TaskPageComponent,
         TaskDetailComponent,
+        TaskAuthorComponent,
+        SuggestionComponent,
         ExecutorsPageComponent,
         ExecutorPreviewComponent,
-        AuthFormComponent,
         ExecutorFormComponent,
-        SuggestionComponent,
-        TaskAuthorComponent
+        AuthFormComponent
     ],
     imports: [
         BrowserModule,
@@ -60,7 +58,8 @@ import { ProfilePageModule } from './profile-page/profile-page.module'
         ReactiveFormsModule,
         FormsModule,
         SharedModule,
-        ProfilePageModule
+        ProfilePageModule,
+        MainPageModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
