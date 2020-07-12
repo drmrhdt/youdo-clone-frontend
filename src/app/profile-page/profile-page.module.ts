@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { ProfilePageRoutingModule } from './profile-page-routing.module'
+import { SharedModule } from '../shared/shared.module'
+import { RouterModule } from '@angular/router'
+
 import { ProfilePageComponent, ProfileSummaryComponent } from '.'
 
-import { SharedModule } from '../shared/shared.module'
-
 @NgModule({
-    imports: [CommonModule, ProfilePageRoutingModule, SharedModule],
+    imports: [
+        RouterModule.forChild([{ path: '', component: ProfilePageComponent }]),
+        CommonModule,
+        SharedModule
+    ],
     declarations: [ProfilePageComponent, ProfileSummaryComponent],
     exports: [ProfilePageComponent]
 })
