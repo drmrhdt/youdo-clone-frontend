@@ -12,69 +12,73 @@ import { TaskPageComponent } from './tasks-page/task-page/task-page.component'
 import { ExecutorsPageComponent } from './executors-page/executors-page.component'
 import { ExecutorFormComponent } from './executor-form/executor-form.component'
 
-import { ProfilePageComponent } from './profile-page/profile-page.component'
-
 const routes: Routes = [
-	{
-		path: '',
-		redirectTo: '/youdo-clone',
-		pathMatch: 'full'
-	},
-	{ path: 'youdo-clone', component: JumbotronComponent },
-	{
-		path: 'youdo-clone/tasks-my',
-		component: TasksPageComponent,
-		canActivate: [AuthGuard]
-	},
-	{
-		path: 'youdo-clone/tasks-my/:category/:page',
-		component: TasksPageComponent,
-		canActivate: [AuthGuard]
-	},
-	{
-		path: 'youdo-clone/tasks-my/:category/:subcategory/:page',
-		component: TasksPageComponent,
-		canActivate: [AuthGuard]
-	},
-	{
-		path: 'youdo-clone/tasks',
-		component: TasksPageComponent
-	},
-	{
-		path: 'youdo-clone/tasks/:category/:page',
-		component: TasksPageComponent
-	},
-	{
-		path: 'youdo-clone/tasks/:category/:subcategory/:page',
-		component: TasksPageComponent
-	},
-	{
-		path: 'youdo-clone/tasks-add/:category/:subcategory',
-		component: FormComponent
-	},
-	{ path: 'youdo-clone/tasks/:taskId', component: TaskPageComponent },
-	{
-		path: 'youdo-clone/executors',
-		component: ExecutorsPageComponent
-	},
-	{
-		path: 'youdo-clone/executors/:category/:page',
-		component: ExecutorsPageComponent
-	},
-	{
-		path: 'youdo-clone/executors/:category/:subcategory/:page',
-		component: ExecutorsPageComponent
-	},
-	{ path: 'youdo-clone/profile/:id', component: ProfilePageComponent },
-	{
-		path: 'youdo-clone/verification/personalinfo',
-		component: ExecutorFormComponent
-	}
+    // {
+    //     path: '',
+    //     redirectTo: '/youdo-clone',
+    //     pathMatch: 'full'
+    // },
+    { path: '', component: JumbotronComponent },
+    {
+        path: 'tasks-my',
+        component: TasksPageComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'tasks-my/:category/:page',
+        component: TasksPageComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'tasks-my/:category/:subcategory/:page',
+        component: TasksPageComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'tasks',
+        component: TasksPageComponent
+    },
+    {
+        path: 'tasks/:category/:page',
+        component: TasksPageComponent
+    },
+    {
+        path: 'tasks/:category/:subcategory/:page',
+        component: TasksPageComponent
+    },
+    { path: 'tasks/:taskId', component: TaskPageComponent },
+    {
+        path: 'tasks-add/:category/:subcategory',
+        component: FormComponent
+    },
+    {
+        path: 'executors',
+        component: ExecutorsPageComponent
+    },
+    {
+        path: 'executors/:category/:page',
+        component: ExecutorsPageComponent
+    },
+    {
+        path: 'executors/:category/:subcategory/:page',
+        component: ExecutorsPageComponent
+    },
+    {
+        path: 'profile/:id',
+        loadChildren: () =>
+            import('./profile-page/profile-page.module').then(
+                m => m.ProfilePageModule
+            )
+    },
+    {
+        path: 'verification/personalinfo',
+        component: ExecutorFormComponent
+    }
 ]
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule],
-	providers: [AuthGuard]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: [AuthGuard]
 })
 export class AppRoutingModule {}
