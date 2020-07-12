@@ -1,52 +1,54 @@
 <nav class="header-nav">
-  <a routerLink="/youdo-clone"
-    class="header-nav__link header-nav__logo">
-    <img src="../../assets/download.svg"
-      alt="youdo-clone-logo" />
-  </a>
-  <div class="header-nav__link-container">
-    <a class="header-nav__link"
-      (click)="isShowDropdown = !isShowDropdown"
-      #createTaskLink>
-      Создать задание
-    </a>
-    <app-dropdown-list [categories]="categories"
-      *ngIf="isShowDropdown"></app-dropdown-list>
-  </div>
-  <a routerLink="/youdo-clone/tasks/all/{{ defaultPage }}"
-    class="header-nav__link">Найти задание</a>
-  <a routerLink="/youdo-clone/executors/Courier/1"
-    class="header-nav__link">Исполнители</a>
-  <a *ngIf="isAuthenticated"
-    routerLink="/youdo-clone/tasks-my/all/{{ defaultPage }}"
-    class="header-nav__link">Мои
-    заказы</a>
-
-  <div class="user-menu">
-    <ng-container *ngIf="isAuthenticated; else signInSignUp">
-      <a *ngIf="isAdminOrModerator"
-        class="header-nav__link"
-        routerLink="/youdo-clone/admin">Админка</a>
+   <a routerLink="/"
+      class="header-nav__link header-nav__logo">
+      <img src="../../assets/download.svg"
+           alt="youdo-clone-logo" />
+   </a>
+   <div class="header-nav__link-container">
       <a class="header-nav__link"
-        routerLink="/youdo-clone/profile/{{id}}">Профиль</a>
-      <a class="user-menu__exit"
-        (click)="onSignOut()">Выход</a>
-    </ng-container>
+         (click)="isShowDropdown = !isShowDropdown"
+         [ngClass]="{isDisabled: isTaskFormPage}"
+         #createTaskLink>
+         Создать задание
+      </a>
+      <app-dropdown-list [categories]="categories"
+                         *ngIf="isShowDropdown">
+      </app-dropdown-list>
+   </div>
+   <a routerLink="/tasks/all/{{ defaultPage }}"
+      class="header-nav__link">Найти задание</a>
+   <a routerLink="/executors/Courier/1"
+      class="header-nav__link">Исполнители</a>
+   <a *ngIf="isAuthenticated"
+      routerLink="/tasks-my/all/{{ defaultPage }}"
+      class="header-nav__link">Мои
+      заказы</a>
 
-    <ng-template #signInSignUp>
-      <a class="user-menu__link"
-        (click)="showSignInDialog()">Вход</a>
-      <a class="user-menu__link"
-        (click)="showSignUpDialog()">Регистрация</a>
-    </ng-template>
-  </div>
+   <div class="user-menu">
+      <ng-container *ngIf="isAuthenticated; else signInSignUp">
+         <a *ngIf="isAdminOrModerator"
+            class="header-nav__link"
+            routerLink="/admin">Админка</a>
+         <a class="header-nav__link"
+            routerLink="/profile/{{id}}">Профиль</a>
+         <a class="user-menu__exit"
+            (click)="onSignOut()">Выход</a>
+      </ng-container>
+
+      <ng-template #signInSignUp>
+         <a class="user-menu__link"
+            (click)="showSignInDialog()">Вход</a>
+         <a class="user-menu__link"
+            (click)="showSignUpDialog()">Регистрация</a>
+      </ng-template>
+   </div>
 </nav>
 
 <app-modal *ngIf="isShowDialog"
-  modalTitle="{{ modalTitle }}"
-  (close)="isShowDialog = false"
-  [bodyComponent]="body">
-  <ng-template #body>
-    <app-auth-form authFormType="{{ authFormType }}"></app-auth-form>
-  </ng-template>
+           modalTitle="{{ modalTitle }}"
+           (close)="isShowDialog = false"
+           [bodyComponent]="body">
+   <ng-template #body>
+      <app-auth-form authFormType="{{ authFormType }}"></app-auth-form>
+   </ng-template>
 </app-modal>

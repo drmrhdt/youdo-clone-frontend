@@ -40,3 +40,9 @@ a {
     }
   }
 }
+
+.isDisabled {
+  color: #dddddd;
+
+  pointer-events: none;
+}

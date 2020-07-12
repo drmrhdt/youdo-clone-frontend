@@ -41,6 +41,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.isShowDropdown = false
     }
 
+    get isTaskFormPage() {
+        return location.pathname.includes('tasks-add')
+    }
+
     constructor(
         private _authService: AuthService,
         private _categoriesService: CategoriesService,
