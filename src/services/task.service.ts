@@ -22,10 +22,13 @@ export class TaskService {
     getTasksFromSuggestionsByExecutorIdAndFilters(
         values
     ): Observable<ITasksResponse> {
-        // TODO { params : {...values } }
-        return this._httpClient.get<ITasksResponse>(
-            `${baseUrl}/suggestions/${values.authorId}/${values.category}/${values.subcategory}`
-        )
+        return this._httpClient.get<ITasksResponse>(`${baseUrl}/suggestions`, {
+            params: {
+                authorId: values.authorId,
+                category: values.category,
+                subcategory: values.subcategory
+            }
+        })
     }
 
     getTaskById(id: string): Observable<ITaskResponse> {

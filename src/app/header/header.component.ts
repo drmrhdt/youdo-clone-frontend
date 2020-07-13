@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     get isTaskFormPage() {
-        return location.pathname.includes('tasks-add')
+        return location.pathname.includes('tasks/add')
     }
 
     constructor(

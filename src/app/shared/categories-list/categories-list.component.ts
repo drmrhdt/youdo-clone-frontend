@@ -33,7 +33,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _categoriesService: CategoriesService
     ) {
-        this._route.params
+        this._route.queryParams
             .pipe(takeUntil(this._unsubscriber$))
             .subscribe(params => (this.selectedCategory = params['category']))
     }
@@ -62,18 +62,22 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
         //     return
         // }
         this.selectedCategory = category.key
-        this._router.navigateByUrl(
-            `${this.section}/${category.key}/${defaultPage}`
-        )
+        this._router.navigate([this.section], {
+            queryParams: {
+                category: category.key,
+                page: defaultPage
+            }
+        })
     }
 
     selectSubcategory(category, subcategory): void {
         this.selectedSubcategory = subcategory.code
-        this._router.navigate([
-            this.section,
-            category.key,
-            subcategory.code,
-            defaultPage
-        ])
+        this._router.navigate([this.section], {
+            queryParams: {
+                category: category.key,
+                subcategory: subcategory.code,
+                page: defaultPage
+            }
+        })
     }
 }

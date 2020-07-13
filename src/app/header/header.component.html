@@ -15,12 +15,24 @@
                          *ngIf="isShowDropdown">
       </app-dropdown-list>
    </div>
-   <a routerLink="/tasks/all/{{ defaultPage }}"
+   <a [routerLink]="['/tasks']"
+      [queryParams]="{category:
+      undefined,
+      page:
+      defaultPage}"
       class="header-nav__link">Найти задание</a>
-   <a routerLink="/executors/Courier/1"
+   <a [routerLink]="['/executors']"
+      [queryParams]="{category:
+         'Courier',
+      page:
+      defaultPage}"
       class="header-nav__link">Исполнители</a>
    <a *ngIf="isAuthenticated"
-      routerLink="/tasks-my/all/{{ defaultPage }}"
+      [routerLink]="['/tasks/my']"
+      [queryParams]="{category:
+      undefined,
+      page:
+      defaultPage}"
       class="header-nav__link">Мои
       заказы</a>
 

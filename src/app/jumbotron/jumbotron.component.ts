@@ -62,8 +62,12 @@ export class JumbotronComponent implements OnInit {
 
     onSelectTip(tip: ITask): void {
         this.moveTextToInput(tip.description)
-        this._router.navigate([`tasks-add`, tip.category, tip.subcategory], {
-            queryParams: { description: this.inputValue }
+        this._router.navigate([`tasks/add`], {
+            queryParams: {
+                category: tip.category,
+                subcategory: tip.subcategory,
+                description: this.inputValue
+            }
         })
     }
 
@@ -83,8 +87,12 @@ export class JumbotronComponent implements OnInit {
                           subcategory: this.firstCategory.subcategories[0].code
                       }
 
-                this._router.navigate([`tasks-add`, category, subcategory], {
-                    queryParams: { description: this.inputValue }
+                this._router.navigate([`tasks/add`], {
+                    queryParams: {
+                        category,
+                        subcategory,
+                        description: this.inputValue
+                    }
                 })
                 // TODO share this.inputValue through service?
             })

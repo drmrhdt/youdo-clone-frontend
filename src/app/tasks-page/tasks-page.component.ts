@@ -1,8 +1,8 @@
-import { Component, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 
-import { Subject, combineLatest } from 'rxjs'
-import { takeUntil, map } from 'rxjs/operators'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 import { TaskService, UserService, CategoriesService } from 'src/services'
 
@@ -13,7 +13,7 @@ import { ITask, ITasksResponse, IUser, ICategory, Filters } from 'src/models'
     templateUrl: './tasks-page.component.html',
     styleUrls: ['./tasks-page.component.scss']
 })
-export class TasksPageComponent implements OnDestroy {
+export class TasksPageComponent implements OnDestroy, OnInit {
     isLoading: boolean = true
     signedInUserId: string
     tasks: ITask[] = []
@@ -23,7 +23,7 @@ export class TasksPageComponent implements OnDestroy {
     tab: Filters = this.filters.Master
 
     get isMyTasks(): boolean {
-        return location.pathname.split('/').includes('tasks-my')
+        return location.pathname.includes('tasks/my')
     }
 
     private _unsubscriber$ = new Subject()
@@ -35,13 +35,6 @@ export class TasksPageComponent implements OnDestroy {
         private _taskService: TaskService,
         private _userService: UserService
     ) {
-        this._userService.currentUserListener$
-            .pipe(takeUntil(this._unsubscriber$))
-            .subscribe((response: IUser) => {
-                if (response) this.signedInUserId = response._id
-                this.getTasks(this._route.snapshot.params)
-            })
-
         this._categoriesService.categoriesListener$
             .pipe(takeUntil(this._unsubscriber$))
             .subscribe((response: ICategory[]) => {
@@ -49,14 +42,20 @@ export class TasksPageComponent implements OnDestroy {
                 this.setTitle()
                 this.setInitialTab()
             })
+    }
 
-        combineLatest(this._route.params, this._route.queryParams)
-            .pipe(
-                takeUntil(this._unsubscriber$),
-                map(results => ({ params: results[0], query: results[1] }))
-            )
-            .subscribe(results => {
-                this.getTasks(results.params)
+    ngOnInit(): void {
+        this._userService.currentUserListener$
+            .pipe(takeUntil(this._unsubscriber$))
+            .subscribe((response: IUser) => {
+                if (response) this.signedInUserId = response._id
+                this.getTasks(this._route.snapshot.queryParams)
+            })
+
+        this._route.queryParams
+            .pipe(takeUntil(this._unsubscriber$))
+            .subscribe(queryParams => {
+                this.getTasks(queryParams)
                 this.setTitle()
             })
     }
@@ -70,9 +69,7 @@ export class TasksPageComponent implements OnDestroy {
         const filters = this.filterParams(params)
         this.isLoading = true
 
-        const query = this._route.snapshot.queryParams.filter
-
-        if (!query || query === this.filters.Master) {
+        if (!params.filter || params.filter === this.filters.Master) {
             // isMaster
             this._taskService
                 .getTasksByFilter(filters)
@@ -81,7 +78,7 @@ export class TasksPageComponent implements OnDestroy {
                     this.tasks = response.data.tasks
                     this.isLoading = false
                 })
-        } else if (query === this.filters.Executor) {
+        } else if (params.filter === this.filters.Executor) {
             // isSuggestion get tasks from suggestions
             this._taskService
                 .getTasksFromSuggestionsByExecutorIdAndFilters(filters)
@@ -110,7 +107,7 @@ export class TasksPageComponent implements OnDestroy {
 
     setTitle(): void {
         if (this.categories) {
-            const categoryFromUrl = this._route.snapshot.params.category
+            const categoryFromUrl = this._route.snapshot.queryParams.category
 
             const findedCategory = this.categories.find(
                 (item: ICategory) => item.key === categoryFromUrl
@@ -126,6 +123,9 @@ export class TasksPageComponent implements OnDestroy {
 
     onTabClick(filter: Filters): void {
         this.tab = filter
-        this._router.navigate([], { queryParams: { filter } })
+        this._router.navigate([], {
+            queryParams: { filter },
+            queryParamsHandling: 'merge'
+        })
     }
 }

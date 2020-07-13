@@ -1,4 +1,5 @@
-<section class="jumbotron" *ngIf="!isLoading">
+<section class="jumbotron"
+         *ngIf="!isLoading">
   <div class="jumbotron__offer">
     <h1 class="jumbotron__title">Освободим вас от забот</h1>
     <h2 class="jumbotron__subtitle">
@@ -7,12 +8,20 @@
 
     <div class="jumbotron__search-container">
       <form class="jumbotron__form">
-        <input class="jumbotron__input" type="text" placeholder="Напишите, чем вам помочь..." [(ngModel)]="inputValue"
-          [ngModelOptions]="{standalone: true}" (ngModelChange)="onInput($event)" />
-        <app-button [title]="'Заказать услугу'" (click)="submit()" class="jumbotron__button"></app-button>
+        <input class="jumbotron__input"
+               type="text"
+               placeholder="Напишите, чем вам помочь..."
+               [(ngModel)]="inputValue"
+               [ngModelOptions]="{standalone: true}"
+               (ngModelChange)="onInput($event)" />
+        <app-button [title]="'Заказать услугу'"
+                    (click)="submit()"
+                    class="jumbotron__button"></app-button>
       </form>
-      <ul class="jumbotron__dropdown" *ngIf="tips.length">
-        <li *ngFor="let tip of tips" (click)="onSelectTip(tip)">
+      <ul class="jumbotron__dropdown"
+          *ngIf="tips.length">
+        <li *ngFor="let tip of tips"
+            (click)="onSelectTip(tip)">
           {{tip.description | lowercase}}
         </li>
       </ul>
@@ -20,14 +29,22 @@
 
     <p class="jumbotron__example-query">
       Например:
-      <span class="jumbotron__example-link" (click)="moveTextToInput(exampleQuery)" [textContent]="exampleQuery">
+      <span class="jumbotron__example-link"
+            (click)="moveTextToInput(exampleQuery)"
+            [textContent]="exampleQuery">
       </span>
     </p>
-    <a class="jumbotron__action-link" href="#">стать исполнителем и начать зарабатывать</a>
+    <a class="jumbotron__action-link"
+       href="#">стать исполнителем и начать зарабатывать</a>
   </div>
   <div class="jumbotron__video-container">
-    <video class="jumbotron__video" poster="https://static.youdo.com/i/video/frame.jpg" loop autoplay muted>
-      <source src="https://static.youdo.com/i/video/hero_video.mp4" type="video/mp4" />
+    <video class="jumbotron__video"
+           poster="https://static.youdo.com/i/video/frame.jpg"
+           loop
+           autoplay
+           muted>
+      <source src="https://static.youdo.com/i/video/hero_video.mp4"
+              type="video/mp4" />
     </video>
   </div>
 </section>
