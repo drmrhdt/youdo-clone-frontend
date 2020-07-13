@@ -1,55 +1,57 @@
 <form *ngIf="authFormType === 'signUp'"
-  class="auth__form"
-  [formGroup]="formSignUp">
+      [formGroup]="formSignUp"
+      class="auth__form">
 
   <ng-container formGroupName="personalInfo">
     <label for="firstName">Имя</label>
     <input formControlName="firstName"
-      id="firstName"
-      type="text"
-      placeholder="Имя" />
+           id="firstName"
+           type="text"
+           placeholder="Имя" />
     <label for="lastName">Фамилия</label>
     <input formControlName="lastName"
-      id="lastName"
-      type="text"
-      placeholder="Фамилия" />
+           id="lastName"
+           type="text"
+           placeholder="Фамилия" />
   </ng-container>
 
   <ng-container formGroupName="contacts">
     <label for="login">Введите почту</label>
     <input formControlName="email"
-      id="login"
-      type="email"
-      placeholder="email" />
+           id="login"
+           type="email"
+           placeholder="email" />
   </ng-container>
 
   <label for="password">Пароль</label>
   <input formControlName="password"
-    id="password"
-    type="password"
-    placeholder="Пароль" />
+         id="password"
+         type="password"
+         placeholder="Пароль" />
   <label for="confirmPassword">Повторите пароль</label>
   <input formControlName="passwordConfirm"
-    id="confirmPassword"
-    type="password"
-    placeholder="Пароль" />
+         id="confirmPassword"
+         type="password"
+         placeholder="Пароль" />
   <app-button [title]="'Отправить'"
-    (click)="signUp()"></app-button>
+              (click)="signUp()">
+  </app-button>
 </form>
 
 <form *ngIf="authFormType === 'signIn'"
-  class="auth__form"
-  [formGroup]="formSignIn">
+      [formGroup]="formSignIn"
+      class="auth__form">
   <label for="login">Введите почту</label>
   <input formControlName="email"
-    id="login"
-    type="email"
-    placeholder="email" />
+         id="login"
+         type="email"
+         placeholder="email" />
   <label for="password">Пароль</label>
   <input id="password"
-    type="password"
-    placeholder="Пароль"
-    formControlName="password" />
+         type="password"
+         placeholder="Пароль"
+         formControlName="password" />
   <app-button [title]="'Отправить'"
-    (click)="signIn()"></app-button>
+              (click)="signIn()">
+  </app-button>
 </form>

@@ -4,10 +4,10 @@
       <img src="../../assets/download.svg"
            alt="youdo-clone-logo" />
    </a>
-   <div class="header-nav__link-container">
+   <div class="header-nav__dropdown-position">
       <a class="header-nav__link"
          (click)="isShowDropdown = !isShowDropdown"
-         [ngClass]="{isDisabled: isTaskFormPage}"
+         [ngClass]="{'header-nav__link_status_disabled': isTaskFormPage}"
          #createTaskLink>
          Создать задание
       </a>
@@ -36,30 +36,29 @@
       class="header-nav__link">Мои
       заказы</a>
 
-   <div class="user-menu">
+   <div class="header-nav__user-nav">
       <ng-container *ngIf="isAuthenticated; else signInSignUp">
          <a *ngIf="isAdminOrModerator"
             class="header-nav__link"
             routerLink="/admin">Админка</a>
          <a class="header-nav__link"
             routerLink="/profile/{{id}}">Профиль</a>
-         <a class="user-menu__exit"
-            (click)="onSignOut()">Выход</a>
+         <a (click)="onSignOut()">Выход</a>
       </ng-container>
 
       <ng-template #signInSignUp>
-         <a class="user-menu__link"
+         <a class="header-nav__link"
             (click)="showSignInDialog()">Вход</a>
-         <a class="user-menu__link"
+         <a class="header-nav_link"
             (click)="showSignUpDialog()">Регистрация</a>
       </ng-template>
    </div>
 </nav>
 
 <app-modal *ngIf="isShowDialog"
-           modalTitle="{{ modalTitle }}"
            (close)="isShowDialog = false"
-           [bodyComponent]="body">
+           [bodyComponent]="body"
+           modalTitle="{{ modalTitle }}">
    <ng-template #body>
       <app-auth-form authFormType="{{ authFormType }}"></app-auth-form>
    </ng-template>

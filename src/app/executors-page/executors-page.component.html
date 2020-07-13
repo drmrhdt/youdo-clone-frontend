@@ -1,6 +1,6 @@
 <app-layout [layout]="'fromSmallToBig'"
-  [leftBlock]="leftBlock"
-  [rightBlock]="rightBlock">
+            [leftBlock]="leftBlock"
+            [rightBlock]="rightBlock">
   <ng-template #leftBlock>
     <app-verification-banner></app-verification-banner>
     <app-categories-list></app-categories-list>
@@ -13,7 +13,7 @@
       </ng-template>
     </app-section-header>
     <app-executor-preview *ngFor="let executor of users"
-      [executor]="executor">
+                          [executor]="executor">
     </app-executor-preview>
   </ng-template>
 </app-layout>

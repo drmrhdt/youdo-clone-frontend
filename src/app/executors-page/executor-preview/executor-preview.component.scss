@@ -1,51 +1,46 @@
 @import "../../../styles/variables.scss";
 
-.executor-preview {
+:host {
   display: flex;
-  padding: 0 0 50px 0;
+  margin: 0 0 30px 0;
+  padding: 10px 0;
 
-  &__left-block {
-    width: 20%;
-  }
+  .executor-preview {
+    &__left-block {
+      width: 20%;
+    }
 
-  &__right-block {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 80%;
-    padding: 0 0 0 20px;
-  }
+    &__right-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 80%;
+      padding: 0 0 0 20px;
+    }
 
-  &__avatar {
-    width: 100%;
+    &__avatar {
+      width: 100%;
 
-    border-radius: 8px;
-  }
+      border-radius: 50%;
+    }
 
-  &__reviews {
-    font-size: 0.8rem;
-    color: $color-black-opacity-normal;
-  }
+    &__reviews {
+      font-size: 0.8rem;
+      color: $color-black-opacity-normal;
+    }
 
-  &__name {
-    display: inline;
+    &__name {
+      font-size: 1.4rem;
 
-    font-size: 1.4rem;
+      border-bottom: 1px solid $color-blue-dark;
+    }
 
-    background-size: contain;
-    border-bottom: 1px solid $color-blue-dark;
-  }
+    &__description {
+      color: $color-black-opacity-normal;
+    }
 
-  &__description {
-    color: $color-black-opacity-normal;
-  }
-
-  &__btn {
-    align-self: flex-start;
-    ::ng-deep {
-      button {
-        padding: 0.5rem 20px;
-      }
+    &__btn {
+      align-self: flex-start;
     }
   }
 }

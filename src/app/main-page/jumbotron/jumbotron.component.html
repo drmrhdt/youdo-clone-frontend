@@ -1,14 +1,14 @@
 <section class="jumbotron"
          *ngIf="!isLoading">
   <div class="jumbotron__offer">
-    <h1 class="jumbotron__title">Освободим вас от забот</h1>
-    <h2 class="jumbotron__subtitle">
+    <h1 class="title">Освободим вас от забот</h1>
+    <h2 class="subtitle">
       Поможем найти надежного исполнителя для любых задач
     </h2>
 
     <div class="jumbotron__search-container">
-      <form class="jumbotron__form">
-        <input class="jumbotron__input"
+      <form class="form">
+        <input class="input"
                type="text"
                placeholder="Напишите, чем вам помочь..."
                [(ngModel)]="inputValue"
@@ -16,9 +16,10 @@
                (ngModelChange)="onInput($event)" />
         <app-button [title]="'Заказать услугу'"
                     (click)="submit()"
-                    class="jumbotron__button"></app-button>
+                    class="button_type__submit">
+        </app-button>
       </form>
-      <ul class="jumbotron__dropdown"
+      <ul class="tips-dropdown"
           *ngIf="tips.length">
         <li *ngFor="let tip of tips"
             (click)="onSelectTip(tip)">

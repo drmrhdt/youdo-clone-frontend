@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+$minWidth: 260px;
 
 :host {
   position: absolute;
@@ -6,22 +7,38 @@
   left: 0;
   z-index: 5;
 
-  min-width: 260px;
+  min-width: $minWidth;
 
   background-color: $color-white;
   box-shadow: 0 1px 5px $color-black-opacity-light;
 }
 
+.dropdown-list,
+.nested-list {
+  &__li &__link {
+    position: relative;
+
+    display: block;
+    padding: 5px 10px;
+
+    font-weight: 700;
+    font-size: 1rem;
+
+    &:hover {
+      color: $color-orange-normal !important;
+    }
+  }
+}
+
 .dropdown-list {
   &__li &__link {
-    font-weight: 700;
     color: $color-black-opacity-darken;
 
     &:hover::after {
       content: "";
       position: absolute;
-      top: 6px;
-      right: -4px;
+      top: 4px;
+      right: -5px;
       z-index: 2;
 
       display: block;
@@ -46,13 +63,12 @@
   top: 0;
   left: 100%;
 
-  display: table-cell;
   display: none;
-  min-width: 260px;
+  min-width: $minWidth;
   min-height: 100%;
   max-height: calc(100vh - 120px);
   margin-left: -6px;
-  padding: 20px 17px;
+  padding: 15px 20px;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -62,22 +78,5 @@
   &__li &__link {
     font-weight: normal;
     color: $color-black-opacity-normal;
-  }
-}
-
-.category-link {
-  font-weight: bold !important;
-}
-
-.list-link {
-  position: relative;
-
-  display: block;
-  padding: 6px 25px 6px 17px;
-
-  font-size: 1rem;
-
-  &:hover {
-    color: $color-orange-normal !important;
   }
 }

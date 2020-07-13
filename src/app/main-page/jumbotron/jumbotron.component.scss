@@ -32,20 +32,20 @@
     text-align: center;
   }
 
-  &__title,
-  &__subtitle {
+  .title,
+  .subtitle {
     margin: 0;
 
     color: $color-white;
   }
 
-  &__title {
+  .title {
     font-size: 3.11111111em;
     line-height: 1.10714286;
     letter-spacing: 1.4px;
   }
 
-  &__subtitle {
+  .subtitle {
     padding: 8px 0 25px 0;
 
     font-weight: 400;
@@ -53,7 +53,7 @@
     letter-spacing: 1.4px;
   }
 
-  &__form {
+  .form {
     display: flex;
     width: 100%;
     padding: 2px;
@@ -72,7 +72,7 @@
     }
   }
 
-  &__input {
+  .input {
     flex-grow: 2;
     padding: 2px 11px 0 16px;
 
@@ -87,7 +87,7 @@
     transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   }
 
-  &__button {
+  .button_type__submit {
     ::ng-deep {
       // TODO что-то сделать с padding, margin - !important- это плохо
       button {
@@ -188,7 +188,7 @@
     position: relative;
   }
 
-  &__dropdown {
+  .tips-dropdown {
     position: absolute;
     bottom: -40px;
     left: 0;

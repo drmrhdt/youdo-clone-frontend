@@ -1,48 +1,40 @@
-@import "../../styles/variables.scss";
-
-a {
-  color: $color-black-opacity-darken;
-
-  &:hover {
-    color: $color-orange-normal;
-  }
-}
+@import '../../styles/variables.scss';
 
 .header-nav {
-  display: flex;
-  padding: 20px 40px 10px 40px;
+    display: flex;
+    padding: 20px 40px 10px 40px;
 
-  &__logo {
-    width: 80px;
-  }
+    & > :nth-child(n):not(:last-child) {
+        margin-left: 20px;
+    }
 
-  & > :nth-child(n):not(:last-child) {
-    margin-left: 20px;
-  }
+    &__logo {
+        width: 7%;
+    }
 
-  &__link-container {
-    position: relative;
-  }
-
-  .user-menu {
-    margin-left: auto;
-
-    & > :nth-child(n) {
-      margin-left: 20px;
+    &__dropdown-position {
+        position: relative;
     }
 
     &__link {
-      border-bottom: 1px dotted $color-black-opacity-darken;
+        color: $color-black-opacity-darken;
 
-      &:hover {
-        border-bottom: none;
-      }
+        &:hover {
+            color: $color-orange-normal;
+        }
+
+        &_status_disabled {
+            color: $color-lightgray-normal;
+
+            pointer-events: none;
+        }
     }
-  }
-}
 
-.isDisabled {
-  color: #dddddd;
+    &__user-nav {
+        margin-left: auto;
 
-  pointer-events: none;
+        & > :nth-child(n) {
+            margin-left: 20px;
+        }
+    }
 }
