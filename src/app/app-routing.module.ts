@@ -23,47 +23,21 @@ const routes: Routes = [
             import('./main-page/main-page.module').then(m => m.MainPageModule)
     },
     {
-        path: 'tasks-my',
-        component: TasksPageComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'tasks-my/:category/:page',
-        component: TasksPageComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'tasks-my/:category/:subcategory/:page',
-        component: TasksPageComponent,
-        canActivate: [AuthGuard]
-    },
-    {
         path: 'tasks',
         component: TasksPageComponent
     },
     {
-        path: 'tasks/:category/:page',
-        component: TasksPageComponent
+        path: 'tasks/my',
+        component: TasksPageComponent,
+        canActivate: [AuthGuard]
     },
     {
-        path: 'tasks/:category/:subcategory/:page',
-        component: TasksPageComponent
+        path: 'tasks/add',
+        component: FormComponent
     },
     { path: 'tasks/:taskId', component: TaskPageComponent },
     {
-        path: 'tasks-add/:category/:subcategory',
-        component: FormComponent
-    },
-    {
         path: 'executors',
-        component: ExecutorsPageComponent
-    },
-    {
-        path: 'executors/:category/:page',
-        component: ExecutorsPageComponent
-    },
-    {
-        path: 'executors/:category/:subcategory/:page',
         component: ExecutorsPageComponent
     },
     {
