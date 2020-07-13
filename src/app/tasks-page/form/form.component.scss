@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../../styles/variables.scss";
 
 .form {
   box-sizing: border-box;
@@ -52,8 +52,8 @@
     }
 
     &:checked + label::after {
-      background: $color-orange-light url("../../assets/checked.svg") 50% 50%
-        no-repeat;
+      background: $color-orange-light url("../../../assets/checked.svg")
+      50% 50% no-repeat;
       border-color: $color-orange-normal;
     }
   }

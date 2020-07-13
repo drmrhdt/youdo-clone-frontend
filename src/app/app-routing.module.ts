@@ -3,12 +3,6 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { AuthGuard } from 'src/guards'
 
-import { FormComponent } from './form/form.component'
-
-import { TasksPageComponent } from './tasks-page/tasks-page.component'
-import { TaskPageComponent } from './tasks-page/task-page/task-page.component'
-
-import { ExecutorsPageComponent } from './executors-page/executors-page.component'
 import { ExecutorFormComponent } from './executor-form/executor-form.component'
 
 const routes: Routes = [
@@ -24,21 +18,17 @@ const routes: Routes = [
     },
     {
         path: 'tasks',
-        component: TasksPageComponent
+        loadChildren: () =>
+            import('./tasks-page/tasks-page.module').then(
+                m => m.TasksPageModule
+            )
     },
-    {
-        path: 'tasks/my',
-        component: TasksPageComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'tasks/add',
-        component: FormComponent
-    },
-    { path: 'tasks/:taskId', component: TaskPageComponent },
     {
         path: 'executors',
-        component: ExecutorsPageComponent
+        loadChildren: () =>
+            import('./executors-page/executors-page.module').then(
+                m => m.ExecutorsPageModule
+            )
     },
     {
         path: 'profile/:id',
