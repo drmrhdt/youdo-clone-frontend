@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router'
 
 import { SharedModule } from '../shared/shared.module'
 
-import { JumbotronComponent } from '../jumbotron/jumbotron.component'
+import { JumbotronComponent } from './jumbotron/jumbotron.component'
 import { MainPageComponent } from './main-page.component'
 
 @NgModule({
