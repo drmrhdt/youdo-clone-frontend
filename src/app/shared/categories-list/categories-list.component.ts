@@ -24,12 +24,8 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 
     private _unsubscriber$ = new Subject()
 
-    get sectionOne(): string {
-        return location.pathname.split('/')[1]
-    }
-
-    get sectionTwo(): string {
-        return location.pathname.split('/')[2]
+    get section(): string {
+        return location.pathname
     }
 
     constructor(
@@ -57,9 +53,12 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
     }
 
     selectAll(): void {
-        this._router.navigateByUrl(
-            `${this.sectionOne}/${this.sectionTwo}/all/1`
-        )
+        this._router.navigate([this.section], {
+            queryParams: {
+                category: 'all',
+                page: defaultPage
+            }
+        })
     }
 
     selectCategory(category): void {
@@ -68,7 +67,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
         //     return
         // }
         this.selectedCategory = category.key
-        this._router.navigate([this.sectionOne, this.sectionTwo], {
+        this._router.navigate([this.section], {
             queryParams: {
                 category: category.key,
                 page: defaultPage
@@ -78,7 +77,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 
     selectSubcategory(category, subcategory): void {
         this.selectedSubcategory = subcategory.code
-        this._router.navigate([this.sectionOne, this.sectionTwo], {
+        this._router.navigate([this.section], {
             queryParams: {
                 category: category.key,
                 subcategory: subcategory.code,
