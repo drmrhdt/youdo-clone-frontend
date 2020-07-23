@@ -13,29 +13,22 @@ const routes: Routes = [
     // },
     {
         path: '',
-        loadChildren: () =>
-            import('./main-page/main-page.module').then(m => m.MainPageModule)
+        loadChildren: () => import('./main/main.module').then(m => m.MainModule)
     },
     {
         path: 'tasks',
         loadChildren: () =>
-            import('./tasks-page/tasks-page.module').then(
-                m => m.TasksPageModule
-            )
+            import('./tasks/tasks.module').then(m => m.TasksModule)
     },
     {
         path: 'executors',
         loadChildren: () =>
-            import('./executors-page/executors-page.module').then(
-                m => m.ExecutorsPageModule
-            )
+            import('./executors/executors.module').then(m => m.ExecutorsModule)
     },
     {
         path: 'profile/:id',
         loadChildren: () =>
-            import('./profile-page/profile-page.module').then(
-                m => m.ProfilePageModule
-            )
+            import('./profile/profile.module').then(m => m.ProfileModule)
     },
     {
         path: 'verification/personalinfo',

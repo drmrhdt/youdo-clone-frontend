@@ -1,4 +1,4 @@
-export { TasksPageComponent } from './tasks-page.component'
+export { TasksComponent } from './tasks.component'
 export { TaskPageComponent } from './task-page/task-page.component'
 export { TaskPreviewComponent } from './task-preview/task-preview.component'
 export { TaskDetailComponent } from './task-page/task-detail/task-detail.component'

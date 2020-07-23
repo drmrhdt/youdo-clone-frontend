@@ -19,10 +19,10 @@ import { AuthInterceptor } from 'src/interceptors'
 import { AuthService } from 'src/services'
 
 import { SharedModule } from './shared/shared.module'
-import { ProfilePageModule } from './profile-page/profile-page.module'
-import { MainPageModule } from './main-page/main-page.module'
-import { ExecutorsPageModule } from './executors-page/executors-page.module'
-import { TasksPageModule } from './tasks-page/tasks-page.module'
+import { ProfileModule } from './profile/profile.module'
+import { MainModule } from './main/main.module'
+import { ExecutorsModule } from './executors/executors.module'
+import { TasksModule } from './tasks/tasks.module'
 
 @NgModule({
     declarations: [
@@ -39,10 +39,10 @@ import { TasksPageModule } from './tasks-page/tasks-page.module'
         ReactiveFormsModule,
         FormsModule,
         SharedModule,
-        ProfilePageModule,
-        MainPageModule,
-        ExecutorsPageModule,
-        TasksPageModule
+        ProfileModule,
+        MainModule,
+        ExecutorsModule,
+        TasksModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

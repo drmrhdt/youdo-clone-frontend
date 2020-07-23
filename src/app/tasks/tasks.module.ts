@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module'
 
 import {
     TasksContainerComponent,
-    TasksPageComponent,
+    TasksComponent,
     AuthGuard,
     FormComponent,
     TaskPageComponent,
@@ -26,11 +26,11 @@ import {
                 children: [
                     {
                         path: 'all',
-                        component: TasksPageComponent
+                        component: TasksComponent
                     },
                     {
                         path: 'my',
-                        component: TasksPageComponent,
+                        component: TasksComponent,
                         canActivate: [AuthGuard]
                     },
                     {
@@ -46,7 +46,7 @@ import {
         ReactiveFormsModule
     ],
     declarations: [
-        TasksPageComponent,
+        TasksComponent,
         TaskPageComponent,
         TaskPreviewComponent,
         TaskDetailComponent,
@@ -57,4 +57,4 @@ import {
     ],
     exports: [TasksContainerComponent]
 })
-export class TasksPageModule {}
+export class TasksModule {}

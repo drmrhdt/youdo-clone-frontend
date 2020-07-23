@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router'
 import { SharedModule } from '../shared/shared.module'
 
 import { JumbotronComponent } from './jumbotron/jumbotron.component'
-import { MainPageComponent } from './main-page.component'
+import { MainComponent } from './main.component'
 
 @NgModule({
     imports: [
@@ -15,7 +15,7 @@ import { MainPageComponent } from './main-page.component'
         FormsModule,
         SharedModule
     ],
-    declarations: [MainPageComponent, JumbotronComponent],
-    exports: [MainPageComponent]
+    declarations: [MainComponent, JumbotronComponent],
+    exports: [MainComponent]
 })
-export class MainPageModule {}
+export class MainModule {}

@@ -9,11 +9,11 @@ import { TaskService, UserService, CategoriesService } from 'src/services'
 import { ITask, ITasksResponse, IUser, ICategory, Filters } from 'src/models'
 
 @Component({
-    selector: 'app-tasks-page',
-    templateUrl: './tasks-page.component.html',
-    styleUrls: ['./tasks-page.component.scss']
+    selector: 'app-tasks',
+    templateUrl: './tasks.component.html',
+    styleUrls: ['./tasks.component.scss']
 })
-export class TasksPageComponent implements OnDestroy, OnInit {
+export class TasksComponent implements OnDestroy, OnInit {
     isLoading: boolean = true
     signedInUserId: string
     tasks: ITask[] = []
