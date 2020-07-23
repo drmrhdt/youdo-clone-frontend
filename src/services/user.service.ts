@@ -5,34 +5,41 @@ import { BehaviorSubject, Observable } from 'rxjs'
 
 import { baseUrl } from 'src/environments'
 
-import { IUsersResponse, IUserResponse } from 'src/models'
+import { IUsersResponse, IUserResponse, IUser } from 'src/models'
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserService {
-	currentUserListener$ = new BehaviorSubject(null)
+    currentUserListener$ = new BehaviorSubject(null)
 
-	constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient) {}
 
-	getCurrentUserInfo(): Observable<IUserResponse> {
-		return this._httpClient.get<IUserResponse>(`${baseUrl}/users/me/info`)
-	}
+    getCurrentUserInfo(): Observable<IUserResponse> {
+        return this._httpClient.get<IUserResponse>(`${baseUrl}/users/me/info`)
+    }
 
-	getUserInfoById(id: string) {
-		return this._httpClient.get<IUserResponse>(`${baseUrl}/users/${id}`)
-	}
+    getUserInfoById(id: string): Observable<IUserResponse> {
+        return this._httpClient.get<IUserResponse>(`${baseUrl}/users/${id}`)
+    }
 
-	getUsersByFilter(filter: string, value: any): Observable<IUsersResponse> {
-		return this._httpClient.get<IUsersResponse>(
-			`${baseUrl}/users?${filter}=${value}`
-		)
-	}
+    getUsersByFilter(filter: string, value: any): Observable<IUsersResponse> {
+        return this._httpClient.get<IUsersResponse>(
+            `${baseUrl}/users?${filter}=${value}`
+        )
+    }
 
-	updateMe(body): Observable<IUserResponse> {
-		return this._httpClient.patch<IUserResponse>(
-			`${baseUrl}/users/updateMe`,
-			body
-		)
-	}
+    updateMe(body): Observable<IUserResponse> {
+        return this._httpClient.patch<IUserResponse>(
+            `${baseUrl}/users/updateMe`,
+            body
+        )
+    }
+
+    getExecutors(body?): Observable<IUsersResponse> {
+        return this._httpClient.get<IUsersResponse>(
+            `${baseUrl}/users/findByFilters`,
+            { params: body }
+        )
+    }
 }

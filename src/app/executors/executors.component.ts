@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -19,15 +20,30 @@ export class ExecutorsComponent implements OnInit, OnDestroy {
 
     private _unsubscriber$ = new Subject()
 
-    constructor(private _userService: UserService) {}
+    constructor(
+        private _route: ActivatedRoute,
+        private _userService: UserService
+    ) {}
 
     ngOnInit(): void {
         this._userService
-            .getUsersByFilter('isExecutor', true)
+            .getExecutors()
             .pipe(takeUntil(this._unsubscriber$))
             .subscribe(
                 (response: IUsersResponse) => (this.users = response.data.users)
             )
+
+        this._route.queryParams
+            .pipe(takeUntil(this._unsubscriber$))
+            .subscribe(queryParams => {
+                this._userService
+                    .getExecutors(queryParams)
+                    .pipe(takeUntil(this._unsubscriber$))
+                    .subscribe(
+                        (response: IUsersResponse) =>
+                            (this.users = response.data.users)
+                    )
+            })
     }
 
     ngOnDestroy(): void {
