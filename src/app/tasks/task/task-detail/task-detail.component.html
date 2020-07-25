@@ -40,14 +40,14 @@
         для оформления
         расписки/доверенности</span>
     </div>
-    <app-button *ngIf="!suggestions?.length && !isMyTask"
+    <app-button *ngIf="!task?.suggestions.length && !isMyTask"
                 [title]="'Предложить свои услуги'"
                 (click)="showDialog()"></app-button>
   </article>
 </section>
 
-<ng-container *ngIf="suggestions?.length">
-  <app-suggestion *ngFor="let suggestion of suggestions"
+<ng-container *ngIf="task?.suggestions.length">
+  <app-suggestion *ngFor="let suggestion of task.suggestions"
                   [suggestion]="suggestion">
   </app-suggestion>
 </ng-container>

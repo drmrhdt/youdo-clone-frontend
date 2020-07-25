@@ -17,7 +17,6 @@ export class TaskDetailComponent {
     @Input() isLoading: boolean = true
     @Input() task: ITask
     @Input() signedInUser: IUser
-    @Input() suggestions: IPossibleExecutorSuggestion[]
 
     isShowDialog: boolean = false
     form: FormGroup
@@ -58,8 +57,8 @@ export class TaskDetailComponent {
                 })
                 .pipe(takeUntil(this._unsubscriber$))
                 .subscribe(console.log)
-        } else {
-            console.log('no, you must sign in')
+            return
         }
+        console.log('no, you must sign in')
     }
 }
