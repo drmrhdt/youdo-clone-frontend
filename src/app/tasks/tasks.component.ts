@@ -97,9 +97,9 @@ export class TasksComponent implements OnDestroy, OnInit {
                 key === 'page' ||
                 params[key] === null ||
                 (key === 'category' && params[key] === 'all')
-            ) {
+            )
                 continue
-            } else filters[key] = params[key]
+            filters[key] = params[key]
         }
 
         return filters
