@@ -14,6 +14,6 @@ export class TaskPreviewComponent {
     constructor(private _router: Router) {}
 
     selectTask(id: string): void {
-        this._router.navigateByUrl(`/tasks/${id}`)
+        this._router.navigate([id])
     }
 }
