@@ -80,7 +80,7 @@ export class AuthService implements OnDestroy {
         this._userService.currentUserListener$.next(null)
     }
 
-    autoAuthUser(): void {
+    private _autoAuthUser(): void {
         const token = this._getAuthData()
 
         if (token) {
@@ -89,22 +89,22 @@ export class AuthService implements OnDestroy {
     }
 
     init(): void {
-        this.autoAuthUser()
+        this._autoAuthUser()
         this.getAuthStatusListener()
             .pipe(
                 takeUntil(this._unsubscriber$),
                 flatMap(isAuthenticated => {
                     if (isAuthenticated) {
-                        return this._userService.getCurrentUserInfo()
+                        return this._userService.getCurrentUser()
                     }
                     return of(false)
                 })
             )
-            .subscribe((response: IUserResponse) => {
+            .subscribe((response: IUserResponse) =>
                 this._userService.currentUserListener$.next(
                     response ? response.data.currentUser : response
                 )
-            })
+            )
     }
 
     private _saveAuthData(token: string): void {

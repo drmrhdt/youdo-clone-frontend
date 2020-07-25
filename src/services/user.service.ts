@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs'
 
 import { baseUrl } from 'src/environments'
 
-import { IUsersResponse, IUserResponse, IUser } from 'src/models'
+import { IUsersResponse, IUserResponse } from 'src/models'
 
 @Injectable({
     providedIn: 'root'
@@ -15,18 +15,18 @@ export class UserService {
 
     constructor(private _httpClient: HttpClient) {}
 
-    getCurrentUserInfo(): Observable<IUserResponse> {
+    getCurrentUser(): Observable<IUserResponse> {
         return this._httpClient.get<IUserResponse>(`${baseUrl}/users/me/info`)
     }
 
-    getUserInfoById(id: string): Observable<IUserResponse> {
+    getUserById(id: string): Observable<IUserResponse> {
         return this._httpClient.get<IUserResponse>(`${baseUrl}/users/${id}`)
     }
 
     getUsersByFilter(filter: string, value: any): Observable<IUsersResponse> {
-        return this._httpClient.get<IUsersResponse>(
-            `${baseUrl}/users?${filter}=${value}`
-        )
+        return this._httpClient.get<IUsersResponse>(`${baseUrl}/users`, {
+            params: { [filter]: value }
+        })
     }
 
     updateMe(body): Observable<IUserResponse> {

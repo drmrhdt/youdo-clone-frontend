@@ -31,8 +31,10 @@ export class TaskService {
         })
     }
 
-    getTaskById(id: string): Observable<ITaskResponse> {
-        return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/${id}`)
+    getTaskById(id: string, userId?: string): Observable<ITaskResponse> {
+        return this._httpClient.get<ITaskResponse>(`${baseUrl}/tasks/${id}`, {
+            params: { userId }
+        })
     }
 
     createTask(formValues) {

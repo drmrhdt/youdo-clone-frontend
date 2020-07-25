@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
         if (!this.isMyProfile)
             this._userService
-                .getUserInfoById(this.idFromUrl)
+                .getUserById(this.idFromUrl)
                 .pipe(takeUntil(this._unsubscriber$))
                 .subscribe((response: IUserResponse) => {
                     this.user = response.data.findedByIdUser
