@@ -1,5 +1,5 @@
 <section *ngIf="isLoading === false"
-  class="task-detail">
+         class="task-detail">
   <h4 class="task-detail__title">{{ task.description }}</h4>
   <div class="task-detail__status-bar">
     <div class="task-detail__status">Открыто</div>
@@ -13,14 +13,12 @@
   <article class="task-detail__card">
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Начать</strong>
-      <span
-        class="task-detail__task-value">{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
+      <span class="task-detail__task-value">{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
         {{ task.executionTime.startTime | date: "hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Завершить</strong>
-      <span
-        class="task-detail__task-value">{{ task.executionTime.endDate | date: "dd.MM.yy" }},
+      <span class="task-detail__task-value">{{ task.executionTime.endDate | date: "dd.MM.yy" }},
         {{ task.executionTime.endTime | date: "hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
@@ -42,48 +40,51 @@
         для оформления
         расписки/доверенности</span>
     </div>
-    <app-button *ngIf="!suggestion && !isMyTask"
-      [title]="'Предложить свои услуги'"
-      (click)="showDialog()"></app-button>
+    <app-button *ngIf="!suggestions?.length && !isMyTask"
+                [title]="'Предложить свои услуги'"
+                (click)="showDialog()"></app-button>
   </article>
 </section>
 
-<app-suggestion *ngIf="suggestion"
-  [suggestion]="suggestion"></app-suggestion>
+<ng-container *ngIf="suggestions?.length">
+  <app-suggestion *ngFor="let suggestion of suggestions"
+                  [suggestion]="suggestion">
+  </app-suggestion>
+</ng-container>
 
 <app-modal modalTitle="Предложить свои услуги"
-  *ngIf="isShowDialog"
-  (close)="isShowDialog = false"
-  [bodyComponent]="body">
+           *ngIf="isShowDialog"
+           (close)="isShowDialog = false"
+           [bodyComponent]="body">
   <ng-template #body>
     <form class="task-detail__form"
-      [formGroup]="form">
+          [formGroup]="form">
       <div class="form-group">
         <label for="suggestion-price">Сколько вы хотите за работу?</label>
         <input formControlName="price"
-          class="task-detail__field"
-          type="number"
-          id="suggestion-price">
+               class="task-detail__field"
+               type="number"
+               id="suggestion-price">
       </div>
       <div class="form-group">
         <label for="suggestion-price">Выберите тип оплаты:</label>
         <select formControlName="paymentType"
-          name="paymentType">
+                name="paymentType">
           <option value="cash"
-            selected>Наличными</option>
+                  selected>Наличными</option>
           <option value="creditCard">Банковской картой</option>
         </select>
       </div>
       <div class="form-group">
         <label for="suggestion-commentary">Комментарий:</label>
         <textarea formControlName="commentary"
-          class="task-detail__field"
-          id="suggestion-commentary"
-          cols="50"
-          rows="10"></textarea>
+                  class="task-detail__field"
+                  id="suggestion-commentary"
+                  cols="50"
+                  rows="10"></textarea>
       </div>
       <app-button [title]="'Отправить'"
-        (click)="onSubmit()"></app-button>
+                  (click)="onSubmit()"></app-button>
     </form>
   </ng-template>
 </app-modal>

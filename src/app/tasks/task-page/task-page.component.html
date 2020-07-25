@@ -1,14 +1,14 @@
 <app-layout [layout]="'fromBigToSmall'"
-  [leftBlock]="leftBlock"
-  [rightBlock]="rightBlock">
+            [leftBlock]="leftBlock"
+            [rightBlock]="rightBlock">
   <ng-template #leftBlock>
     <app-task-detail [task]="task"
-      [signedInUser]="signedInUser"
-      [suggestion]="suggestion"
-      [isLoading]="isLoading">
+                     [signedInUser]="signedInUser"
+                     [suggestions]="task?.suggestions"
+                     [isLoading]="isLoading">
     </app-task-detail>
   </ng-template>
   <ng-template #rightBlock>
-    <app-task-author [taskAuthor]="taskAuthor"></app-task-author>
+    <app-task-author [taskAuthor]="task?.authorId"></app-task-author>
   </ng-template>
 </app-layout>
