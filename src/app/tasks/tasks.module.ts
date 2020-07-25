@@ -10,7 +10,7 @@ import {
     TasksComponent,
     AuthGuard,
     FormComponent,
-    TaskPageComponent,
+    TaskComponent,
     TaskPreviewComponent,
     TaskDetailComponent,
     TaskAuthorComponent,
@@ -37,7 +37,7 @@ import {
                         path: 'add',
                         component: FormComponent
                     },
-                    { path: ':taskId', component: TaskPageComponent }
+                    { path: ':taskId', component: TaskComponent }
                 ]
             }
         ]),
@@ -47,7 +47,7 @@ import {
     ],
     declarations: [
         TasksComponent,
-        TaskPageComponent,
+        TaskComponent,
         TaskPreviewComponent,
         TaskDetailComponent,
         TaskAuthorComponent,
