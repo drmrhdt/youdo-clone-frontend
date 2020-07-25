@@ -8,28 +8,19 @@ import { baseUrl } from 'src/environments'
 import { ISuggestionResponse, IPossibleExecutorSuggestion } from 'src/models'
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class SuggestionService {
-	constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient) {}
 
-	addNewSuggestion(
-		suggestion: IPossibleExecutorSuggestion
-	): Observable<ISuggestionResponse> {
-		return this._httpClient.post<ISuggestionResponse>(
-			`${baseUrl}/suggestions`,
-			{
-				suggestion
-			}
-		)
-	}
-
-	getSuggestionByTaskIdAndExecutorId(
-		taskId: string,
-		executorId: string
-	): Observable<ISuggestionResponse> {
-		return this._httpClient.get<ISuggestionResponse>(
-			`${baseUrl}/suggestions/${taskId}/${executorId}`
-		)
-	}
+    addNewSuggestion(
+        suggestion: IPossibleExecutorSuggestion
+    ): Observable<ISuggestionResponse> {
+        return this._httpClient.post<ISuggestionResponse>(
+            `${baseUrl}/suggestions`,
+            {
+                suggestion
+            }
+        )
+    }
 }
