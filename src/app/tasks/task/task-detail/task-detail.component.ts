@@ -6,7 +6,7 @@ import { takeUntil } from 'rxjs/operators'
 
 import { SuggestionService } from 'src/services'
 
-import { IUser, ITask, IPossibleExecutorSuggestion } from 'src/models'
+import { IUser, ITask } from 'src/models'
 
 @Component({
     selector: 'app-task-detail',
@@ -24,7 +24,24 @@ export class TaskDetailComponent {
     private _unsubscriber$ = new Subject()
 
     get isMyTask(): boolean {
-        return this.task?.authorId === this.signedInUser?._id
+        return this.task?.authorId._id === this.signedInUser?._id
+    }
+    get isSuggestedByCurrentUser(): boolean {
+        return (
+            this.task?.suggestions.findIndex(
+                suggestion =>
+                    suggestion.executorId._id === this.signedInUser._id
+            ) !== -1
+        )
+    }
+    // I'm sorry. I've tried.
+    get isShowSuggestBtn(): boolean {
+        if (this.isMyTask) return false
+        if (!this.isMyTask) {
+            if (this.isSuggestedByCurrentUser) return false
+
+            if (!this.isSuggestedByCurrentUser) return true
+        }
     }
 
     constructor(
@@ -40,7 +57,6 @@ export class TaskDetailComponent {
 
     showDialog(): void {
         this.isShowDialog = true
-        // TODO it works only after we go to another route and return here
     }
 
     onSubmit(): void {

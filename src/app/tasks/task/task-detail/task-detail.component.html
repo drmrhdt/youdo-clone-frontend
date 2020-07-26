@@ -40,7 +40,7 @@
         для оформления
         расписки/доверенности</span>
     </div>
-    <app-button *ngIf="!task?.suggestions.length && !isMyTask"
+    <app-button *ngIf="isShowSuggestBtn"
                 [title]="'Предложить свои услуги'"
                 (click)="showDialog()"></app-button>
   </article>

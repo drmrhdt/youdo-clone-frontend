@@ -1,4 +1,4 @@
-import { IPossibleExecutorSuggestion } from './IPossibleExecutorSuggestion.model'
+import { IPossibleExecutorSuggestion, IUser } from '.'
 
 export interface ITask {
     _id: any
@@ -16,7 +16,7 @@ export interface ITask {
     address: string // it will be FormArray
     budget: number
     author: string
-    authorId: string
+    authorId: IUser | any
     email: string
     tel: string
     isBusiness: false
