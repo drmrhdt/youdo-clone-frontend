@@ -46,7 +46,7 @@
   </article>
 </section>
 
-<ng-container *ngIf="task?.suggestions.length">
+<ng-container *ngIf="task?.suggestions.length && signedInUser">
   <app-suggestion *ngFor="let suggestion of task.suggestions"
                   [suggestion]="suggestion">
   </app-suggestion>

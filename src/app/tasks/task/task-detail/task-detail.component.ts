@@ -4,7 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 
-import { SuggestionService } from 'src/services'
+import { SuggestionService, UserService } from 'src/services'
 
 import { IUser, ITask } from 'src/models'
 
@@ -16,21 +16,25 @@ import { IUser, ITask } from 'src/models'
 export class TaskDetailComponent {
     @Input() isLoading: boolean = true
     @Input() task: ITask
-    @Input() signedInUser: IUser
 
     isShowDialog: boolean = false
     form: FormGroup
 
     private _unsubscriber$ = new Subject()
 
+    get signedInUser(): IUser {
+        return this._userService.currentUserListener$.value
+    }
+
     get isMyTask(): boolean {
         return this.task?.authorId._id === this.signedInUser?._id
     }
+
     get isSuggestedByCurrentUser(): boolean {
         return (
             this.task?.suggestions.findIndex(
                 suggestion =>
-                    suggestion.executorId._id === this.signedInUser._id
+                    suggestion.executorId._id === this.signedInUser?._id
             ) !== -1
         )
     }
@@ -39,14 +43,14 @@ export class TaskDetailComponent {
         if (this.isMyTask) return false
         if (!this.isMyTask) {
             if (this.isSuggestedByCurrentUser) return false
-
             if (!this.isSuggestedByCurrentUser) return true
         }
     }
 
     constructor(
         private _formBuilder: FormBuilder,
-        private _suggestionService: SuggestionService
+        private _suggestionService: SuggestionService,
+        private _userService: UserService
     ) {
         this.form = this._formBuilder.group({
             paymentType: ['cash', Validators.required],
