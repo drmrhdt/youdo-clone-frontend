@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { Subject, EMPTY } from 'rxjs'
+import { takeUntil, flatMap } from 'rxjs/operators'
 
 import { UserService } from 'src/services'
 
@@ -19,11 +19,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     get isMyProfile(): boolean {
-        return this.idFromUrl === this.signedInUserId
+        return this.idFromUrl === this.signedInUser?._id
     }
 
     user: IUser
-    signedInUserId: string = ''
+    signedInUser: IUser
 
     private _unsubscriber$ = new Subject()
 
@@ -36,22 +36,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this._userService.currentUserListener$
             .pipe(takeUntil(this._unsubscriber$))
             .subscribe((response: IUser) => {
-                if (response) this.signedInUserId = response._id
+                if (response) this.signedInUser = response
             })
 
-        if (!this.isMyProfile)
-            this._userService
-                .getUserById(this.idFromUrl)
-                .pipe(takeUntil(this._unsubscriber$))
-                .subscribe((response: IUserResponse) => {
-                    this.user = response.data.findedByIdUser
+        this._route.params
+            .pipe(
+                takeUntil(this._unsubscriber$),
+                flatMap(params => {
+                    this.user = this.isMyProfile ? this.signedInUser : null
+                    return !this.user
+                        ? this._userService.getUserById(params['id'])
+                        : EMPTY
                 })
-        else
-            this._userService.currentUserListener$
-                .pipe(takeUntil(this._unsubscriber$))
-                .subscribe((response: IUser) => {
-                    this.user = response
-                })
+            )
+            .subscribe(response => {
+                if (response) this.user = response.data.findedByIdUser
+            })
     }
 
     ngOnDestroy(): void {
