@@ -17,6 +17,7 @@ export interface ITask {
     budget: number
     author: string
     authorId: IUser | any
+    executor: IUser
     email: string
     tel: string
     isBusiness: false
