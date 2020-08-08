@@ -41,7 +41,7 @@ export class TaskService {
         return this._httpClient.post(`${baseUrl}/tasks`, formValues)
     }
 
-    updateTask(id, body): Observable<ITaskResponse> {
+    updateTask(id: string, body): Observable<ITaskResponse> {
         return this._httpClient.patch<ITaskResponse>(`${baseUrl}/tasks`, {
             id,
             body
