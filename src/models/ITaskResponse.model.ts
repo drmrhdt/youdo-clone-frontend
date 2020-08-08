@@ -1,8 +1,8 @@
-import { ITask } from "./ITask.model";
-import { IResponseSingle } from "./IResponseSingle.model";
+import { ITask, IResponseSingle } from 'src/models'
 
 export interface ITaskResponse extends IResponseSingle {
-  data: {
-    task: ITask;
-  };
+    data: {
+        task?: ITask
+        updatedTask?: ITask
+    }
 }
