@@ -45,10 +45,11 @@
                 (click)="showDialog()"></app-button>
   </article>
 </section>
-
 <ng-container *ngIf="task?.suggestions.length && signedInUser">
   <app-suggestion *ngFor="let suggestion of task.suggestions"
-                  [suggestion]="suggestion">
+                  [suggestion]="suggestion"
+                  [chosedExecutor]="task.executor?._id"
+                  [isMyTask]="isMyTask">
   </app-suggestion>
 </ng-container>
 

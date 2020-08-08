@@ -3,4 +3,18 @@
     <p>Тип оплаты: {{suggestion.paymentType}}</p>
     <p>Оплата: {{suggestion.price}} руб.</p>
     <p>Комментарий: {{suggestion.commentary}}</p>
+
+    <ng-container *ngIf="suggestion.executorId._id === chosedExecutor">
+        <p *ngIf="this.isMyTask">Вы выбрали этого исполнителя</p>
+        <p *ngIf="!this.isMyTask && signedInUser._id === suggestion.executorId._id">Вас выбрали исполнителем</p>
+        <p *ngIf="!this.isMyTask && signedInUser._id !== suggestion.executorId._id">Выбранный исполнитель</p>
+
+        <app-button *ngIf="this.isMyTask"
+                    title="Отменить выбор"
+                    (click)="onCancelClick()"></app-button>
+    </ng-container>
+
+    <app-button *ngIf="isShowBtn"
+                title="Выбрать исполнителя"
+                (click)="onSelectClick(suggestion.executorId._id)"></app-button>
 </div>
