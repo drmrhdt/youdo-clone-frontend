@@ -1,9 +1,16 @@
-import { Component, Input, OnDestroy } from '@angular/core'
+import {
+    Component,
+    Input,
+    OnDestroy,
+    Output,
+    EventEmitter
+} from '@angular/core'
+import { Router } from '@angular/router'
 
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, flatMap } from 'rxjs/operators'
 
-import { TaskService, UserService } from 'src/services'
+import { TaskService, UserService, SuggestionService } from 'src/services'
 
 import { IPossibleExecutorSuggestion, IUser } from 'src/models'
 
@@ -17,6 +24,8 @@ export class SuggestionComponent implements OnDestroy {
     @Input() chosedExecutor: string
     @Input() isMyTask: boolean
 
+    @Output() onEdit = new EventEmitter()
+
     signedInUser: IUser
 
     private _unsubscriber$ = new Subject()
@@ -28,8 +37,10 @@ export class SuggestionComponent implements OnDestroy {
     }
 
     constructor(
+        private _router: Router,
         private _taskService: TaskService,
-        private _userService: UserService
+        private _userService: UserService,
+        private _suggestionService: SuggestionService
     ) {
         this._userService.currentUserListener$
             .pipe(takeUntil(this._unsubscriber$))
@@ -49,12 +60,33 @@ export class SuggestionComponent implements OnDestroy {
     }
 
     onCancelClick(): void {
-        this._taskService
-            .updateTask(this.suggestion.taskId, {
-                executor: null
-            })
+        this.deleteExecutorFromTask()
             .pipe(takeUntil(this._unsubscriber$))
             .subscribe(() => (this.chosedExecutor = null))
+    }
+
+    onEditClick(suggestion): void {
+        this.onEdit.emit(suggestion)
+    }
+
+    onDeleteClick(id: string): void {
+        this._suggestionService
+            .deleteSuggestion(id)
+            .pipe(
+                takeUntil(this._unsubscriber$),
+                flatMap(_ => this.deleteExecutorFromTask())
+            )
+            .subscribe(() => (this.chosedExecutor = null))
+    }
+
+    deleteExecutorFromTask() {
+        return this._taskService.updateTask(this.suggestion.taskId, {
+            executor: null
+        })
+    }
+
+    navigateToUserProfile(id: string): void {
+        this._router.navigate(['profile', id])
     }
 
     ngOnDestroy(): void {

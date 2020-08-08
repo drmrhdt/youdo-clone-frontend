@@ -6,7 +6,7 @@ import { takeUntil } from 'rxjs/operators'
 
 import { SuggestionService, UserService } from 'src/services'
 
-import { IUser, ITask } from 'src/models'
+import { IUser, ITask, IPossibleExecutorSuggestion } from 'src/models'
 
 @Component({
     selector: 'app-task-detail',
@@ -19,6 +19,8 @@ export class TaskDetailComponent {
 
     isShowDialog: boolean = false
     form: FormGroup
+
+    editedSuggestion: IPossibleExecutorSuggestion
 
     private _unsubscriber$ = new Subject()
 
@@ -59,11 +61,31 @@ export class TaskDetailComponent {
         })
     }
 
+    onEditSuggestion(event: IPossibleExecutorSuggestion) {
+        this.editedSuggestion = event
+        this.form.get('price').patchValue(this.editedSuggestion.price)
+        this.form
+            .get('paymentType')
+            .patchValue(this.editedSuggestion.paymentType)
+        this.form.get('commentary').patchValue(this.editedSuggestion.commentary)
+
+        this.showDialog()
+    }
+
     showDialog(): void {
         this.isShowDialog = true
     }
 
-    onSubmit(): void {
+    onSaveSuggestion(): void {
+        if (this.form.valid && this.signedInUser) {
+            this._suggestionService
+                .updateSuggestion(this.editedSuggestion._id, this.form.value)
+                .pipe(takeUntil(this._unsubscriber$))
+                .subscribe()
+        }
+    }
+
+    onCreateSuggestion(): void {
         if (
             this.form.valid &&
             this.signedInUser &&
@@ -76,9 +98,14 @@ export class TaskDetailComponent {
                     ...this.form.value
                 })
                 .pipe(takeUntil(this._unsubscriber$))
-                .subscribe(console.log)
+                .subscribe()
             return
         }
         console.log('no, you must sign in')
+    }
+
+    ngOnDestroy(): void {
+        this._unsubscriber$.next(true)
+        this._unsubscriber$.complete()
     }
 }

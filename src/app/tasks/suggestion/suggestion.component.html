@@ -1,20 +1,46 @@
 <div class="suggestion">
-    <p>Автор: {{suggestion.executorId.personalInfo.firstName}} {{suggestion.executorId.personalInfo.lastName}}</p>
-    <p>Тип оплаты: {{suggestion.paymentType}}</p>
-    <p>Оплата: {{suggestion.price}} руб.</p>
-    <p>Комментарий: {{suggestion.commentary}}</p>
+    <img [src]="suggestion.executorId.personalInfo.avatar"
+         alt="avatar"
+         class="suggestion__avatar">
+    <div class="suggestion__info"
+         [class.selected]="suggestion.executorId._id === chosedExecutor">
+        <div class="suggestion__description">
+            <p>Автор:
+                <a (click)="navigateToUserProfile(suggestion.executorId._id)">{{suggestion.executorId.personalInfo.firstName}}
+                    {{suggestion.executorId.personalInfo.lastName}}</a>
+            </p>
+            <p>Тип оплаты: {{suggestion.paymentType}}</p>
+            <p>Оплата: {{suggestion.price}} руб.</p>
+            <p>Комментарий: {{suggestion.commentary}}</p>
+        </div>
 
-    <ng-container *ngIf="suggestion.executorId._id === chosedExecutor">
-        <p *ngIf="this.isMyTask">Вы выбрали этого исполнителя</p>
-        <p *ngIf="!this.isMyTask && signedInUser._id === suggestion.executorId._id">Вас выбрали исполнителем</p>
-        <p *ngIf="!this.isMyTask && signedInUser._id !== suggestion.executorId._id">Выбранный исполнитель</p>
+        <div class="suggestion__actions-bar">
+            <div *ngIf="suggestion.executorId._id === chosedExecutor">
+                <app-button *ngIf="this.isMyTask"
+                            title="Отменить выбор"
+                            class="suggestion__btn"
+                            (click)="onCancelClick()"></app-button>
 
-        <app-button *ngIf="this.isMyTask"
-                    title="Отменить выбор"
-                    (click)="onCancelClick()"></app-button>
-    </ng-container>
 
-    <app-button *ngIf="isShowBtn"
-                title="Выбрать исполнителя"
-                (click)="onSelectClick(suggestion.executorId._id)"></app-button>
+                <p class="suggestion__action-text"
+                   *ngIf="this.isMyTask">Вы выбрали этого исполнителя</p>
+                <p *ngIf="!this.isMyTask && signedInUser._id === suggestion.executorId._id">Вас выбрали исполнителем</p>
+                <p *ngIf="!this.isMyTask && signedInUser._id !== suggestion.executorId._id">Выбранный исполнитель</p>
+            </div>
+            <app-button *ngIf="isShowBtn"
+                        title="Выбрать исполнителя"
+                        class="suggestion__btn"
+                        (click)="onSelectClick(suggestion.executorId._id)"></app-button>
+
+        </div>
+        <div *ngIf="signedInUser._id === suggestion.executorId._id"
+             class="suggestion__edit-panel">
+            <i class="material-icons"
+               (click)="onEditClick(suggestion)"
+               title="Изменить">create</i>
+            <i class="material-icons"
+               (click)="onDeleteClick(suggestion._id)"
+               title="Удалить">delete</i>
+        </div>
+    </div>
 </div>

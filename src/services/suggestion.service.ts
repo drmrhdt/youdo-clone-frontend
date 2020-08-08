@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import { Observable } from 'rxjs'
 
@@ -21,6 +21,21 @@ export class SuggestionService {
             {
                 suggestion
             }
+        )
+    }
+
+    updateSuggestion(id: string, body): Observable<ISuggestionResponse> {
+        return this._httpClient.patch<ISuggestionResponse>(
+            `${baseUrl}/suggestions/${id}`,
+            {
+                body
+            }
+        )
+    }
+
+    deleteSuggestion(id: string): Observable<ArrayBuffer> {
+        return this._httpClient.delete<ArrayBuffer>(
+            `${baseUrl}/suggestions/${id}`
         )
     }
 }

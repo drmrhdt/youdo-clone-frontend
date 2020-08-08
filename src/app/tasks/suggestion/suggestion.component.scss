@@ -1,5 +1,65 @@
 @import "../../../styles/variables.scss";
 
 .suggestion {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px 0;
+
   border-bottom: 1px solid $color-lightgray-light;
+
+  &__avatar {
+    flex: 1;
+    height: auto;
+    padding: 10px;
+  }
+
+  &__info {
+    display: flex;
+    flex: 10;
+    justify-content: space-between;
+    padding: 10px 20px;
+
+    border: 1px solid $color-lightgray-light;
+    border-radius: 8px;
+  }
+
+  &__description {
+    flex: 3;
+  }
+
+  &__actions-bar {
+    flex: 1;
+  }
+
+  &__btn {
+    ::ng-deep {
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  &__action-text {
+    margin-top: 10px;
+
+    text-align: center;
+  }
+
+  &__edit-panel {
+    &:nth-child(n) {
+      cursor: pointer;
+    }
+
+    .material-icons {
+      margin-left: 10px;
+    }
+  }
+}
+
+p {
+  margin: 0 0 5px 0;
+}
+
+.selected {
+  background-color: $color-lightgray-light;
 }
