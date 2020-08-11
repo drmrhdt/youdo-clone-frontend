@@ -71,11 +71,11 @@ export class TaskDetailComponent {
             .patchValue(this.editedSuggestion.paymentType)
         this.form.get('commentary').patchValue(this.editedSuggestion.commentary)
 
-        this.showDialog()
+        this.toggleDialog()
     }
 
-    showDialog(): void {
-        this.isShowDialog = true
+    toggleDialog(): void {
+        this.isShowDialog = !this.isShowDialog
     }
 
     onSaveSuggestion(): void {
@@ -83,7 +83,7 @@ export class TaskDetailComponent {
             this._suggestionService
                 .updateSuggestion(this.editedSuggestion._id, this.form.value)
                 .pipe(takeUntil(this._unsubscriber$))
-                .subscribe()
+                .subscribe(() => this.toggleDialog())
         }
     }
 
@@ -101,7 +101,7 @@ export class TaskDetailComponent {
                     ...this.form.value
                 })
                 .pipe(takeUntil(this._unsubscriber$))
-                .subscribe(_ => (this.isShowDialog = false))
+                .subscribe(() => this.toggleDialog())
             return
         }
         console.log('no, you must sign in')

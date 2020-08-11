@@ -42,7 +42,7 @@
     </div>
     <app-button *ngIf="isShowSuggestBtn"
                 [title]="'Предложить свои услуги'"
-                (click)="showDialog()"></app-button>
+                (click)="this.toggleDialog()"></app-button>
   </article>
 </section>
 <ng-container *ngIf="task?.suggestions.length && signedInUser">
@@ -56,7 +56,7 @@
 
 <app-modal modalTitle="Предложить свои услуги"
            *ngIf="isShowDialog"
-           (close)="isShowDialog = false"
+           (close)="this.toggleDialog()"
            [bodyComponent]="body">
   <ng-template #body>
     <form class="task-detail__form"
