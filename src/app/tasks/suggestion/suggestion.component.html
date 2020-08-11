@@ -33,7 +33,7 @@
                         (click)="onSelectClick(suggestion.executorId._id)"></app-button>
 
         </div>
-        <div *ngIf="signedInUser._id === suggestion.executorId._id"
+        <div *ngIf="signedInUser._id === suggestion.executorId._id && chosedExecutor !== suggestion.executorId._id"
              class="suggestion__edit-panel">
             <i class="material-icons"
                (click)="onEditClick(suggestion)"
