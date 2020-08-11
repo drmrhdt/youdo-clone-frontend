@@ -86,7 +86,8 @@
                   rows="10"></textarea>
       </div>
       <app-button [title]="editedSuggestion ? 'Сохранить':'Создать'"
-                  (click)="editedSuggestion ? onSaveSuggestion() : onCreateSuggestion()"></app-button>
+                  (click)="editedSuggestion ? onSaveSuggestion() : onCreateSuggestion()"
+                  [isDisabled]="isUserAlreadySuggested"></app-button>
     </form>
   </ng-template>
 </app-modal>

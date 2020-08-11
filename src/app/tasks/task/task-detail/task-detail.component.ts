@@ -18,6 +18,8 @@ export class TaskDetailComponent {
     @Input() task: ITask
 
     isShowDialog: boolean = false
+    isUserAlreadySuggested: boolean = false
+
     form: FormGroup
 
     editedSuggestion: IPossibleExecutorSuggestion
@@ -40,7 +42,7 @@ export class TaskDetailComponent {
             ) !== -1
         )
     }
-    // I'm sorry. I've tried.
+    // TODO I'm sorry. I've tried.
     get isShowSuggestBtn(): boolean {
         if (this.isMyTask) return false
         if (!this.isMyTask) {
@@ -91,6 +93,7 @@ export class TaskDetailComponent {
             this.signedInUser &&
             this.signedInUser.workInfo.isExecutor
         ) {
+            this.isUserAlreadySuggested = true
             this._suggestionService
                 .addNewSuggestion({
                     taskId: this.task._id,
@@ -98,7 +101,7 @@ export class TaskDetailComponent {
                     ...this.form.value
                 })
                 .pipe(takeUntil(this._unsubscriber$))
-                .subscribe()
+                .subscribe(_ => (this.isShowDialog = false))
             return
         }
         console.log('no, you must sign in')
