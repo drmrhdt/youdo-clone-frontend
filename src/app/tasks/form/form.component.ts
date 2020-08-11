@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { FormBuilder, Validators } from '@angular/forms'
 
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, flatMap } from 'rxjs/operators'
 
 import { CategoriesService, TaskService, UserService } from 'src/services'
 
@@ -161,10 +161,24 @@ export class FormComponent implements OnInit, OnDestroy {
                     newTask.executionTime.endDate
             )
         }
+        const taskInfo = {
+            ...this._userService.currentUserListener$.value.taskInfo,
+            total: ++this._userService.currentUserListener$.value.taskInfo
+                .total,
+            created: ++this._userService.currentUserListener$.value.taskInfo
+                .created
+        }
+
         this._taskService
             .createTask(newTask)
-            .pipe(takeUntil(this._unsubscriber$))
-            .subscribe(console.log)
+            .pipe(
+                takeUntil(this._unsubscriber$),
+                flatMap(() => {
+                    return this._userService.updateMe({ taskInfo })
+                })
+            )
+            .subscribe()
+
         console.warn(this.form.value)
         this.form.reset()
     }
