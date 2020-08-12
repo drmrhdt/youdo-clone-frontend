@@ -13,4 +13,11 @@ export class ProfileSummaryComponent {
     get userIsOnline(): boolean {
         return window.navigator.onLine
     }
+
+    get userAge(): number {
+        return (
+            new Date().getFullYear() -
+            new Date(this.user.personalInfo.birthday).getFullYear()
+        )
+    }
 }

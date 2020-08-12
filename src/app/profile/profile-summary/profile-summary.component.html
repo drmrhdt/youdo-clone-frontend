@@ -1,5 +1,6 @@
 <div class="profile-summary__status-bar">
-    <p *ngIf="userIsOnline; else userIsOffline" class="profile-summary__status_online">
+    <p *ngIf="userIsOnline; else userIsOffline"
+       class="profile-summary__status_online">
         Сейчас на сайте
     </p>
     <ng-template #userIsOffline>
@@ -12,16 +13,19 @@
 </h1>
 <!-- TODO check if I could use app-layout here -->
 <div class="profile-summary__info-block">
-    <img class="profile-summary__avatar" src="{{user?.personalInfo.avatar}}" alt="avatar" />
+    <img class="profile-summary__avatar"
+         src="{{user?.personalInfo.avatar}}"
+         alt="avatar" />
     <div>
-        <p class="profile-summary__age">Возраст: 22</p>
+        <p class="profile-summary__age">Возраст: {{userAge}}</p>
         <p class="profile-summary__address">{{user?.personalInfo.address}}</p>
         <div class="profile-summary__tasks">
             <p class="profile-summary__tasks_done">Всего выполнено заданий: {{user?.taskInfo.finishedTasks}}</p>
-            <p class="profile-summary__tasks_created">Всего создано заданий: {{user?.taskInfo.total}}</p>
+            <p class="profile-summary__tasks_created">Всего создано заданий: {{user?.taskInfo.created}}</p>
         </div>
         <div class="profile-summary__rating">Средний рейтинг: </div>
         <p class="profile-summary__reviews-count">Всего отзывов: {{user?.workInfo.reviews.total}}</p>
     </div>
 </div>
-<app-button *ngIf="!isMyProfile" [title]="'Задать вопрос'"></app-button>
+<app-button *ngIf="!isMyProfile"
+            [title]="'Задать вопрос'"></app-button>
