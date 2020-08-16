@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 
 import { Subject } from 'rxjs'
 import { takeUntil, flatMap } from 'rxjs/operators'
@@ -16,10 +16,17 @@ import { ICategory, ISubcategory, IUser } from 'src/models'
 })
 export class FormComponent implements OnInit, OnDestroy {
     isLoading: boolean = false
+    form: FormGroup
     currentCategoryObject: ICategory
     currentSubcategoryObject: ISubcategory
     categories: ICategory[] = []
     signedInUser: IUser
+
+    timeOptions = [
+        { name: 'Начать работу', value: 'start' },
+        { name: 'Закончить работу', value: 'end' },
+        { name: 'Выбрать период', value: 'period' }
+    ]
 
     private _unsubscriber$ = new Subject()
 
@@ -29,7 +36,30 @@ export class FormComponent implements OnInit, OnDestroy {
         private _categoriesService: CategoriesService,
         private _taskService: TaskService,
         private _userService: UserService
-    ) {}
+    ) {
+        this.form = this._formBuilder.group({
+            description: ['', Validators.required],
+            category: [this.categoryFromUrl, Validators.required],
+            subcategory: [this.subcategoryFromUrl, Validators.required],
+            comment: ['', Validators.required],
+            executionTime: this._formBuilder.group({
+                startDate: [+new Date(), Validators.required], // make today default
+                startTime: [+new Date(), Validators.required],
+                endDate: null,
+                endTime: null
+            }),
+            address: ['', Validators.required], // it will be FormArray
+            budget: '',
+            author: [''],
+            tel: ['', Validators.required],
+            additionalConditions: this._formBuilder.group({
+                isSubscribeSuggestions: false,
+                isShowOnlyToExecutors: false
+            }),
+            isBusiness: false,
+            isSbr: true
+        })
+    }
 
     get categoryFromUrl(): string {
         return this._route.snapshot.queryParamMap.get('category')
@@ -38,32 +68,6 @@ export class FormComponent implements OnInit, OnDestroy {
     get subcategoryFromUrl(): string {
         return this._route.snapshot.queryParamMap.get('subcategory')
     }
-
-    form = this._formBuilder.group({
-        description: ['', Validators.required],
-        category: [this.categoryFromUrl, Validators.required],
-        subcategory: [this.subcategoryFromUrl, Validators.required],
-        comment: ['', Validators.required],
-        executionTime: this._formBuilder.group({
-            time: ['start', Validators.required],
-            startDate: [+new Date(), Validators.required],
-            startTime: [+new Date(), Validators.required],
-            endDate: null,
-            endTime: null
-        }),
-        address: ['', Validators.required], // it will be FormArray
-        budget: '',
-        author: [''],
-        authorId: ['', Validators.required],
-        email: ['', Validators.required],
-        tel: ['', Validators.required],
-        additionalConditions: this._formBuilder.group({
-            isSubscribeSuggestions: false,
-            isShowOnlyToExecutors: false
-        }),
-        isBusiness: false,
-        isSbr: true
-    })
 
     ngOnInit(): void {
         this.isLoading = true
@@ -97,16 +101,11 @@ export class FormComponent implements OnInit, OnDestroy {
             .subscribe((response: IUser) => {
                 this.signedInUser = response
                 if (this.signedInUser) {
-                    this.form.get('authorId').patchValue(this.signedInUser._id)
-                    this.form
-                        .get('email')
-                        .patchValue(this.signedInUser.contacts.email)
+                    // TODO rewrite
+                    this.form.get('author').patchValue(this.signedInUser._id)
                     this.form
                         .get('tel')
                         .patchValue(this.signedInUser.contacts.phone)
-                    this.form
-                        .get('author')
-                        .patchValue(this.signedInUser.personalInfo.firstName)
                 }
             })
     }
@@ -137,30 +136,21 @@ export class FormComponent implements OnInit, OnDestroy {
             reviews: {
                 positive: 0,
                 negative: 0
+            },
+            executionTime: {
+                startDate: +new Date(
+                    this.form.value.executionTime.startDate +
+                        ' ' +
+                        this.form.value.executionTime.startTime
+                ),
+                endDate: +new Date(
+                    this.form.value.executionTime.endDate +
+                        ' ' +
+                        this.form.value.executionTime.endTime
+                )
             }
         }
-        newTask.executionTime = {
-            startDate: +new Date(
-                newTask.executionTime.startDate +
-                    ' ' +
-                    newTask.executionTime.startTime
-            ),
-            startTime: +new Date(
-                newTask.executionTime.startDate +
-                    ' ' +
-                    newTask.executionTime.startTime
-            ),
-            endDate: +new Date(
-                newTask.executionTime.endTime +
-                    ' ' +
-                    newTask.executionTime.endDate
-            ),
-            endTime: +new Date(
-                newTask.executionTime.endTime +
-                    ' ' +
-                    newTask.executionTime.endDate
-            )
-        }
+
         const taskInfo = {
             ...this._userService.currentUserListener$.value.taskInfo,
             total: ++this._userService.currentUserListener$.value.taskInfo
@@ -173,13 +163,8 @@ export class FormComponent implements OnInit, OnDestroy {
             .createTask(newTask)
             .pipe(
                 takeUntil(this._unsubscriber$),
-                flatMap(() => {
-                    return this._userService.updateMe({ taskInfo })
-                })
+                flatMap(() => this._userService.updateMe({ taskInfo }))
             )
             .subscribe()
-
-        console.warn(this.form.value)
-        this.form.reset()
     }
 }
