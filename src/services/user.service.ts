@@ -36,6 +36,13 @@ export class UserService {
         )
     }
 
+    updateUser(id: string, body): Observable<IUserResponse> {
+        return this._httpClient.patch<IUserResponse>(
+            `${baseUrl}/users/${id}`,
+            body
+        )
+    }
+
     getExecutors(body?): Observable<IUsersResponse> {
         return this._httpClient.get<IUsersResponse>(
             `${baseUrl}/users/findByFilters`,
