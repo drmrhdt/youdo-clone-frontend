@@ -48,7 +48,7 @@
 <ng-container *ngIf="task?.suggestions.length && signedInUser">
   <app-suggestion *ngFor="let suggestion of task.suggestions"
                   [suggestion]="suggestion"
-                  [chosedExecutor]="task.executor?._id"
+                  [chosedExecutor]="task?.executor"
                   [isMyTask]="isMyTask"
                   (onEdit)="onEditSuggestion($event)">
   </app-suggestion>

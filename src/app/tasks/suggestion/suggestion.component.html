@@ -3,7 +3,7 @@
          alt="avatar"
          class="suggestion__avatar">
     <div class="suggestion__info"
-         [class.selected]="suggestion.executorId._id === chosedExecutor">
+         [class.selected]="suggestion.executorId._id === chosedExecutor?._id">
         <div class="suggestion__description">
             <p>Автор:
                 <a (click)="navigateToUserProfile(suggestion.executorId._id)">{{suggestion.executorId.personalInfo.firstName}}
@@ -15,7 +15,7 @@
         </div>
 
         <div class="suggestion__actions-bar">
-            <div *ngIf="suggestion.executorId._id === chosedExecutor">
+            <div *ngIf="suggestion.executorId._id === chosedExecutor?._id">
                 <app-button *ngIf="this.isMyTask"
                             title="Отменить выбор"
                             class="suggestion__btn"
@@ -33,7 +33,7 @@
                         (click)="onSelectClick(suggestion.executorId._id)"></app-button>
 
         </div>
-        <div *ngIf="signedInUser._id === suggestion.executorId._id && chosedExecutor !== suggestion.executorId._id"
+        <div *ngIf="signedInUser._id === suggestion.executorId._id && chosedExecutor?._id !== suggestion.executorId._id"
              class="suggestion__edit-panel">
             <i class="material-icons"
                (click)="onEditClick(suggestion)"
@@ -44,3 +44,8 @@
         </div>
     </div>
 </div>
+
+<app-modal *ngIf="isShowModal"
+           [modalTitle]="'Вы выбрали исполнителя!'"
+           [isShowCloseBtn]="true"
+           (close)="toggleModal()"></app-modal>
