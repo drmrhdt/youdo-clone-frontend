@@ -13,13 +13,11 @@
   <article class="task-detail__card">
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Начать</strong>
-      <span class="task-detail__task-value">{{ task.executionTime.startDate | date: "dd.MM.yyyy" }},
-        {{ task.executionTime.startTime | date: "hh:mm" }}</span>
+      <span class="task-detail__task-value">{{ task.executionTime.startDate | date: "dd.MM.yyyy, hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Завершить</strong>
-      <span class="task-detail__task-value">{{ task.executionTime.endDate | date: "dd.MM.yy" }},
-        {{ task.executionTime.endTime | date: "hh:mm" }}</span>
+      <span class="task-detail__task-value">{{ task.executionTime.endDate | date: "dd.MM.yyyy, hh:mm" }}</span>
     </div>
     <div class="task-detail__task-item">
       <strong class="task-detail__task-property">Стоимость</strong>
@@ -45,6 +43,7 @@
                 (click)="this.toggleDialog()"></app-button>
   </article>
 </section>
+
 <ng-container *ngIf="task?.suggestions.length && signedInUser">
   <app-suggestion *ngFor="let suggestion of task.suggestions"
                   [suggestion]="suggestion"
