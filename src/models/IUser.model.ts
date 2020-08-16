@@ -6,7 +6,6 @@ export interface IUser {
         username: string
         gender: string
         birthday: string
-        age: number
         description: string
         avatar: string
 
@@ -36,6 +35,7 @@ export interface IUser {
     }
     taskInfo: {
         total: number
+        created: number
         inProcess: number
         finishedTasks: number
         successfulTasks: number
