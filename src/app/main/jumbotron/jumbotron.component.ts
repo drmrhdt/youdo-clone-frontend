@@ -30,7 +30,7 @@ export class JumbotronComponent implements OnInit {
             .getRandomTask()
             .pipe(takeUntil(this._unsubscriber$))
             .subscribe((response: ITaskResponse) => {
-                this.exampleQuery = response.data.task[0].description
+                this.exampleQuery = response.data.task[0]?.description
                 this.isLoading = false
             })
 

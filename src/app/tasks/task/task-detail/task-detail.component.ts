@@ -31,7 +31,7 @@ export class TaskDetailComponent {
     }
 
     get isMyTask(): boolean {
-        return this.task?.authorId._id === this.signedInUser?._id
+        return this.task?.author._id === this.signedInUser?._id
     }
 
     get isSuggestedByCurrentUser(): boolean {

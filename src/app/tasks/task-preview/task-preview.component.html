@@ -22,8 +22,8 @@
          src="../../assets/test_avatar.png"
          alt="avatar" />
     <div class="column layout_margin_left">
-      <a routerLink="/profile/{{task?.authorId}}"
-         class="link">{{ task.author }}</a>
+      <a routerLink="/profile/{{task?.author._id}}"
+         class="link">{{ task?.author.personalInfo.firstName }}</a>
       <!-- <span *ngIf="task.reviews.positive || task.reviews.negative">
         Отзывы:
         <span class="task-preview__review_type_positive" *ngIf="task.reviews.positive">
