@@ -1,40 +1,39 @@
 <form *ngIf="!isLoading; else loader"
-  class="form"
-  (ngSubmit)="onSubmit()"
-  [formGroup]="form">
+      class="form"
+      (ngSubmit)="onSubmit()"
+      [formGroup]="form">
   <h2 class="form__title">Заполните заявку</h2>
   <div class="form__group">
     <label for="title"
-      class="form__label">Мне нужно</label>
+           class="form__label">Мне нужно</label>
     <input formControlName="description"
-      type="text"
-      id="title"
-      class="form__field form__field_w_100"
-      placeholder="Напишите, чем вам помочь..."
-      required />
+           type="text"
+           class="form__field form__field_w_100"
+           placeholder="Напишите, чем вам помочь..."
+           required />
   </div>
 
   <div class="form__group group-inputs">
     <select formControlName="category"
-      class="form__field"
-      required
-      (change)="updateSelectSubcategory()">
+            class="form__field"
+            required
+            (change)="updateSelectSubcategory()">
       <option value="{{ currentCategoryObject.key }}">
         {{ currentCategoryObject.text }}
       </option>
       <option *ngFor="let category of categories"
-        value="{{ category.key }}">
+              value="{{ category.key }}">
         {{ category.text }}
       </option>
     </select>
     <select formControlName="subcategory"
-      class="form__field"
-      required>
+            class="form__field"
+            required>
       <option value="{{ currentSubcategoryObject.code }}">
         {{ currentSubcategoryObject.name }}
       </option>
       <option *ngFor="let subcategory of currentCategoryObject.subcategories"
-        value="{{ subcategory.code }}">
+              value="{{ subcategory.code }}">
         {{ subcategory.name }}
       </option>
     </select>
@@ -42,77 +41,80 @@
 
   <div class="form__group">
     <label for="comment"
-      class="form__label">Опишите пожелания и детали, чтобы исполнители лучше
+           class="form__label">Опишите пожелания и детали, чтобы исполнители лучше
       оценили вашу задачу
     </label>
     <textarea formControlName="comment"
-      id="comment"
-      cols="30"
-      rows="10"
-      class="form__field form__field_w_100"
-      placeholder="Пример заявки"
-      required></textarea>
+              id="comment"
+              cols="30"
+              rows="10"
+              class="form__field form__field_w_100"
+              placeholder="Пример заявки"
+              required></textarea>
   </div>
 
   <div formGroupName="executionTime">
     <div class="form__group group-date">
       <label class="form__label">Дата и время</label>
-      <select formControlName="time"
-        class="form__field field_margin_left"
-        #selectTime
-        required>
-        <option value="start"
-          selected>Начать работу</option>
-        <option value="end">Закончить работу</option>
-        <option value="period">Указать период</option>
+      <select class="form__field field_margin_left"
+              #selectTime
+              required>
+        <option *ngFor="let option of timeOptions"
+                [value]="option.value"
+                [selected]="option.value === 'start'">{{option.name}}</option>
       </select>
     </div>
 
     <div class="form__group">
+      <!-- TODO make component -->
       <div class="group-actions"
-        *ngIf="selectTime.value === 'start' || selectTime.value === 'period'">
+           *ngIf="selectTime.value === 'start' || selectTime.value === 'period'">
         <label *ngIf="selectTime.value === 'period'"
-          class="form__label">
+               class="form__label">
           Начать
         </label>
         <div class="group-actions__inputs-action">
           <input formControlName="startDate"
-            type="date"
-            class="form__field" />
+                 type="date"
+                 class="form__field" />
           <input formControlName="startTime"
-            type="time"
-            class="form__field field_margin_left" />
+                 type="time"
+                 class="form__field field_margin_left" />
         </div>
+        <!-- duplicate -->
         <div class="group-actions__links-action">
           <a href="#"
-            class="form__link form__link_action form__link_font-size_xs">
+             class="form__link form__link_action form__link_font-size_xs">
             Сегодня
           </a>
           <a href="#"
-            class="form__link form__link_action form__link_font-size_xs">Завтра</a>
+             class="form__link form__link_action form__link_font-size_xs">Завтра</a>
         </div>
+        <!-- duplicate -->
       </div>
 
       <div class="group-actions"
-        *ngIf="selectTime.value === 'end' || selectTime.value === 'period'">
+           *ngIf="selectTime.value === 'end' || selectTime.value === 'period'">
         <label *ngIf="selectTime.value === 'period'"
-          class="form__label">Завершить
+               class="form__label">Завершить
         </label>
         <div class="group-actions__inputs-action">
           <input formControlName="endDate"
-            type="date"
-            class="form__field" />
+                 type="date"
+                 class="form__field" />
           <input formControlName="endTime"
-            type="time"
-            class="form__field field_margin_left" />
+                 type="time"
+                 class="form__field field_margin_left" />
         </div>
+        <!-- duplicate -->
         <div class="group-actions__links-action">
           <a href="#"
-            class="form__link form__link_action form__link_font-size_xs">Сегодня
+             class="form__link form__link_action form__link_font-size_xs">Сегодня
           </a>
           <a href="#"
-            class="form__link form__link_action form__link_font-size_xs">Завтра</a>
+             class="form__link form__link_action form__link_font-size_xs">Завтра</a>
         </div>
+        <!-- duplicate -->
       </div>
     </div>
   </div>
@@ -120,135 +122,135 @@
   <div class="form__group">
     <label class="form__label">Адрес</label>
     <input formControlName="address"
-      type="text"
-      class="form__field form__field_w_100"
-      placeholder="Улица, дом, строение, корпус"
-      required />
+           type="text"
+           class="form__field form__field_w_100"
+           placeholder="Улица, дом, строение, корпус"
+           required />
     <a href="#"
-      class="form__link_action">Добавить ещё один адрес</a>
+       class="form__link_action">Добавить ещё один адрес</a>
   </div>
 
   <div class="form__group">
     <input formControlName="isBusiness"
-      type="checkbox"
-      id="business"
-      class="form__field form__field_type_checkbox" />
+           type="checkbox"
+           id="business"
+           class="form__field form__field_type_checkbox" />
     <label for="business"
-      class="form__label form__label_type_checkbox">
+           class="form__label form__label_type_checkbox">
       Я использую YouDo для бизнеса, нужны закрывающие документы
     </label>
   </div>
 
   <div class="form__group">
     <label for="budget"
-      class="form__label">На какой бюджет вы рассчитываете?</label>
+           class="form__label">На какой бюджет вы рассчитываете?</label>
     <input formControlName="budget"
-      type="range"
-      id="budget"
-      class="form__field"
-      min="0"
-      max="20000" />
+           type="range"
+           id="budget"
+           class="form__field"
+           min="0"
+           max="20000" />
     <label class="form__label">или укажите примерную стоимость
       <input type="number"
-        formControlName="budget"
-        class="form__field field_margin_left" />
+             formControlName="budget"
+             class="form__field field_margin_left" />
     </label>
   </div>
 
   <div *ngIf="!signedInUser; else tel"
-    class="form__group">
+       class="form__group">
     <label class="form__label">Ваши контакты</label>
     <div class="group-contacts">
       <input formControlName="author"
-        type="text"
-        class="form__field"
-        placeholder="Имя Фамилия"
-        required />
+             type="text"
+             class="form__field"
+             placeholder="Имя Фамилия"
+             required />
       <input formControlName="email"
-        type="email"
-        class="form__field"
-        placeholder="E-mail"
-        required />
+             type="email"
+             class="form__field"
+             placeholder="E-mail"
+             required />
       <input formControlName="tel"
-        type="tel"
-        class="form__field"
-        placeholder="Ваш телефон"
-        required />
+             type="tel"
+             class="form__field"
+             placeholder="Ваш телефон"
+             required />
     </div>
     <p>
       Уже зарегистрированы?
       <a href="#"
-        class="form__link form__link_action">Войдите!</a>
+         class="form__link form__link_action">Войдите!</a>
     </p>
   </div>
 
   <ng-template #tel>
     <div class="form__group">
-      <label class="form__label">Ваши контакты</label><input
-        formControlName="tel"
-        type="tel"
-        class="form__field"
-        placeholder="Ваш телефон"
-        required />
+      <label class="form__label">Ваши контакты</label>
+      <input formControlName="tel"
+             type="tel"
+             class="form__field"
+             placeholder="Ваш телефон"
+             required />
     </div>
 
   </ng-template>
 
   <div class="form__group"
-    formGroupName="additionalConditions">
+       formGroupName="additionalConditions">
     <label class="form__label">Дополнительные условия</label>
     <input formControlName="isSubscribeSuggestions"
-      type="checkbox"
-      id="subscribe-suggestions"
-      class="form__field form__field_type_checkbox"
-      checked />
+           type="checkbox"
+           id="subscribe-suggestions"
+           class="form__field form__field_type_checkbox"
+           checked />
     <label for="subscribe-suggestions"
-      class="form__label form__label_type_checkbox">
+           class="form__label form__label_type_checkbox">
       Получать email-уведомления о новых предложениях
     </label>
     <input formControlName="isShowOnlyToExecutors"
-      type="checkbox"
-      id="show-only-executors"
-      class="form__field form__field_type_checkbox" />
+           type="checkbox"
+           id="show-only-executors"
+           class="form__field form__field_type_checkbox" />
     <label for="show-only-executors"
-      class="form__label form__label_type_checkbox">
+           class="form__label form__label_type_checkbox">
       Показывать мое задание только исполнителям
     </label>
   </div>
 
   <div class="form__group">
     <app-button class="form__btn"
-      [isDisabled]="!form.valid"
-      [title]="'Опубликовать'"></app-button>
+                [isDisabled]="!form.valid"
+                [title]="'Опубликовать'"></app-button>
   </div>
 
   <div class="form__group">
     <!-- just for validation, not for sending to server -->
     <input type="checkbox"
-      id="terms"
-      class="form__field form__field_type_checkbox"
-      checked />
+           id="terms"
+           class="form__field form__field_type_checkbox"
+           checked />
     <label for="terms"
-      class="form__label form__label_type_checkbox">
+           class="form__label form__label_type_checkbox">
       Я согласен с
       <a href="#"
-        class="form__link-terms form__link">
+         class="form__link-terms form__link">
         правилами сайта
       </a>
     </label>
     <p class="form__label">
       Нажимая «Опубликовать», вы соглашаетесь с правилами платёжного сервиса
       <a href="#"
-        class="form__link form__link_color_gray form__link_border_solid">«Единая
+         class="form__link form__link_color_gray form__link_border_solid">«Единая
         касса — Безопасная Сделка»
       </a>
       и сервиса
       <a href="#"
-        class="form__link form__link_color_gray form__link_border_solid">«Сделка
+         class="form__link form__link_color_gray form__link_border_solid">«Сделка
         без риска»</a>. Ваш банк
       может взимать дополнительную комиссию.
       <a href="#"
-        class="form__link form__link_color_gray form__link_border_dotted">Отключить
+         class="form__link form__link_color_gray form__link_border_dotted">Отключить
         Сделку без риска</a>
     </p>
   </div>
